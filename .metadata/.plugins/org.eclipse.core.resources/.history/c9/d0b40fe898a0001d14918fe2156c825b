@@ -1,0 +1,21 @@
+package lesson001;
+
+import java.util.Scanner;
+
+public class Question6 {
+
+	public static void main(String[] args) {
+		//kullanıcdan alınan vize ve final notlarını 
+		//geçip geçmediğini yazan prog
+		
+		Scanner input = new Scanner(System.in);
+		
+		float vize ,fnal , ort;
+		System.out.println("Vize notunu girin");
+		vize = input.nextFloat();
+		System.out.println("Final notunu girin");
+		fnal = input.nextFloat();
+		
+	}
+
+}

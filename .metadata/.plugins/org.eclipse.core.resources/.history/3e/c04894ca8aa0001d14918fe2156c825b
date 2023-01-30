@@ -1,0 +1,14 @@
+package lesson001;
+
+public class Question1 {
+
+	public static void main(String[] args) {
+
+
+		//Javada primitive tipler nelerdir ? 
+		//Birbirinden farkı ?
+		
+		
+	}
+
+}

@@ -1,0 +1,24 @@
+package lesson001;
+
+import java.util.Scanner;
+
+public class Question1 {
+
+	public static void main(String[] args) {
+
+
+		//Javada primitive tipler nelerdir ? 
+		//Birbirinden farkı ?
+		
+		
+		//Verilen isim ve soy isim değerleini hello (isim ) soyisim yaz
+		//Değişken tanımlarken 
+		String name = "Yasin";
+		String sname = "Solak";
+		System.out.println("Hello "+ name + " "+sname);
+		
+		
+		
+	}
+
+}
