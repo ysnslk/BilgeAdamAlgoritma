@@ -1,0 +1,19 @@
+package lesson002;
+
+public class Question13 {
+	
+	
+	//Telefona ve maile bir kod gelecek bu kodları biz tanımlıyoruz.
+	//Kullanıcadan maile ve telefona gelen kodu istiyoruz.
+	//Eğer onun mailine ve telefonuna giden kod ile uyuşuyorsa 
+	//Sisteme kayıt oldunuz.
+	//Eğer bir yanlış varsa bunun nerden olduğunu bul.
+			
+
+
+	public static void main(String[] args) {
+
+		
+	}
+
+}

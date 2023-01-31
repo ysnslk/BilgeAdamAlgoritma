@@ -1,0 +1,15 @@
+package lesson002;
+
+import java.util.Scanner;
+
+public class Question18 {
+
+	//Girilen char değerini alfabenin içinde var mı yok mu 
+	public static void main(String[] args) {
+		char x ;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Bir karakter girin");
+		x = sc.next().charAt(0);
+	}
+
+}

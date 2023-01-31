@@ -1,0 +1,12 @@
+package lesson002;
+
+public class Question11 {
+
+	public static void main(String[] args) {
+		
+		//Dairenin çevresini ve alalını hesaplayn program
+		//r değerini kullanıcıdan alalım.
+		final float PI = 3.14;
+	}
+
+}

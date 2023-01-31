@@ -1,0 +1,47 @@
+package lesson002;
+
+import java.util.Scanner;
+
+public class Question16 {
+	//Kullanıcıdan aldığımız sayı haftanın hangi güne denk geliyor 
+	//Bu gün hafta içi mi hafta sonu mu ?
+	
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		int sayi ;
+		System.out.println("Sayı giriniz");
+		sayi = sc.nextInt();
+		switch (sayi) {
+		case 1:
+			
+			break;
+case 2:
+			
+			break;
+case 3:
+	
+	break;
+case 4:
+	
+	break;
+case 5:
+	
+	break;
+case 6:
+	
+	break;
+case 7:
+	
+	break;
+
+		default:
+			System.out.println("Lütfen geçerli bir sayı girin (1-7)...!");
+			break;
+		}
+		
+
+	}
+
+}

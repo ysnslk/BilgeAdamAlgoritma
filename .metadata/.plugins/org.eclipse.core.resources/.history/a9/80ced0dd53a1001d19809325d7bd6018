@@ -1,0 +1,19 @@
+package lesson002;
+
+import java.util.Scanner;
+
+public class Question11 {
+
+	public static void main(String[] args) {
+		
+		//Dairenin çevresini ve alalını hesaplayn program
+		//r değerini kullanıcıdan alalım.
+		final float PI = 3.14f;
+		int r;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Yarıçap değerini giriniz.");
+		r=sc.nextInt();
+		
+	}
+
+}
