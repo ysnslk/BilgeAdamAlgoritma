@@ -1,0 +1,18 @@
+package lesson003;
+
+import java.util.Scanner;
+
+public class Question29 {
+
+	public static void main(String[] args) {
+		//Kullanıcı sıfıra basana kadar girilen sayıları çarp
+		Scanner sc = new Scanner(System.in);
+		int sayi,carpim=1;
+		do {
+			System.out.println("Sayı Giriniz");
+			sayi = sc.nextInt();
+			
+		} while (sayi!=0);
+	}
+
+}

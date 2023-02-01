@@ -1,0 +1,11 @@
+package lesson003;
+
+public class Question27 {
+
+	public static void main(String[] args) {
+		//Girilen sayının basamaklarının toplamını bulalım
+		Scanner sc = new Scanner(System.in);
+
+	}
+
+}

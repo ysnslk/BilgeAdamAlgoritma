@@ -1,0 +1,12 @@
+package lesson003;
+
+public class Question24 {
+
+	public static void main(String[] args) {
+		// 1den 100 e kadar çift sayıların toplamını tek sayıların
+		//oranını bulan program
+		int tekt =0,ciftt=0;
+
+	}
+
+}

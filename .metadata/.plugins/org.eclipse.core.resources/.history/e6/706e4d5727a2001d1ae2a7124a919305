@@ -1,0 +1,13 @@
+package lesson003;
+
+import java.util.Scanner;
+
+public class Question25 {
+
+	public static void main(String[] args) {
+		//Girilen sayının asal olup olmadığını bulan program
+				Scanner sc = new Scanner(System.in);
+
+	}
+
+}

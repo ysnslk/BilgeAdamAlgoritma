@@ -1,0 +1,10 @@
+package lesson003;
+
+public class Question25 {
+
+	public static void main(String[] args) {
+		//Girilen sayının asal olup olmadığını bulan program
+
+	}
+
+}

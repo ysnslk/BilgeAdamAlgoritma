@@ -1,0 +1,10 @@
+package lesson003;
+
+public class Question29 {
+
+	public static void main(String[] args) {
+		//Kullanıcı sıfıra basana kadar girilen sayıları çarp
+
+	}
+
+}
