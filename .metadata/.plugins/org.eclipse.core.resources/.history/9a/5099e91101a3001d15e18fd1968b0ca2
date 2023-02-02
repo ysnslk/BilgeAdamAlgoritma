@@ -1,0 +1,30 @@
+package lesson004;
+
+import java.util.Scanner;
+
+public class Question38 {
+
+	public static void main(String[] args) {
+		//         Menu 1-Dışarıdan bir kelime ve bir harf girilsin  eğer kelimemizin için de o 
+		//        harf varsa kaç tane olduğunu ve index numaralarını yazdırın.
+		//        eğer harfi içermiyorsa bir çıktı aradağınız harf yok gibi
+		//        2-Dışarıdan bir kelime giriniz daha sonra değiştirmek istediğiniz harfi
+		//          giriniz daha sonra hangi harfle değiştireceğinizi giriniz Eğer kelimemiz
+		//          içerisinde o harf varsa değiştirsin.
+		//        3-Dışarıdan Girilen bir kelimeyi ters çevirip yazdıralım.Polindrom olup
+		//         * olmadığını bulunuz(kek,iki,kabak,kayak)
+		//		  4-Sistemden çıksın
+
+					Scanner sc = new Scanner(System.in);
+					boolean kontrol=false;
+					while (kontrol) {
+						System.out.println("====String İşlemleri======");
+						System.out.println("1-Harf Saydırma");
+						System.out.println("2-Harf Değiştirme");
+						System.out.println("3-Polindrom Kontrolü");
+						System.out.println();
+						
+					}
+	}
+
+}

@@ -1,0 +1,23 @@
+package lesson004;
+
+import java.util.Scanner;
+
+public class Question37 {
+
+	public static void main(String[] args) {
+		//Kullanıcıdan 
+		//maill @hotmail.com @outlook.com, pass , repass
+		//e mail formatını kontrol et.
+		Scanner sc = new Scanner(System.in);
+		String mail,pass,repass;
+		
+		System.out.println("Mail adresi giriniz");
+		mail = sc.nextLine();
+		System.out.println("Şifre giriniz");
+		pass = sc.nextLine();
+		System.out.println("Şifreyi tekrar giriniz");
+		repass = sc.nextLine();
+		
+	}
+
+}

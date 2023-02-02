@@ -1,0 +1,11 @@
+package lesson004;
+
+public class Question33 {
+
+	public static void main(String[] args) {
+		// Klavyeden girilen 0 ile 100 arasından 5 adet  sayıdan 
+		//en büyük ve en küçük olanı bulan program.
+
+	}
+
+}

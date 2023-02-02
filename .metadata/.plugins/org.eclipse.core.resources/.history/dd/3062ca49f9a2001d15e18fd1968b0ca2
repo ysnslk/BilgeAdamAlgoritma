@@ -1,0 +1,11 @@
+package lesson004;
+
+public class Question36 {
+
+	public static void main(String[] args) {
+		// Verilen kelimenin içinde kaç tane e olduğunu bulan
+		//Algoritmayı yaz
+
+	}
+
+}

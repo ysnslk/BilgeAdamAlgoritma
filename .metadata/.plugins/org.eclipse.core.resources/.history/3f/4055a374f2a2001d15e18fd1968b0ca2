@@ -1,0 +1,12 @@
+package lesson004;
+
+public class Question34 {
+
+	public static void main(String[] args) {
+		// Verilen kelimenin harflerini alt alta yazdıralrım.
+		//java
+		
+		String kelime = "java";
+	}
+
+}
