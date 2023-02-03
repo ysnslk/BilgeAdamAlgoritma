@@ -1,0 +1,15 @@
+package lesson005;
+
+public class Question42 {
+
+	public static void main(String[] args) {
+		int[] sayilar = {2,4,10,5};
+		//SAyı tektir çifttir diye çıktı al.
+		//Dizi içindeki eleman toplamını yazdır
+		
+		for(int i = 0;i<sayilar.length;i++)){
+			
+		}
+	}
+
+}

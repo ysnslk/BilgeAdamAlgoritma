@@ -1,0 +1,19 @@
+package lesson005;
+
+public class Question44 {
+
+	public static void main(String[] args) {
+		int[] sayilar = { -2,-4,10,5,4,5,-5 };
+		int count=0;
+		
+		for (int i = 0; i < sayilar.length; i++) {
+			if(i<0) {
+				count++;
+			}
+		}
+		
+		
+		
+	}
+
+}

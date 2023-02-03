@@ -1,0 +1,10 @@
+package lesson005;
+
+public class Question39 {
+
+	public static void main(String[] args) {
+		//random integer sayı üretme
+
+	}
+
+}

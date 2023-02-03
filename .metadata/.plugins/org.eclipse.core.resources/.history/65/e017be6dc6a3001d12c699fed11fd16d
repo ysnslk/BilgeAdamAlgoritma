@@ -1,0 +1,9 @@
+package lesson005;
+
+public class Question42 {
+
+	public static void main(String[] args) {
+		int[] sayilar = {2,4,10,5}
+	}
+
+}

@@ -1,0 +1,11 @@
+package lesson005;
+
+public class Question39 {
+
+	public static void main(String[] args) {
+		//random integer sayı üretme
+		//randoms sayı üretelim 0 ile 100 arasında
+
+	}
+
+}
