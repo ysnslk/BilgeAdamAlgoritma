@@ -1,0 +1,18 @@
+package lesson006;
+
+public class Question47 {
+
+	public static void main(String[] args) {
+		//İkiye ikilik bir array oluştur
+		//İçinde isimler yazılsın
+		
+		//1. grup
+		//Ali
+		//Mehmet
+		
+		//2.Grup
+		//Ahmet
+		//Hakan 
+	}
+
+}
