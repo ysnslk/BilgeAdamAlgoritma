@@ -1,0 +1,25 @@
+package lesson007;
+
+public class Question57 {
+	
+	
+	//Topla metodu yazalım.
+	//Toplam sonucunu kontorl edelimi
+	//Sayının 10 dan büyük olup olmadığını bulalım
+	
+	private static int topla(int sayi1,int sayi2) {
+
+		return sayi1 + sayi2;
+		
+	}
+	
+	
+	
+	
+	public static void main(String[] args) {
+		
+		
+		topla(15);
+		
+	}
+}

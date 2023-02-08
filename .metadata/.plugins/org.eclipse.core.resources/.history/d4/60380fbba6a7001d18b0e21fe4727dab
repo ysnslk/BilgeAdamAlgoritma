@@ -1,0 +1,11 @@
+package lesson007;
+
+public class Question55 {
+
+	public static void main(String[] args) {
+		//Verilen arrayda en büyük ve en küçük  değerleri bulan prog
+		String[] array = { "5", "2", "3", "4", "99", "85" };
+
+	}
+
+}

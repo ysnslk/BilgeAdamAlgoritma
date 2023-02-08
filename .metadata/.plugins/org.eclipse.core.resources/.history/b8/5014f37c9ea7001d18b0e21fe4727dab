@@ -1,0 +1,18 @@
+package lesson007;
+
+public class Question53 {
+
+	public static void main(String[] args) {
+		// İki kez üst üste  aynı sayı klavyeden girilene kadar döngü devam edecek.
+		//iki kez üst üste girlidiğinde o zamana kadar girilen sayıların ortalamasını veren 
+		
+		boolean kontrol = false;
+		
+		while (kontrol == ture) {
+			
+		}
+		
+
+	}
+
+}

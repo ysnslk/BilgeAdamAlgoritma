@@ -1,0 +1,12 @@
+package lesson007;
+
+public class Question58 {
+
+	public static void main(String[] args) {
+		//Parametre olarak int alan ve int döndüren
+		//Girilen sayının kaç basamaklı olduğunu bulan metodu yazın
+		
+
+	}
+
+}

@@ -1,0 +1,11 @@
+package lesson007;
+
+public class Question56 {
+
+	public static void main(String[] args) {
+		// parametre olarak girilen isim ve soyismi alıp ekrana yazdıralım
+		
+
+	}
+
+}

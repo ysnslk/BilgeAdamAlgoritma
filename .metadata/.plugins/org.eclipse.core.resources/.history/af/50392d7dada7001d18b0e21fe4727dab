@@ -1,0 +1,30 @@
+package lesson007;
+
+public class Question57 {
+	
+	
+	//Topla metodu yazalım.
+	//Toplam sonucunu kontorl edelimi
+	//Sayının 10 dan büyük olup olmadığını bulalım
+	
+	private static void topla(int topla) {
+
+		if(topla>=10) {
+			System.out.println("Değer 10 dan büyük");
+		}
+		else {
+			System.out.println("Değer 10 dan küçük");
+		}
+		
+	}
+	
+	
+	
+	
+	public static void main(String[] args) {
+		
+		
+		topla(15);
+		
+	}
+}
