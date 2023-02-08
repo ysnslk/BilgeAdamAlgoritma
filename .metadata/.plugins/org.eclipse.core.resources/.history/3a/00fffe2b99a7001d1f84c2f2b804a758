@@ -56,10 +56,6 @@ public class HW {
 			}
 			toplam = toplam + nums2[i];
 		}
-		if(nums2[0] !=13)
-		{
-			toplam = toplam + nums2[0];
-		}
 
 		System.out.println("Dizinin toplamı : " + toplam);
 
