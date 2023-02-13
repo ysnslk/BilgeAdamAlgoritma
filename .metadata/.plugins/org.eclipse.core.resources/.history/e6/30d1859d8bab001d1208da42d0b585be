@@ -1,0 +1,34 @@
+package lesson008;
+
+public class Question60 {
+	
+	
+	public static  int yasHesapla(int yil) {
+		int yas = 2023-yil;
+		return yas;
+	}
+	
+	public static int yuzyilHesapla(int yil) {
+		
+		yuzYil = yil / 100;
+		
+		
+		return yuzYil;
+	}
+	
+
+	public static void main(String[] args) {
+
+		//Doğum yılınzıı girerek yaşınızı ve
+		//Hangi yüzyılda doğduğunuzu hesaplayan metodlar
+		//3 farklı metod
+		//Yas Hesapla
+		//yüzyıl hesapla
+		//Bilgileri yazdır.
+		
+		
+		
+
+	}
+
+}

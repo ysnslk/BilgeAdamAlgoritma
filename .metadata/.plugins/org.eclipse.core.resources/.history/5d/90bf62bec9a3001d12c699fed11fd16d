@@ -1,9 +1,0 @@
-package lesson005;
-
-public class Question44 {
-
-	public static void main(String[] args) {
-sayilar		int count=0;
-	}
-
-}
