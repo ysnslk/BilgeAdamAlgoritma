@@ -1,0 +1,32 @@
+package maraton001;
+
+public class Question2 {
+
+	public static void tekrarEdeniBul() {
+		int[] dizi =  { 0, 1, 5, 3 };
+		int tekrar = 0, tekrarEden = 0;
+		for (int i = 0; i < dizi.length; i++) {
+			for (int j = 0; j < dizi.length; j++) {
+				if (i != j) {
+					if (dizi[i] == dizi[j]) {
+						
+						tekrarEden = dizi[i];
+						tekrar++;
+					}
+				}
+			}
+
+		}
+		if (tekrar > 0) {
+			System.out.println(tekrarEden + " Sayısı dizide " + tekrar + " kere tekrarlanmıştır.");
+		} else {
+			System.out.println(tekrarEden + "Tekrar eden sayı bulunamamıştır");
+		}
+	}
+
+	public static void main(String[] args) {
+		tekrarEdeniBul();
+
+	}
+
+}
