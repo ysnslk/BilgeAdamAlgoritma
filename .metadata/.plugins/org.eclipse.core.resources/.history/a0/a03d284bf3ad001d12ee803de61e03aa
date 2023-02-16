@@ -1,0 +1,20 @@
+package lesson010;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Profile profile1 = new Profile();
+		profile1.uName = "mehmet123";
+		profile1.name = "Mehmet";
+		profile1.description = "------";
+		profile1.profilePicture = "jpg";
+		profile1.follows = 0;
+		profile1.followers = 0;
+		profile1.posts = "";
+		profile1.stories="";
+		
+		System.out.println(profile1);
+
+	}
+
+}

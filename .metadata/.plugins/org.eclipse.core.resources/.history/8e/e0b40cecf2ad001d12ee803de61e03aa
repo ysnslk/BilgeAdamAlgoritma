@@ -1,0 +1,19 @@
+package lesson010;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Profile profile1 = new Profile();
+		profile1.uName = "";
+		profile1.name = "";
+		profile1.description = "";
+		profile1.profilePicture = "";
+		profile1.follows = 0;
+		profile1.followers = 0;
+		profile1.posts = "";
+		profile1.stories="";
+		
+
+	}
+
+}

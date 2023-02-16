@@ -1,0 +1,75 @@
+package lesson009;
+
+import java.util.Scanner;
+
+public class Question66 {
+	public static Scanner sc = new Scanner(System.in);
+	/*
+	 * Menuyu oluşturalım 
+	 * Toplama metodu kullanıcı 0 girene kadar sayıları alınız 0
+	 * girince sonucu gösterip tekrar menuye dön
+	 * 
+	 * Çıkarma
+	 * Kullanıcıdan ilk başta kaç adet sayı girileceğini alalım
+	 * sonucu yazdır
+	 */
+
+	// int , Integer (wrapper sınıf) farkı,
+	// Integer primitive int e hizmet eden bir sınıf
+	// int --> null alamaz default 0 olur
+
+	public static void menu() {
+		boolean check = true;
+		System.out.println("1- Toplama");
+		System.out.println("Seçiminiz");
+		int secim = sc.nextInt();
+		while (check) {
+			switch (secim) {
+			case 1:
+				System.out.println(toplama());
+				break;
+			case 2:
+				cikarma();
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	private static void cikarma() {
+		System.out.println("Kaç adet sayı girmek istiyorsunuz");
+		int kacSayi = sc.nextInt();
+		int sonuc =0;
+		for (int i = 0; i < kacSayi; i++) {
+			System.out.println((i+1)+". sayıyı giriniz : ");
+			int sayi = sc.nextInt();
+			sonuc -= say;
+			
+		}
+
+	}
+
+	public static int toplama() {
+		int toplam = 0;
+		int i = 1;
+		boolean check = true;
+		while (check) {
+			System.out.println(i + ". Sayıyı giriniz");
+			int sayi = sc.nextInt();
+			toplam += sayi;
+			if (sayi == 0) {
+				check = false;
+			}
+			i++;
+
+		}
+
+		return toplam;
+	}
+
+	public static void main(String[] args) {
+		menu();
+	}
+
+}

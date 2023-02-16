@@ -1,0 +1,24 @@
+package lesson009;
+
+public class Question68 {
+	public static int sesliHarfBul(String kelime) {
+		int sayac = 0;
+		int[] sesliHarfler = { 65, 69, 73, 79, 85 };
+		for (int j = 0; j < sesliHarfler.length; j++) {
+			for (int i = 0; i < kelime.length(); i++) {
+				if (sesliHarfler[j] == kelime.charAt(i)) {
+					sayac++;
+				}
+			}
+
+		}
+		return sayac;
+	}
+
+	public static void main(String[] args) {
+		// girilen kelimedeki sesli harflerin sayısını bulan metodu yazınız.
+		// Metod int dönsün parametre string
+		sesliHarfBul();
+	}
+
+}
