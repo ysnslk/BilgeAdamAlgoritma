@@ -1,0 +1,25 @@
+package lesson011;
+
+public class Main {
+	public static void main(String[] args) {
+		//Product sınıfı oluşturalım.
+		//Id price name stock
+		//bilgileriGoster() 
+		//değişkenler private
+		//Boş constructor
+		
+		
+		//Veritabanına kaydedildi
+		
+		Product p1 = new Product();
+		p1.setId("1");
+		p1.setName("Asus");
+		p1.setPrice(100);
+		p1.setStock(10);
+		p1.bilgilerGoster();
+		
+		Product p2 = new Product("2",2500,"HP",20);
+		p2.bilgilerGoster();
+	}
+
+}

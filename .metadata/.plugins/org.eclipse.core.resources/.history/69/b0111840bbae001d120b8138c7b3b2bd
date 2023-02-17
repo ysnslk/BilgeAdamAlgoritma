@@ -1,0 +1,7 @@
+package lesson011;
+
+public class Sepet {
+	private String[]products;
+	private int totalPrice;
+
+}

@@ -1,0 +1,69 @@
+package lesson011;
+
+public class Product {
+	private String id;
+	private int price;
+	private String name;
+	private int stock;
+	
+	public Product () {
+		//Bir sınıftan nesne ürettiğimizde arka tarafta çalışan ilk metodtur
+		System.out.println("Product sınıfının sıfır parametreli constructor u çalıştı");
+	}
+	public Product (String id,int price, String name,int stock ) {
+	
+		this.id = id;
+		this.setPrice(price);
+		this.name= name;
+		
+	}
+	
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		if(price < 0) {
+			System.out.println("0 dan büyük bir değer girin");
+			this.price = 0;
+		}
+		else {
+			this.price = price;
+		}
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	public void bilgilerGoster() {
+		System.out.println(toString());
+	}
+
+	@Override
+	public String toString() {
+		return "Id : " + id + ", Price :" + price + ", Name :" + name + ", Stock :" + stock;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,10 @@
+package lesson011.helper;
+
+import java.util.Random;
+
+public class RandomGenerateID {
+	public Random rnd = new Random();
+	public String generateID() {
+		int n = rnd.nextInt(1,100);
+	}
+}

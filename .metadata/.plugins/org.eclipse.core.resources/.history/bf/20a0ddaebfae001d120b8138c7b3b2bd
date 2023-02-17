@@ -1,0 +1,41 @@
+package lesson011;
+
+import java.util.Iterator;
+
+public class Sepet {
+	private String[] products;
+	private int totalPrice;
+	private static int index = 0;
+	
+	public Sepet() {
+		this.products = new Product[10];
+	}
+
+	public String[] getProducts() {
+		return products;
+	}
+
+	public void setProducts(String[] products) {
+		this.products = products;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	
+	public void sepeteEkle(Product product) {
+		products[index] = product;
+		index++;
+		//Her ürün eklendiğinde totalPRice artacak
+		//Her ürün deklediğimde product 'ın stoğu azalması lazm.
+		//10 taneden fazla ürün alamasın.
+	}
+
+}
