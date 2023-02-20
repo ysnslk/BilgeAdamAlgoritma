@@ -1,6 +1,12 @@
 package lesson011;
 
+import java.security.ProtectionDomain;
+import java.util.Scanner;
+
+import lesson011.helper.RandomGenerateID;
+
 public class Main {
+	public static Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) {
 		// Product sınıfı oluşturalım.
 		// Id price name stock
@@ -57,6 +63,58 @@ public class Main {
 		System.out.println(p3.isActive());
 		
 		sepet1.getProductsManual();
+		
+		//Prodcut Ekle Metodu 
+		//Değerleri kullanıcıdan alalım
+		//Aldığımız  değerler ile product oluşturucaz
+		
+	
+		Product p9 = productEkle();
+		p9.bilgilerGoster();
+		//sepeteEkle(product);
+		
+		
+		
+		
+		
+		
 	}
+	
+	
+	
+	public static Product productEkle() {
+		Product product = new Product();
+		System.out.println("Ürün Adını  Girin : ");
+		String pName = sc.nextLine();
+		System.out.println("Ürün Fiyatını  Girin : ");
+		int pPrice = sc.nextInt();
+		System.out.println("Stok Miktarı Girin : ");
+		int pStock=sc.nextInt();
+		
+		product.setName(pName);
+		product.setPrice(pPrice);
+		product.setStock(pStock);
+		product.setProductCode(pName);
+		product.bilgilerGoster();
+		return product;
+	}
+	
+	
+	//Sepete ekle 
+	
+	public static void sepeteEkle(Product product) {
+		Sepet sepet = new Sepet();
+		sepet.sepeteEkle(product);
+		
+		sepet.getProductsManual();
+				
+	}
+
+	
+	
+	//Urun kodu
+	//Apple Pro 
+	//App325 
+	//Ürün adı 
 
 }

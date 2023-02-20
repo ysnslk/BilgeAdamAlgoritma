@@ -1,0 +1,30 @@
+package lesson012;
+
+public class Pizza {
+	
+	
+	private int price;
+	private boolean isNormal;
+	
+	Public Pizza() {
+		
+	}
+	Public Pizza() {
+			
+	}
+		
+	
+	
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public boolean isNormal() {
+		return isNormal;
+	}
+	public void setNormal(boolean isNormal) {
+		this.isNormal = isNormal;
+	}
+}

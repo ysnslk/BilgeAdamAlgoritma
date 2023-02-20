@@ -1,0 +1,28 @@
+package lesson012;
+
+public class Pizza {
+	
+	
+	private int price;
+	private boolean isNormal;
+	public int getPrice() {
+		if (isNormal) {
+			this.price = 200;
+		}
+		else {
+			this.price = 300;
+		}
+		return price;
+	}
+	public boolean isNormal(boolean isNormal) {
+		return isNormal;
+	}
+	@Override
+	public String toString() {
+		return "Pizza [price=" + price + ", isNormal=" + isNormal + "]";
+	}
+	
+	
+	
+	
+}
