@@ -1,0 +1,6 @@
+package lesson013;
+
+public class Soru {
+	private int puan;
+
+}

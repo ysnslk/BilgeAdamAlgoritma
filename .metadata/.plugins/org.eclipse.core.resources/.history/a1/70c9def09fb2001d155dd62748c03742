@@ -1,0 +1,15 @@
+package lesson013;
+
+public class Sinav {
+
+	private int maxPuan;
+	private int sure;
+	private int soruSayisi;
+	private String ders;
+	private String konu;
+	private String[] sorular;
+	private String[] cevapSecenekleri;
+	private String[] cevaplar;
+
+	// Soru sınıfı oluşturalım.
+}

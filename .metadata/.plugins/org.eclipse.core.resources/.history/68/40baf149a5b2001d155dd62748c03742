@@ -1,0 +1,17 @@
+package lesson013;
+
+public class Main {
+
+	public static void main(String[] args) {
+	
+		//Sınav sınıfı oluşturup.//Attirbutleri yazalım.
+		Sinav sinav = new Sinav();
+		Soru s1 = new Soru();
+		s1.soruOlustur(sinav.getCevapSecenekleri());
+		for (int i = 0; i < s1.getCevapIcerikleri().length; i++) {
+			
+		}
+		
+	}
+
+}

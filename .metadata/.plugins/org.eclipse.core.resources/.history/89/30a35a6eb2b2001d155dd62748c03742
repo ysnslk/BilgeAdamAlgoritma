@@ -1,0 +1,77 @@
+package lesson013;
+
+import java.util.Scanner;
+
+public class Sinav {
+
+	private int maxPuan;
+	private int sure;
+	private int soruSayisi;
+	private String ders;
+	private String konu;
+	private Soru[] sorular;
+	private String[] cevapSecenekleri = { "A", "B", "C", "D" };
+	private String[] cevaplar;
+	
+	
+	public Sinav() {
+		
+	}
+	
+	
+	public int getMaxPuan() {
+		return maxPuan;
+	}
+	public void setMaxPuan(int maxPuan) {
+		this.maxPuan = maxPuan;
+	}
+	public int getSure() {
+		return sure;
+	}
+	public void setSure(int sure) {
+		this.sure = sure;
+	}
+	public int getSoruSayisi() {
+		return soruSayisi;
+	}
+	public void setSoruSayisi(int soruSayisi) {
+		this.soruSayisi = soruSayisi;
+	}
+	public String getDers() {
+		return ders;
+	}
+	public void setDers(String ders) {
+		this.ders = ders;
+	}
+	public String getKonu() {
+		return konu;
+	}
+	public void setKonu(String konu) {
+		this.konu = konu;
+	}
+	public Soru[] getSorular() {
+		return sorular;
+	}
+	public void setSorular(Soru[] sorular) {
+		this.sorular = sorular;
+	}
+	public String[] getCevapSecenekleri() {
+		return cevapSecenekleri;
+	}
+	public void setCevapSecenekleri(String[] cevapSecenekleri) {
+		this.cevapSecenekleri = cevapSecenekleri;
+	}
+	public String[] getCevaplar() {
+		return cevaplar;
+	}
+	public void setCevaplar(String[] cevaplar) {
+		this.cevaplar = cevaplar;
+	}
+	
+	public void sinavOlustur() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Sınavın Konusu ?");
+		setKonu(sc.next());
+	}
+	
+}

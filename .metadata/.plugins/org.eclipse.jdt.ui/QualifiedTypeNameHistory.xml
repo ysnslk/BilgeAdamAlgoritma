@@ -8,5 +8,6 @@
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="java.security.ProtectionDomain"/>
     <fullyQualifiedTypeName name="lesson011.helper.RandomGenerateID"/>
+    <fullyQualifiedTypeName name="lesson013.Sinav"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
 </qualifiedTypeNameHistroy>

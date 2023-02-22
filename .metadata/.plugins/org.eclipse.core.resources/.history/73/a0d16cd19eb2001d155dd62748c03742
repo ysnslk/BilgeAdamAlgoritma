@@ -1,0 +1,16 @@
+package lesson013;
+
+public class Sinav {
+
+	int maxPuan;
+	int sure;
+	int soruSayisi;
+	String ders;
+	String konu;
+	String[] sorular;
+	String[] cevapSecenekleri;
+	String[] cevaplar;
+
+	// Soru -->
+
+}

@@ -1,0 +1,10 @@
+package lesson013;
+
+public class Soru {
+	
+	private int puan;
+	private String icerik;
+	private String dogruCevap;
+	private String[] cevapIcerikleri; // Aşıkkı Bşıkkı
+
+}
