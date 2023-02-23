@@ -1,0 +1,24 @@
+package lesson014;
+
+public class UserManager {
+
+	private final String emailFormat = "@xbanka.com";
+
+	public void generateAutoEmail(User user) {
+
+		user.setEmail(user.getName().toLowerCase().replace(" ", ".") + '.'
+				+ user.getSurName().toLowerCase().replace(" ", ".") + emailFormat);
+	}
+	
+	
+	public void getCredit(Account account,int money) {
+		
+	}
+	
+	
+
+//	public void otomatikEmailOlustur(User user) {
+//		String otomatikOlusanEmail = user.getName().toLowerCase().replaceAll(" ", ("."))
+//		.concat("." + user.getSurname().toLowerCase().replace(' ', ('.'))) + emailFormat;user.setEmail(otomatikOlusanEmail);     
+//		}
+}

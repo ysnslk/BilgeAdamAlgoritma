@@ -1,0 +1,32 @@
+package lesson014;
+
+public class Account {
+	private int accountNo;
+	private double money;
+
+	public int getAccountNo() {
+		return accountNo;
+	}
+
+	public void setAccountNo(int accountNo) {
+		this.accountNo = accountNo;
+	}
+
+	public double getMoney() {
+		return money;
+	}
+
+	public void setMoney(double money) {
+		this.money = money;
+	}
+	
+	public void depositMoney(double money) {
+		if(money <= 10000 && money > 0) {
+			this.money += money;
+		}
+		else {
+			System.err.println("Lütfen bir seferde en fazla 10000 birim yatıeınız...!");
+		}
+	}
+
+}

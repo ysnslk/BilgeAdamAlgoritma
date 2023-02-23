@@ -1,0 +1,27 @@
+package lesson014;
+
+public class AccountManager {
+	public void depositMoney(Account account, double money) {
+		if (money <= 10000 && money > 0) {
+			account.setMoney(account.getMoney() + money);
+			System.out.println("İşlem Başarılı !! Yatırılan tutar : " + money);
+			System.out.println("Güncel Bakiyeniz : " + account.getMoney());
+		} else {
+			System.err.println("Lütfen bir seferde en fazla 10000 birim yatıeınız...!");
+		}
+	}
+
+	public void dwithdrawMoney(Account account, double money) {
+		if (account.getMoney() >= money) {
+			account.setMoney(account.getMoney() - money);
+			System.out.println("İşlem Başarılı !! Çekilen tutar : " + money);
+			System.out.println("Güncel Bakiyeniz : " + account.getMoney());
+		} else {
+			System.err.println("Bakiye yetersiz...!!");
+		}
+	}
+	
+	public void accountDetails(Account accoun) {
+		System.out.println("");
+	}
+}

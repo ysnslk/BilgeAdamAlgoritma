@@ -1,0 +1,8 @@
+package lesson014;
+
+public class AdminManager {
+
+	public void krediBasvursunuOnayla() {
+		
+	}
+}

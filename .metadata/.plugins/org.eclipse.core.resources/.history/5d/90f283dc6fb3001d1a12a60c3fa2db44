@@ -1,0 +1,9 @@
+package lesson014;
+
+public class User {
+
+	private String name;
+	private String surName;
+	private String email;
+	
+}

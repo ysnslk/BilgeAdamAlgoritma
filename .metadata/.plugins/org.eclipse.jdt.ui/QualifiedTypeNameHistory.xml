@@ -5,9 +5,12 @@
     <fullyQualifiedTypeName name="javax.swing.plaf.synth.SynthOptionPaneUI"/>
     <fullyQualifiedTypeName name="java.nio.file.spi.FileSystemProvider"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
-    <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="java.security.ProtectionDomain"/>
     <fullyQualifiedTypeName name="lesson011.helper.RandomGenerateID"/>
     <fullyQualifiedTypeName name="lesson013.Sinav"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="lesson014.AccountManager"/>
+    <fullyQualifiedTypeName name="lesson014.UserManager"/>
+    <fullyQualifiedTypeName name="lesson014.AdminManager"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
 </qualifiedTypeNameHistroy>

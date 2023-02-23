@@ -1,0 +1,11 @@
+package lesson014;
+
+public class AdminManager {
+
+	public void krediBasvursunuOnayla(Account account) {
+		if(account.isKrediBasvurusu())
+		{
+			account.setMoney(account.getMoney()+account.getIstenenKredi());
+		}
+	}
+}

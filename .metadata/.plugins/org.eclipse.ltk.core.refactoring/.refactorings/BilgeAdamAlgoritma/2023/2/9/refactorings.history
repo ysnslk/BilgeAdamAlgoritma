@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;lesson014.Adm&apos; to &apos;AdminManager&apos;&#x0D;&#x0A;- Original project: &apos;BilgeAdamAlgoritma&apos;&#x0D;&#x0A;- Original element: &apos;lesson014.Adm&apos;&#x0D;&#x0A;- Renamed element: &apos;lesson014.AdminManager&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Adm&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;lesson014{Adm.java[Adm" matchStrategy="1" name="AdminManager" qualified="false" references="true" similarDeclarations="false" stamp="1677157747871" textual="false" version="1.0"/>
+</session>

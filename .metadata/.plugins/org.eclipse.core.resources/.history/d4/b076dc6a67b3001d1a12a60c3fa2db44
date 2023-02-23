@@ -1,0 +1,24 @@
+package lesson014;
+
+public class Account {
+	private int accountNo;
+	private double money;
+
+	public int getAccountNo() {
+		return accountNo;
+	}
+
+	public void setAccountNo(int accountNo) {
+		this.accountNo = accountNo;
+	}
+
+	public double getMoney() {
+		return money;
+	}
+
+	public void setMoney(double money) {
+		this.money = money;
+	}
+	
+	
+}
