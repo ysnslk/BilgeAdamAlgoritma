@@ -1,6 +1,0 @@
-package lesson014;
-
-public class Account {
-	private int accountNo;
-	private double money;
-}

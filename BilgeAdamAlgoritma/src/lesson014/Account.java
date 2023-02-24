@@ -5,6 +5,10 @@ public class Account {
 	private double money;
 	private boolean KrediBasvurusu;
 	private double istenenKredi;
+	private double krediBorcu;
+	private boolean KrediAlindiMi;
+	private int krediNotu;
+	private double nakitAvans;
 
 	public Account() {
 		this.accountNo = AccountManager.generateAccountID();
@@ -43,6 +47,52 @@ public class Account {
 	public void setMoney(double money) {
 		this.money = money;
 	}
+
+	public double getKrediBorcu() {
+		return krediBorcu;
+	}
+
+	public void setKrediBorcu(double krediBorcu) {
+		this.krediBorcu = krediBorcu;
+	}
+
+	public boolean isKrediAlindiMi() {
+		return KrediAlindiMi;
+	}
+
+	public void setKrediAlindiMi(boolean krediAlindiMi) {
+		KrediAlindiMi = krediAlindiMi;
+	}
+
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
+	}
+
+	public int getKrediNotu() {
+		return krediNotu;
+	}
+
+	public void setKrediNotu(int krediNotu) {
+		this.krediNotu = krediNotu;
+	}
+
+	public double getNakitAvans() {
+		return nakitAvans;
+	}
+
+	public void setNakitAvans(double nakitAvans) {
+		this.nakitAvans = nakitAvans;
+	}
+
+	@Override
+	public String toString() {
+		System.out.println();
+		return "Hesap Numarası : " + accountNo + " Bakiye : " + money + " Kredi Başvurusu : " + KrediBasvurusu
+				+ " İstenen Kredi (Varsa) : " + istenenKredi + " Kredi Borcu (Varsa) : " + krediBorcu + " Kredi Aldı mı ? " + KrediAlindiMi
+				+ " Kredi Notu : " + krediNotu + " Nakit Avans : " + nakitAvans;
+	}
+	
+	
 
 //	public void depositMoney(double money) {
 //		if (money <= 10000 && money > 0) {

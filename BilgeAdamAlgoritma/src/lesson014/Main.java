@@ -24,6 +24,15 @@ public class Main {
 		 * AdminManager Sayfası oluşturalım. kredibasvurusunu onayla Bizim hesabımıza
 		 * çekmek istediğimiz kadar para hesaba aktarılacak
 		 * 
+		 * ----------
+		 * 
+		 * krediBorcunuOde() hesaptan öde , nakit ödeme eğer userin çekmiş olduğu
+		 * kredi yoksa ve ya kredi borcu reddedilmiş ise işlemleri gerçekleştiriyoruz
+		 * 
+		 * çekilmiş kredi varsa paramtre olarak girdiğimiz kadar ödeme yapmış olalım
+		 * kredi kartı borcunu düşürsün
+		 * 
+		 * Çıktı olarak -> Güncel kredi kartı borcunuz .... TL
 		 */
 		AccountManager accountManager = new AccountManager();
 		UserManager userManager = new UserManager();
@@ -62,7 +71,7 @@ public class Main {
 		acc2.setMoney(10000);
 
 		Account acc3 = new Account();
-		acc3.setMoney(10000);
+		acc3.setMoney(100000);
 
 		User us1 = new User();
 		us1.setName("Yasin");
@@ -91,7 +100,22 @@ public class Main {
 		Account ac5 = new Account();
 		ac5.setMoney(25000);
 		System.out.println(ac5.getAccountNo());
-
+		
+		System.out.println("************\n");
+		System.out.println("Hesap Bakiye : "+acc3.getMoney());
+		System.out.println(acc3.getKrediBorcu());
+		us3.krediBorcunuOde(acc3,1000);
+		us3.hesaptanKrediBorcunuOde(acc3,100);
+		us3.hesaptanKrediBorcunuOde(acc3,100);
+		us3.hesaptanKrediBorcunuOde(acc3,100);
+		us3.hesaptanKrediBorcunuOde(acc3,100);
+		us3.hesaptanKrediBorcunuOde(acc3,100);
+		System.out.println(acc3.getKrediNotu());
+		us3.nakitAvansCek(acc3);
+		us3.nakitAvansCek(acc3);
+		
+		System.out.println(us3);
+		
 	}
 
 }

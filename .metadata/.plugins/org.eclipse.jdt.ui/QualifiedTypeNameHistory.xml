@@ -13,4 +13,5 @@
     <fullyQualifiedTypeName name="lesson014.UserManager"/>
     <fullyQualifiedTypeName name="lesson014.AdminManager"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="java.awt.AlphaComposite"/>
 </qualifiedTypeNameHistroy>
