@@ -12,8 +12,11 @@
     <fullyQualifiedTypeName name="lesson014.AccountManager"/>
     <fullyQualifiedTypeName name="lesson014.UserManager"/>
     <fullyQualifiedTypeName name="lesson014.AdminManager"/>
-    <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="java.awt.AlphaComposite"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="com.hw001.MaasArtimi"/>
+    <fullyQualifiedTypeName name="com.hw001.Iki.Takim"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="com.hw001.Iki.TakimManager"/>
 </qualifiedTypeNameHistroy>
