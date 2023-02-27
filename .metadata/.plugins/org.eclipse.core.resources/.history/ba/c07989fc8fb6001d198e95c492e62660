@@ -1,0 +1,7 @@
+package lesson015.veteriner;
+
+public class Insan {
+
+	private String tcKimlik;
+	private String isim;
+}

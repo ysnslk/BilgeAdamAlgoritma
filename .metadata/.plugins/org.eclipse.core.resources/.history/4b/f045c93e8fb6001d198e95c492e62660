@@ -1,0 +1,7 @@
+package lesson015.veteriner;
+
+public class Kedi extends Hayvan {
+
+	private String tur;
+	private String cins;
+}

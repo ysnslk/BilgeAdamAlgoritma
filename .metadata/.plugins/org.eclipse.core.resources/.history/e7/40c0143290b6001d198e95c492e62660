@@ -1,0 +1,20 @@
+package lesson015.veteriner;
+
+public class Musteri extends Insan {
+
+	private String adres;
+
+	public Musteri(String adres, String tcKimlik, String isim) {
+		super(tcKimlik, isim);
+		this.adres = adres;
+	}
+
+	public String getAdres() {
+		return adres;
+	}
+
+	public void setAdres(String adres) {
+		this.adres = adres;
+	}
+
+}

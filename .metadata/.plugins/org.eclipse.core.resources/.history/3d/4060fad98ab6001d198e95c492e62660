@@ -1,0 +1,14 @@
+package lesson015;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		/*
+		 * Mülakatta sorulur
+		 * Abstract sınıflar ve interface farkı
+		 */
+
+	}
+
+}

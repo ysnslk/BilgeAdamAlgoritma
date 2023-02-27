@@ -1,0 +1,70 @@
+package lesson015.veteriner;
+
+public class Kopek extends Hayvan {
+
+	private int asiSayisi;
+	private String cins;
+	private String tur;
+	private String karne;
+
+	public Kopek(int asiSayisi, String cins, String karne, boolean kayitliMi, String dogumTarihi) {
+		super(dogumTarihi, kayitliMi, dogumTarihi);
+		this.asiSayisi = asiSayisi;
+		this.cins = cins;
+		this.tur = "Köpek";
+		this.karne = karne;
+	}
+
+	public int getAsiSayisi() {
+		return asiSayisi;
+	}
+
+	public void setAsiSayisi(int asiSayisi) {
+		this.asiSayisi = asiSayisi;
+	}
+
+	public String getCins() {
+		return cins;
+	}
+
+	public void setCins(String cins) {
+		this.cins = cins;
+	}
+
+	public String getTur() {
+		return tur;
+	}
+
+	public void setTur(String tur) {
+		this.tur = tur;
+	}
+
+	public String getKarne() {
+		return karne;
+	}
+
+	public void setKarne(String karne) {
+		this.karne = karne;
+	}
+
+	@Override
+	public String toString() {
+		return "Kopek [asiSayisi=" + asiSayisi + ", cins=" + cins + ", tur=" + tur + ", karne=" + karne + ", getName()="
+				+ getName() + ", isKayitliMi()=" + isKayitliMi() + ", getDogumTarihi()=" + getDogumTarihi() + "]";
+	}
+
+	@Override
+	public void karneOlustur() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void bilgileriGoster() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
+}
