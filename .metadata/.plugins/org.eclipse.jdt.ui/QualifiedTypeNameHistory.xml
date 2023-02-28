@@ -8,15 +8,20 @@
     <fullyQualifiedTypeName name="java.security.ProtectionDomain"/>
     <fullyQualifiedTypeName name="lesson011.helper.RandomGenerateID"/>
     <fullyQualifiedTypeName name="lesson013.Sinav"/>
-    <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="lesson014.AccountManager"/>
     <fullyQualifiedTypeName name="lesson014.UserManager"/>
     <fullyQualifiedTypeName name="lesson014.AdminManager"/>
     <fullyQualifiedTypeName name="java.awt.AlphaComposite"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="com.hw001.MaasArtimi"/>
     <fullyQualifiedTypeName name="com.hw001.Iki.Takim"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="com.hw001.Iki.TakimManager"/>
+    <fullyQualifiedTypeName name="lesson016.interfaceOrnek.IHareket"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="lesson016.IKutuphaneManager"/>
+    <fullyQualifiedTypeName name="lesson016.Util"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="lesson016.Kutuphane"/>
+    <fullyQualifiedTypeName name="lesson016.Kitap"/>
 </qualifiedTypeNameHistroy>
