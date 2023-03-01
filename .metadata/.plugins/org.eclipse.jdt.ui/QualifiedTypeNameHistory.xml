@@ -14,14 +14,16 @@
     <fullyQualifiedTypeName name="java.awt.AlphaComposite"/>
     <fullyQualifiedTypeName name="com.hw001.MaasArtimi"/>
     <fullyQualifiedTypeName name="com.hw001.Iki.Takim"/>
-    <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="com.hw001.Iki.TakimManager"/>
     <fullyQualifiedTypeName name="lesson016.interfaceOrnek.IHareket"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="lesson016.IKutuphaneManager"/>
     <fullyQualifiedTypeName name="lesson016.Util"/>
-    <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="lesson016.Kutuphane"/>
     <fullyQualifiedTypeName name="lesson016.Kitap"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="lesson017.StackOrnek"/>
+    <fullyQualifiedTypeName name="java.util.Stack"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
 </qualifiedTypeNameHistroy>

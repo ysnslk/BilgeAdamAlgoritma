@@ -11,4 +11,8 @@ public interface IKutuphaneManager {
 	void kitapSil();
 	
 	void indirimYap();
+	
+	void kitabıGuncelle();
+	
+	void indirimdekiKitaplariListele();
 }

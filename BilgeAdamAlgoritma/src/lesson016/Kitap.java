@@ -5,6 +5,7 @@ public class Kitap {
 	private String isim;
 	private String yazar;
 	private int fiyat;
+	private boolean indirimliMi;
 
 	public Kitap() {
 
@@ -15,6 +16,7 @@ public class Kitap {
 		this.isim = isim;
 		this.yazar = yazar;
 		this.fiyat = fiyat;
+		this.indirimliMi = false;
 	}
 
 	public String getIsim() {
@@ -41,5 +43,12 @@ public class Kitap {
 		this.fiyat = fiyat;
 	}
 
+	public boolean isIndirimliMi() {
+		return indirimliMi;
+	}
+
+	public void setIndirimliMi(boolean indirimliMi) {
+		this.indirimliMi = indirimliMi;
+	}
 
 }

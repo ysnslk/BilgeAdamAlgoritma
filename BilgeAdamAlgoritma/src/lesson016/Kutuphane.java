@@ -82,6 +82,7 @@ public class Kutuphane implements IKutuphaneManager {
 		Kitap kitap = kontrol(isim);
 		if (kitap != null) {
 			kitap.setFiyat(kitap.getFiyat() - indirim);
+			kitap.setIndirimliMi(true);
 			System.out.println("Güncel Fiyat ---> " + kitap.getFiyat());
 		}
 	}
@@ -94,6 +95,32 @@ public class Kutuphane implements IKutuphaneManager {
 		}
 		System.out.println("Kitap bulunamamıştır.");
 		return null;
+	}
+
+	@Override
+	public void kitabıGuncelle() {
+		String isim = Util.StringDegerAl("Lütfen güncellemek istediğiniz kitabın adını girin : ");
+		Kitap kitap = kontrol(isim);
+		if (kitap != null) {
+			String guncelIsim = Util.StringDegerAl("Güncellemek istediğiniz adı girin : ");
+			kitap.setIsim(guncelIsim);
+			System.out.println("Kitap ismi güncellendi ---> " + kitap.getIsim());
+		}
+	}
+
+	@Override
+	public void indirimdekiKitaplariListele() {
+		if (kitaplar.size() > 0) {
+			for (Kitap kitap : kitaplar) {
+				if (kitap.isIndirimliMi()) {
+					System.out.println("Kitap Adı : " + kitap.getIsim() + " Fiyatı : " + kitap.getFiyat());
+				}
+				
+			}
+		} else {
+			System.err.println("Lütfen İlk Önce Kütüphaneye Kitap Ekleyin!!!!!\n");
+		}
+		
 	}
 
 }

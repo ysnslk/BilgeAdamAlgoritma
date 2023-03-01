@@ -1,6 +1,0 @@
-package lesson013;
-
-public class Soru {
-	private Sinav[] soru;
-
-}

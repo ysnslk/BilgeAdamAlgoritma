@@ -24,10 +24,13 @@ public class Main {
 		 * indirimYap metodu kitap ismini alalım. Alınan isimde bir kitap yoksa kitap
 		 * yoktur kitabın fiyatını güncelleyin güncel fiyatı yazın
 		 * 
-		 * Kontrol diye bir metod yazarız.
-		 * Kitap var mı yok mu onu bulur.
-		 * Varsa o kitabı bize return eder.
-		 * Yoksa Bilglilendirir.
+		 * Kontrol diye bir metod yazarız. Kitap var mı yok mu onu bulur. Varsa o kitabı
+		 * bize return eder. Yoksa Bilglilendirir.
+		 * 
+		 * 
+		 * Kitabı güncelle metodu
+		 * 
+		 * İndirimde olan kitapları listele
 		 */
 
 		adminMenu();
@@ -37,11 +40,13 @@ public class Main {
 	public static void adminMenu() {
 
 		while (true) {
-			System.out.println("1- Kitap Ekle");
-			System.out.println("2- Bütün Kitapları Listele");
+			System.out.println("1-Kitap Ekle");
+			System.out.println("2-Bütün Kitapları Listele");
 			System.out.println("3-Yazarın Kitaplarını Listele");
 			System.out.println("4-Kitap Sil");
 			System.out.println("5-İndirim Yap");
+			System.out.println("6-Kitap Güncelle");
+			System.out.println("7-İndirimde Olan Kitapları Goster");
 			int secim = Util.intDegerAl("Seçiminiz: ");
 			switch (secim) {
 			case 1:
@@ -58,6 +63,12 @@ public class Main {
 				break;
 			case 5:
 				kutuphane.indirimYap();
+				break;
+			case 6:
+				kutuphane.kitabıGuncelle();
+				break;
+			case 7:
+				kutuphane.indirimdekiKitaplariListele();
 				break;
 			default:
 				System.out.println("Lütfen Dogru seçin yapın!!!!");
