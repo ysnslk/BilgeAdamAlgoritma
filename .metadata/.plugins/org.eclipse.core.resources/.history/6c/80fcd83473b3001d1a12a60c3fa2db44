@@ -1,8 +1,0 @@
-package lesson014;
-
-public class UserManager {
-
-	public void generateAutoEmail(User user) {
-		user.setEmail(user.getName().toLowerCase() + '.' + user.getSurName().toLowerCase() + "@xbanka.com");
-	}
-}
