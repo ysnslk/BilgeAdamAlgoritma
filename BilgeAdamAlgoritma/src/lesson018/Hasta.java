@@ -2,18 +2,26 @@ package lesson018;
 
 public class Hasta implements Comparable<Hasta> {
 	private String isim;
-	private String sikayet;
+	private String sikayet2;
+	private ESikayet sikayet;
 	private int oncelik;
 
-	public Hasta(String isim, String sikayet) {
+	public Hasta(String isim, String sikayet2) {
 		super();
 		this.isim = isim;
-		this.sikayet = sikayet;
-		oncelikBelirle(sikayet);
+		this.sikayet2 = sikayet2;
+		oncelikBelirle(sikayet2);
 //		this.oncelik = sikayet.equalsIgnoreCase("Apandist") ? 1 :
 //			sikayet.equalsIgnoreCase("Yanık") ? 2 :
 //				sikayet.equalsIgnoreCase("Apandist") ? 3 : 4;
 
+	}
+
+	public Hasta(String isim, ESikayet sikayet) {
+		super();
+		this.isim = isim;
+		this.sikayet = sikayet;
+		oncelikBelirleEnum(sikayet);
 	}
 
 	public void oncelikBelirle(String sikayet) {
@@ -25,6 +33,24 @@ public class Hasta implements Comparable<Hasta> {
 			this.oncelik = 3;
 		}
 	}
+	//Illegal Argument
+	public void oncelikBelirleEnum(ESikayet sikayet) {
+		switch (sikayet) {
+		case APANDIST:
+			this.oncelik = 1;
+			break;
+		case YANIK:
+			this.oncelik = 2;
+			break;
+
+		case AGRI:
+			this.oncelik = 3;
+			break;
+
+		default:
+			throw new IllegalArgumentException("Beklenmedik değer girdisi oldu");
+		}
+	}
 
 	public String getIsim() {
 		return isim;
@@ -34,20 +60,28 @@ public class Hasta implements Comparable<Hasta> {
 		this.isim = isim;
 	}
 
-	public String getSikayet() {
-		return sikayet;
-	}
-
-	public void setSikayet(String sikayet) {
-		this.sikayet = sikayet;
-	}
-
 	public int getOncelik() {
 		return oncelik;
 	}
 
 	public void setOncelik(int oncelik) {
 		this.oncelik = oncelik;
+	}
+
+	public String getSikayet2() {
+		return sikayet2;
+	}
+
+	public void setSikayet2(String sikayet2) {
+		this.sikayet2 = sikayet2;
+	}
+
+	public ESikayet getSikayet() {
+		return sikayet;
+	}
+
+	public void setSikayet(ESikayet sikayet) {
+		this.sikayet = sikayet;
 	}
 
 	@Override

@@ -1,7 +1,0 @@
-package lesson015.veteriner;
-
-public class Veteriner extends Insan {
-
-	private String mezunOlduguOkul;
-	private int calismaSuresi;
-}

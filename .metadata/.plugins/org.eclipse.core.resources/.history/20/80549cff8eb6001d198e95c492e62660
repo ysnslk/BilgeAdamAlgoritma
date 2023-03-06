@@ -1,7 +1,0 @@
-package lesson015.veteriner;
-
-public abstract class Hayvan {
-
-	private boolean kayitliMi;
-	private String dogumTarihi;
-}
