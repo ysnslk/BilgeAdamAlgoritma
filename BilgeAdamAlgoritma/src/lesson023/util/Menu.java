@@ -15,13 +15,16 @@ public class Menu {
 		System.out.println("1- Admin Menu");
 		System.out.println("2- User İşlemleri");
 		System.out.println("3- Kayıt Ol");
-		int key = Util.intDegerAlma("Yapmak istediğiniz işlem");
+		int key = Util.intDegerAlma("Yapmak istediğiniz işlem: ");
 		switch (key) {
 		case 1:
 			adminMenu();
 			break;
 		case 2:
 			userLogin();
+			break;
+		case 3:
+			userManager.register();
 			break;
 
 		default:
@@ -30,15 +33,14 @@ public class Menu {
 	}
 
 	private void adminMenu() {
-		System.out.println("1-Tüm Kullanıcılar Listele");
-		System.out.println("2-Ana Menu");
-		int key = Util.intDegerAlma("Yapmak istediğiniz işlem");
+		System.out.println("1- Tüm Kullanıcıları Listele");
+		System.out.println("2- Ana Menu");
+		int key = Util.intDegerAlma("Yapmak istediğiniz işlem: ");
 		switch (key) {
 		case 1:
-			System.out.println("Kullanıcılar Listelendi");
+			System.out.println("Kullanıcılar listelendi");
 			break;
 		case 2:
-			menu();
 			break;
 		default:
 			break;
@@ -46,30 +48,31 @@ public class Menu {
 	}
 
 	private void userLogin() {
-		String mail = Util.stringDegerAl("Mail adresinizi girin");
-		String password = Util.stringDegerAl("Şifrenizi girin");
+		String mail = Util.stringDegerAl("Mail: ");
+		String password = Util.stringDegerAl("Password: ");
 
-		User user = userManager.userKontrol(mail);
-		boolean pass = userManager.userSifreKontrol(password);
-		if (user != null && pass) {
+		User user = userManager.userMailKontrol(mail);
+		boolean kontrol = userManager.userSifreKontrol(password);
+		if (user != null && kontrol) {
+			System.out.println(user.getId());
 			userMenu(user);
 		}
-
+		
 	}
 
 	private void userMenu(User user) {
-		System.out.println("1- Dm At");
-		int key = Util.intDegerAlma("Yapmak istediğiniz işlem");
+		System.out.println("1- DM At");
+		int key = Util.intDegerAlma("Yapmak istediğiniz işlem: ");
 		switch (key) {
 		case 1:
-			System.out.println("Dm Atıldı");
+			System.out.println("Dm Atıldı " + user.getEmail());
 			break;
-
+		case 2:
+			break;
 		default:
 			break;
 		}
 	}
-
+	
+	//UserExcepiton sınıfı
 }
-
-//UserException

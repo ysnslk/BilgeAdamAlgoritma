@@ -1,0 +1,2 @@
+Hello java Bu bir yazma işlemidir
+Bu bir yazma işlemidiraaaa

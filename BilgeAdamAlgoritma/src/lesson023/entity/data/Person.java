@@ -6,12 +6,13 @@ public abstract class Person {
 	private String email;
 	private String password;
 
-	public Person(String id, String email, String password) {
+	public Person(String email, String password) {
 		super();
-		this.id = id;
 		this.email = email;
 		this.password = password;
 	}
+	
+	public abstract String randomGenerateId();
 
 	public String getId() {
 		return id;
@@ -35,11 +36,6 @@ public abstract class Person {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	@Override
-	public String toString() {
-		return "Person [id=" + id + ", email=" + email + ", password=" + password + "]";
 	}
 
 }
