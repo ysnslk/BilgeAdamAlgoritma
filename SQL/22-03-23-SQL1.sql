@@ -72,3 +72,8 @@ Select * from users
 
 select userid,addressid from orders where totalprice = (SELECT MAX(totalprice) AS LargestPrice FROM orders)
 
+--payment total 2000den büyük olanlara 200TL indirim yapalım güncelleyelim.
+
+update payments set paymenttotal = (paymenttotal-200) where paymenttotal >2000
+
+select * from payments
