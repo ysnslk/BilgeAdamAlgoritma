@@ -59,7 +59,7 @@ public class PersonRepository implements  IPersonRepository{
             connection = JDBCHelper.getConnection();
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
-           if(resultSet != null){
+           if(resultSet.next()){
                 displayPersons(resultSet);
             }
             else {
@@ -156,8 +156,9 @@ public class PersonRepository implements  IPersonRepository{
             preparedStatement.setString(1,email);
             preparedStatement.setInt(2, id);
             int effectedRow = preparedStatement.executeUpdate();
-            connection.commit();
+
             if (effectedRow > 0) {
+                connection.commit();
                 System.out.println(id + "li kullanıcının mai adresi veri tabanında güncellendi");
             }
         } catch (SQLException e) {
