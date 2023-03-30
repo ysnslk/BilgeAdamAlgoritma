@@ -52,19 +52,19 @@ public class PersonRepository implements  IPersonRepository{
     @Override
     public void getAllPerson() {
         Connection connection = null;
-        String query = "Select * from persons";
+        String query = "Select * from persons ";
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             connection = JDBCHelper.getConnection();
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
-           // if(resultSet.first() != true){
+           if(resultSet != null){
                 displayPersons(resultSet);
-            //}
-           // else {
-           //     System.out.println("Tabloda kayıtlı veri bulunamadı....!");
-            //}
+            }
+            else {
+               System.out.println("Tabloda kayıtlı veri bulunamadı....!");
+            }
 
 
         } catch (SQLException e) {
@@ -79,7 +79,7 @@ public class PersonRepository implements  IPersonRepository{
     }
     @Override
     public void deleteAllRecords(){
-        String query = "Delete from persons";
+        String query = "Delete from persons returning *";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
