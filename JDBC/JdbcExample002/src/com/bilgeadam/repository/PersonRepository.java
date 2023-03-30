@@ -59,7 +59,13 @@ public class PersonRepository implements  IPersonRepository{
             connection = JDBCHelper.getConnection();
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
-            displayPersons(resultSet);
+           // if(resultSet.first() != true){
+                displayPersons(resultSet);
+            //}
+           // else {
+           //     System.out.println("Tabloda kayıtlı veri bulunamadı....!");
+            //}
+
 
         } catch (SQLException e) {
 
@@ -71,7 +77,95 @@ public class PersonRepository implements  IPersonRepository{
         }
 
     }
+    @Override
+    public void deleteAllRecords(){
+        String query = "Delete from persons";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = JDBCHelper.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeQuery();
+            System.out.println("Kayıtlar Başarı ile silindi!!!!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            JDBCHelper.closeConnection(connection);
+            JDBCHelper.closePrepareStatement(preparedStatement);
+        }
 
 
+    }
 
+    @Override
+    public void getPersonById(int id) {
+        Connection connection = null;
+        String query = "Select * from persons where id ="+id+"";
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = JDBCHelper.getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+            // if(resultSet.first() != true){
+            displayPersons(resultSet);
+        } catch (SQLException e) {
+
+            throw new RuntimeException(e);
+        } finally {
+            JDBCHelper.closeConnection(connection);
+            JDBCHelper.closePrepareStatement(preparedStatement);
+            JDBCHelper.closeResultSet(resultSet);
+        }
+    }
+
+    @Override
+    public void deletePersonById(int id) {
+        String query = "Delete from persons where id=? returning *";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = JDBCHelper.getConnection();
+            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeQuery();
+            connection.commit();
+            System.out.println("Kayıt Başarı ile silindi!!!!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            JDBCHelper.closeConnection(connection);
+            JDBCHelper.closePrepareStatement(preparedStatement);
+        }
+    }
+
+    @Override
+    public void updateEmail(String email, int id) {
+        String query = "UPDATE persons set email = ? where id = ?";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = JDBCHelper.getConnection();
+
+            //Transaction için otomatik yazmayı kapattık
+            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,email);
+            preparedStatement.setInt(2, id);
+            int effectedRow = preparedStatement.executeUpdate();
+            connection.commit();
+            if (effectedRow > 0) {
+                System.out.println(id + "li kullanıcının mai adresi veri tabanında güncellendi");
+            }
+        } catch (SQLException e) {
+            System.out.println("Kayıt sırasında bir hata oluştu");
+            throw new RuntimeException();
+        } finally {
+            JDBCHelper.closeConnection(connection);
+            JDBCHelper.closePrepareStatement(preparedStatement);
+        }
+    }
 }
