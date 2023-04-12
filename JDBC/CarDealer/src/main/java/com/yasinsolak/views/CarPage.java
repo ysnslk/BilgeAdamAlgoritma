@@ -7,13 +7,18 @@ package com.yasinsolak.views;
 import com.yasinsolak.entity.Car;
 import com.yasinsolak.repository.CarRepository;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class CarPage extends javax.swing.JFrame {
 
-    CarRepository carRepository ;
+    CarRepository carRepository;
     DefaultTableModel model;
     List<Car> cars;
+
     public CarPage() {
         initComponents();
         carRepository = new CarRepository();
@@ -21,16 +26,17 @@ public class CarPage extends javax.swing.JFrame {
         getCars();
     }
 
-    public void getCars(){
-       model.setRowCount(0);
-       cars = carRepository.findAll();
-       if(cars != null){
-           for (Car car : cars) {
-               Object[] array = {car.getId(),car.getBrand(),car.getCarModel(),car.getModelYear(),car.getDealerShipId()};
-               model.addRow(array);
-           }
-       }
+    public void getCars() {
+        model.setRowCount(0);
+        cars = carRepository.findAll();
+        if (cars != null) {
+            for (Car car : cars) {
+                Object[] array = {car.getId(), car.getBrand(), car.getCarModel(), car.getModelYear(), car.getDealerShipId()};
+                model.addRow(array);
+            }
+        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,7 +46,7 @@ public class CarPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         txtBrand = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -53,46 +59,65 @@ public class CarPage extends javax.swing.JFrame {
         btnUpdate = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        tblCars = new javax.swing.JScrollPane();
+        JScrollPane1 = new javax.swing.JScrollPane();
         tbl_car = new javax.swing.JTable();
+        txtCompanyId1 = new javax.swing.JTextField();
+        txtDeleteInfo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Car Page");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.setToolTipText("");
+        txtSearch.setBackground(new java.awt.Color(255, 255, 255));
+        txtSearch.setForeground(new java.awt.Color(0, 0, 0));
+        txtSearch.setToolTipText("");
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 15, 1234, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 43, 1240, 10));
 
         txtBrand.setEditable(false);
         txtBrand.setBackground(new java.awt.Color(255, 255, 255));
         txtBrand.setForeground(new java.awt.Color(0, 0, 0));
         txtBrand.setToolTipText("");
+        getContentPane().add(txtBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 98, 216, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel1.setText("Brand ");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 99, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel2.setText("Car Model");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 139, -1, -1));
 
         txtCarModel.setEditable(false);
         txtCarModel.setBackground(new java.awt.Color(255, 255, 255));
         txtCarModel.setForeground(new java.awt.Color(0, 0, 0));
         txtCarModel.setToolTipText("");
+        getContentPane().add(txtCarModel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 138, 216, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel3.setText("Model Year");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 179, -1, -1));
 
         txtModelYear.setEditable(false);
         txtModelYear.setBackground(new java.awt.Color(255, 255, 255));
         txtModelYear.setForeground(new java.awt.Color(0, 0, 0));
         txtModelYear.setToolTipText("");
+        getContentPane().add(txtModelYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 178, 216, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel4.setText("Company Id");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 219, -1, -1));
 
         txtCompanyId.setEditable(false);
         txtCompanyId.setBackground(new java.awt.Color(255, 255, 255));
         txtCompanyId.setForeground(new java.awt.Color(0, 0, 0));
         txtCompanyId.setToolTipText("");
+        getContentPane().add(txtCompanyId, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 218, 216, -1));
 
         btnUpdate.setBackground(new java.awt.Color(255, 255, 255));
         btnUpdate.setForeground(new java.awt.Color(0, 0, 0));
@@ -102,14 +127,27 @@ public class CarPage extends javax.swing.JFrame {
                 btnUpdateActionPerformed(evt);
             }
         });
+        getContentPane().add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(597, 96, 145, 32));
 
         btnAdd.setBackground(new java.awt.Color(255, 255, 255));
         btnAdd.setForeground(new java.awt.Color(0, 0, 0));
         btnAdd.setText("Add Car");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(597, 138, 145, 32));
 
         btnDelete.setBackground(new java.awt.Color(255, 255, 255));
         btnDelete.setForeground(new java.awt.Color(0, 0, 0));
         btnDelete.setText("Delete Car");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(597, 178, 145, 32));
 
         tbl_car.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,100 +177,76 @@ public class CarPage extends javax.swing.JFrame {
                 tbl_carMouseClicked(evt);
             }
         });
-        tblCars.setViewportView(tbl_car);
+        JScrollPane1.setViewportView(tbl_car);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTextField1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCarModel, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel1))
-                                    .addGap(34, 34, 34)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtModelYear, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtCompanyId, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(221, 221, 221)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 498, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addComponent(tblCars)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtBrand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCarModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtModelYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCompanyId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                .addComponent(tblCars, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        getContentPane().add(JScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 348, 1246, 325));
+
+        txtCompanyId1.setEditable(false);
+        txtCompanyId1.setBackground(new java.awt.Color(255, 255, 255));
+        txtCompanyId1.setForeground(new java.awt.Color(0, 0, 0));
+        txtCompanyId1.setToolTipText("");
+        getContentPane().add(txtCompanyId1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 218, 216, -1));
+
+        txtDeleteInfo.setBackground(new java.awt.Color(255, 255, 255));
+        txtDeleteInfo.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(txtDeleteInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 340, -1));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbl_carMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_carMouseClicked
-       int selectedRow =  tbl_car.getSelectedRow();
-       txtBrand.setText(model.getValueAt(selectedRow, 1).toString());
+        int selectedRow = tbl_car.getSelectedRow();
+        txtBrand.setText(model.getValueAt(selectedRow, 1).toString());
         txtCarModel.setText(model.getValueAt(selectedRow, 2).toString());
-         txtModelYear.setText(model.getValueAt(selectedRow, 3).toString());
-          txtCompanyId.setText(model.getValueAt(selectedRow, 4).toString());
+        txtModelYear.setText(model.getValueAt(selectedRow, 3).toString());
+        txtCompanyId.setText(model.getValueAt(selectedRow, 4).toString());
     }//GEN-LAST:event_tbl_carMouseClicked
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         setVisible(false);
         UpdateCarPage updateCarPage = new UpdateCarPage();
         updateCarPage.setVisible(true);
-        
+
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        setVisible(false);
+        AddCarPage addCarPage = new AddCarPage();
+        addCarPage.setVisible(true);
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    public void search(String search) {
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+        tbl_car.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
+    }
+    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(((DefaultTableModel) tbl_car.getModel()));
+        sorter.setRowFilter(RowFilter.regexFilter("(?i)" + txtSearch.getText()));
+        tbl_car.setRowSorter(sorter);
+        /*
+            String value = txtSearch.getText();
+            search(value);
+         */
+    }//GEN-LAST:event_txtSearchKeyPressed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+
+        if (txtDeleteInfo.getText().toString().equals("") ) {
+            int dialogButton = JOptionPane.showConfirmDialog(null, "Bu kaydı silmek istediğinize emin misiniz ?", "Bilgilendirme", JOptionPane.YES_NO_CANCEL_OPTION);
+            if (dialogButton == JOptionPane.YES_OPTION) {
+                int selectedRow = tbl_car.getSelectedRow();
+                long id = Long.parseLong(model.getValueAt(selectedRow, 0).toString());
+                carRepository.delete(id);
+                txtDeleteInfo.setText("Kayıt Başarı ile silindi..!!!");
+                getCars();
+                id = 0;
+            }
+        } else {
+            txtDeleteInfo.setText("Lütfen silmek için bir kayıt seçin..!!!");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,6 +284,7 @@ public class CarPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane JScrollPane1;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
@@ -278,12 +293,13 @@ public class CarPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JScrollPane tblCars;
     private javax.swing.JTable tbl_car;
     private javax.swing.JTextField txtBrand;
     private javax.swing.JTextField txtCarModel;
     private javax.swing.JTextField txtCompanyId;
+    private javax.swing.JTextField txtCompanyId1;
+    private javax.swing.JTextField txtDeleteInfo;
     private javax.swing.JTextField txtModelYear;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

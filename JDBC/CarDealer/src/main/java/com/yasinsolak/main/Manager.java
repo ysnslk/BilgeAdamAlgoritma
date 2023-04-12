@@ -6,6 +6,7 @@ package com.yasinsolak.main;
 
 import com.yasinsolak.entity.Car;
 import com.yasinsolak.repository.CarRepository;
+import com.yasinsolak.repository.DealershipRepository;
 import com.yasinsolak.util.Constant;
 import com.yasinsolak.util.FileUtil;
 import java.io.IOException;
@@ -17,6 +18,7 @@ public class Manager {
 
     Scanner scanner = new Scanner(System.in);
     private final CarRepository carRepository = new CarRepository();
+    private final DealershipRepository dealershipRepository = new DealershipRepository();
 
     public static void main(String[] args) throws IOException {
 
@@ -35,6 +37,7 @@ public class Manager {
             System.out.println("3-Araba Güncelle");
             System.out.println("4-Araba Sil");
             System.out.println("5-Arabaları listele");
+             System.out.println("6-DealerShip");
             input = Integer.parseInt(scanner.nextLine());
 
             switch (input) {
@@ -59,8 +62,15 @@ public class Manager {
                     long deletedetId = Long.parseLong(scanner.nextLine());
                     carRepository.delete(deletedetId);
                 case 5:
-                    carRepository.findAll().forEach(x-> System.out.println(x.toString()));
-                    
+                    carRepository.findAll().forEach(x -> System.out.println(x.toString()));
+                case 6:
+                    if (dealershipRepository.databaseControl()) {
+                        System.out.println("Veri tabanına veriler zaten kaydedilmiş durumda");
+                    } else {
+                        dealershipRepository.saveAll(FileUtil.getDealershipList(FileUtil.readFile(Constant.dealerFile)));
+                        System.out.println("Veriler Başarıyla kaydedildi");
+                    }
+                    break;
             }
         } while (true);
     }

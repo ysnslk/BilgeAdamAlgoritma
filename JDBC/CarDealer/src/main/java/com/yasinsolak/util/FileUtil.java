@@ -1,5 +1,7 @@
 package com.yasinsolak.util;
+
 import com.yasinsolak.entity.Car;
+import com.yasinsolak.entity.Dealership;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -37,33 +39,46 @@ public class FileUtil {
         }
         return result;
     }
-    
-    public static List<Car> getCarList(List<String> list){
-        
+
+    public static List<Car> getCarList(List<String> list) {
+
         List<Car> cars = new ArrayList<>();
         for (String string : list) {
             cars.add(convertToCar(string.split(",")));
         }
         return cars;
     }
-    
-    public static Car convertToCar(String[] array){
-        Car car = new Car(Long.parseLong(array[0]),array[1],array[2],array[3],Long.parseLong(array[4]));
+
+    public static Car convertToCar(String[] array) {
+        Car car = new Car(Long.parseLong(array[0]), array[1], array[2], array[3], Long.parseLong(array[4]));
         return car;
     }
-    
+
+    public static List<Dealership> getDealershipList(List<String> list) {
+
+        List<Dealership> dealerships = new ArrayList<>();
+        for (String string : list) {
+            dealerships.add(convertToDealership(string.split(",")));
+        }
+        return dealerships;
+    }
+
+    public static Dealership convertToDealership(String[] array) {
+        Dealership dealership = new Dealership(Long.parseLong(array[0]), array[1], array[2], array[3]);
+        return dealership;
+    }
+
     public static void main(String[] args) {
-       List<Car> list;
+        List<Car> list;
         try {
             list = getCarList(readFile(Constant.carFile));
-            for(Car car  : list){
-            System.out.println(car);
-        }
+            for (Car car : list) {
+                System.out.println(car);
+            }
         } catch (IOException ex) {
             Logger.getLogger(FileUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    
+
     }
 
 }

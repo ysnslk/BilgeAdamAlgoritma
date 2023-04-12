@@ -59,8 +59,9 @@ public class CarRepository implements ICrud<Car> {
         }
     }
 
-    public void delete(Long id) {
-        String sql = "delete from car where id =?";
+   @Override
+    public void delete(long id) {
+         String sql = "delete from car where id =?";
         try {
 
             PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
@@ -136,8 +137,5 @@ public class CarRepository implements ICrud<Car> {
         return control;
     }
 
-    @Override
-    public void delete(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }
