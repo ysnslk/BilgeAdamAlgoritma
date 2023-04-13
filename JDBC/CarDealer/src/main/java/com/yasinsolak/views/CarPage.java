@@ -7,6 +7,8 @@ package com.yasinsolak.views;
 import com.yasinsolak.entity.Car;
 import com.yasinsolak.repository.CarRepository;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -18,6 +20,7 @@ public class CarPage extends javax.swing.JFrame {
     CarRepository carRepository;
     DefaultTableModel model;
     List<Car> cars;
+    //Car carFromCarPAge;
 
     public CarPage() {
         initComponents();
@@ -26,6 +29,14 @@ public class CarPage extends javax.swing.JFrame {
         getCars();
     }
 
+    /*
+    public Car getCarFromCarPAge() {
+        return carFromCarPAge;
+    }
+    public void setCarFromCarPAge(Car carFromCarPAge) {
+        this.carFromCarPAge = carFromCarPAge;
+    }
+     */
     public void getCars() {
         model.setRowCount(0);
         cars = carRepository.findAll();
@@ -35,6 +46,24 @@ public class CarPage extends javax.swing.JFrame {
                 model.addRow(array);
             }
         }
+    }
+
+    public void clearAreaText() {
+        txtBrand.setText("");
+        txtCarModel.setText("");
+        txtModelYear.setText("");
+        txtCompanyId.setText("");
+    }
+
+    public void clearInformationText() {
+        try {
+
+            Thread.sleep(2000);
+
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CarPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        txtDeleteInfo.setText("");
     }
 
     /**
@@ -204,10 +233,22 @@ public class CarPage extends javax.swing.JFrame {
     }//GEN-LAST:event_tbl_carMouseClicked
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+
         setVisible(false);
         UpdateCarPage updateCarPage = new UpdateCarPage();
+        String brand = txtBrand.getText();
+        String carYear = txtCarModel.getText();
+        String modelYear = txtModelYear.getText();
+        Car car = new Car(brand, carYear, modelYear);
+        Long dealerShipId = Long.parseLong(txtCompanyId.getText());
+        car.setDealerShipId(dealerShipId);
+        int selectedRow = tbl_car.getSelectedRow();
+        Long id = (Long) model.getValueAt(selectedRow, 0);
+        car.setId(id);
+        updateCarPage.transferValues(car);
+        //updateCarForm.setCarFromCarPAge(car);
+        setVisible(false);
         updateCarPage.setVisible(true);
-
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -232,20 +273,25 @@ public class CarPage extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSearchKeyPressed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int selectedRow = tbl_car.getSelectedRow();
+        if (selectedRow != -1) {
 
-        if (txtDeleteInfo.getText().toString().equals("") ) {
-            int dialogButton = JOptionPane.showConfirmDialog(null, "Bu kaydı silmek istediğinize emin misiniz ?", "Bilgilendirme", JOptionPane.YES_NO_CANCEL_OPTION);
+            int dialogButton = JOptionPane.showConfirmDialog(null, "Bu kaydı silmek istediğinize emin misiniz ?", "Bilgilendirme", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (dialogButton == JOptionPane.YES_OPTION) {
-                int selectedRow = tbl_car.getSelectedRow();
+
                 long id = Long.parseLong(model.getValueAt(selectedRow, 0).toString());
                 carRepository.delete(id);
                 txtDeleteInfo.setText("Kayıt Başarı ile silindi..!!!");
                 getCars();
+                clearAreaText();
+                clearInformationText();
                 id = 0;
             }
+
         } else {
-            txtDeleteInfo.setText("Lütfen silmek için bir kayıt seçin..!!!");
+            txtDeleteInfo.setText("Lütfen bir alan seçiniz");
         }
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**

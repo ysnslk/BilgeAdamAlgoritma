@@ -4,17 +4,40 @@
  */
 package com.yasinsolak.views;
 
+import com.yasinsolak.entity.Car;
+import com.yasinsolak.entity.Dealership;
+import com.yasinsolak.repository.CarRepository;
+import com.yasinsolak.repository.DealershipRepository;
+import java.util.List;
+
 /**
  *
  * @author xmeny
  */
 public class UpdateCarPage extends javax.swing.JFrame {
 
-    /**
-     * Creates new form UpdateCarPage
-     */
+    DealershipRepository dealershipRepository;
+    CarRepository carRepository;
+    List<Dealership> dealerships;
+
     public UpdateCarPage() {
         initComponents();
+        dealershipRepository = new DealershipRepository();
+        carRepository = new CarRepository();
+        dealerships = dealershipRepository.findAll();
+        dealerships.stream().forEach(s -> {
+            comboCompanyId.addItem(s);
+        });
+
+    }
+    long carId;
+
+    public void transferValues(Car car) {
+        txtBrand.setText(car.getBrand());
+        txtCarModel.setText(car.getCarModel());
+        txtModelYear.setText(car.getModelYear());
+        comboCompanyId.setSelectedIndex((int) car.getDealerShipId() - 1);
+        carId = car.getId();
     }
 
     /**
@@ -40,6 +63,10 @@ public class UpdateCarPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Update Car Page");
+        setLocationByPlatform(true);
+        setMaximumSize(new java.awt.Dimension(999, 999));
+        setMinimumSize(new java.awt.Dimension(500, 500));
+        setPreferredSize(new java.awt.Dimension(500, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Brand");
@@ -68,7 +95,6 @@ public class UpdateCarPage extends javax.swing.JFrame {
 
         comboCompanyId.setBackground(new java.awt.Color(255, 255, 255));
         comboCompanyId.setForeground(new java.awt.Color(0, 0, 0));
-        comboCompanyId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(comboCompanyId, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 282, 160, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -82,6 +108,11 @@ public class UpdateCarPage extends javax.swing.JFrame {
         btnUpdate.setBackground(new java.awt.Color(0, 204, 51));
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 360, 118, 41));
 
         btnCancel.setBackground(new java.awt.Color(255, 51, 51));
@@ -104,6 +135,26 @@ public class UpdateCarPage extends javax.swing.JFrame {
         dispose();
         carPage.setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        Car car = updateCarInformation();
+        carRepository.update(car, carId);
+        carRepository.update(car, carId);
+        setVisible(false);
+        CarPage carPage = new CarPage();
+        carPage.setVisible(true);
+        carPage.getCars();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private Car updateCarInformation() {
+        String brand = txtBrand.getText();
+        String carModel = txtCarModel.getText();
+        String modelYear = txtModelYear.getText();
+        int dealershipId = comboCompanyId.getSelectedIndex();
+        Car car = new Car(brand, carModel, modelYear, dealershipId);
+        return car;
+
+    }
 
     /**
      * @param args the command line arguments
@@ -143,7 +194,7 @@ public class UpdateCarPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox<String> comboCompanyId;
+    private javax.swing.JComboBox<Dealership> comboCompanyId;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -7,6 +7,12 @@ public class Car {
     private String carModel;
     private String modelYear;
     private long dealerShipId;
+    
+     public Car(String brand, String carModel, String modelYear) {
+        this.brand = brand;
+        this.carModel = carModel;
+        this.modelYear = modelYear;
+    }
 
     public Car(long id, String brand, String carModel, String modelYear, long dealerShipId) {
         this.id = id;
@@ -62,7 +68,7 @@ public class Car {
         return dealerShipId;
     }
 
-    public void setDealerShipId(int dealerShipId) {
+    public void setDealerShipId(long dealerShipId) {
         this.dealerShipId = dealerShipId;
     }
 
