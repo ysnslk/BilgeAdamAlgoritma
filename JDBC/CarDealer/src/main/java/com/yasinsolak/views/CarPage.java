@@ -5,6 +5,7 @@
 package com.yasinsolak.views;
 
 import com.yasinsolak.entity.Car;
+import com.yasinsolak.entity.User;
 import com.yasinsolak.repository.CarRepository;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,6 +28,14 @@ public class CarPage extends javax.swing.JFrame {
         carRepository = new CarRepository();
         model = (DefaultTableModel) tbl_car.getModel();
         getCars();
+    }
+    
+    public CarPage(User user) {
+        initComponents();
+        carRepository = new CarRepository();
+        model = (DefaultTableModel) tbl_car.getModel();
+        getCars();
+        welcomeMessage(user);
     }
 
     /*
@@ -92,6 +101,7 @@ public class CarPage extends javax.swing.JFrame {
         tbl_car = new javax.swing.JTable();
         txtCompanyId1 = new javax.swing.JTextField();
         txtDeleteInfo = new javax.swing.JTextField();
+        txtWelcome = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Car Page");
@@ -105,8 +115,8 @@ public class CarPage extends javax.swing.JFrame {
                 txtSearchKeyPressed(evt);
             }
         });
-        getContentPane().add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 15, 1234, -1));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 43, 1240, 10));
+        getContentPane().add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 15, 860, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1240, 10));
 
         txtBrand.setEditable(false);
         txtBrand.setBackground(new java.awt.Color(255, 255, 255));
@@ -220,6 +230,10 @@ public class CarPage extends javax.swing.JFrame {
         txtDeleteInfo.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(txtDeleteInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 340, -1));
 
+        txtWelcome.setBackground(new java.awt.Color(255, 255, 255));
+        txtWelcome.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(txtWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, 330, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -257,6 +271,10 @@ public class CarPage extends javax.swing.JFrame {
         addCarPage.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
+    public void welcomeMessage(User user){
+        txtWelcome.setText("Hoşgeldiniz "+ user.getEmail());
+    }
+    
     public void search(String search) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
         tbl_car.setRowSorter(tr);
@@ -347,5 +365,6 @@ public class CarPage extends javax.swing.JFrame {
     private javax.swing.JTextField txtDeleteInfo;
     private javax.swing.JTextField txtModelYear;
     private javax.swing.JTextField txtSearch;
+    private javax.swing.JTextField txtWelcome;
     // End of variables declaration//GEN-END:variables
 }

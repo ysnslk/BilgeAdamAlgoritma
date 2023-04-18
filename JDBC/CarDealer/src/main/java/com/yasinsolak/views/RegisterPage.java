@@ -6,6 +6,7 @@ package com.yasinsolak.views;
 
 import com.yasinsolak.entity.User;
 import com.yasinsolak.repository.UserRepository;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,9 +18,26 @@ public class RegisterPage extends javax.swing.JFrame {
      * Creates new form RegisterPage
      */
     UserRepository userRepository;
+
     public RegisterPage() {
         initComponents();
         userRepository = new UserRepository();
+        btnSignUp.setEnabled(false);
+    }
+
+    public void validates() {
+        String name = txtName.getText();
+        String email = txtMail.getText();
+        String phone = txtPhone.getText();
+        String password = txtPass.getText();
+        String question = txtQuestion.getText();
+        String answer = txtAnswer.getText();
+        boolean check = userRepository.validateFields(name, email, password, phone, question, answer);
+        if (check) {
+            btnSignUp.setEnabled(true);
+        } else {
+            btnSignUp.setEnabled(false);
+        }
     }
 
     /**
@@ -60,16 +78,31 @@ public class RegisterPage extends javax.swing.JFrame {
 
         txtName.setBackground(new java.awt.Color(255, 255, 255));
         txtName.setForeground(new java.awt.Color(0, 0, 0));
+        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNameKeyReleased(evt);
+            }
+        });
 
         jLabel3.setText("E-Mail");
 
         txtMail.setBackground(new java.awt.Color(255, 255, 255));
         txtMail.setForeground(new java.awt.Color(0, 0, 0));
+        txtMail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtMailKeyReleased(evt);
+            }
+        });
 
         jLabel4.setText("Phone");
 
         txtPhone.setBackground(new java.awt.Color(255, 255, 255));
         txtPhone.setForeground(new java.awt.Color(0, 0, 0));
+        txtPhone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPhoneKeyReleased(evt);
+            }
+        });
 
         jLabel5.setText("Password");
 
@@ -79,11 +112,21 @@ public class RegisterPage extends javax.swing.JFrame {
 
         txtQuestion.setBackground(new java.awt.Color(255, 255, 255));
         txtQuestion.setForeground(new java.awt.Color(0, 0, 0));
+        txtQuestion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtQuestionKeyReleased(evt);
+            }
+        });
 
         jLabel8.setText("Answer");
 
         txtAnswer.setBackground(new java.awt.Color(255, 255, 255));
         txtAnswer.setForeground(new java.awt.Color(0, 0, 0));
+        txtAnswer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAnswerKeyReleased(evt);
+            }
+        });
 
         btnSignUp.setBackground(new java.awt.Color(255, 255, 255));
         btnSignUp.setForeground(new java.awt.Color(0, 0, 0));
@@ -104,15 +147,16 @@ public class RegisterPage extends javax.swing.JFrame {
         txtPass.setBackground(new java.awt.Color(255, 255, 255));
         txtPass.setForeground(new java.awt.Color(0, 0, 0));
         txtPass.setToolTipText("");
+        txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPassKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(220, 220, 220)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,6 +192,10 @@ public class RegisterPage extends javax.swing.JFrame {
                                     .addComponent(txtPass, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(2, 2, 2)))
                         .addGap(120, 120, 120))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(217, 217, 217))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,22 +236,50 @@ public class RegisterPage extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
-      String name =  txtName.getText();
-      String email = txtMail.getText();
-      String phone = txtPhone.getText();
-      String password = txtPass.getText();
-      String securityQuestion = txtQuestion.getText();
-      String answer  = txtAnswer.getText();
-      String address = txtAddress.getText();
-      User user = new User(name, email, phone, password, securityQuestion, answer, address);
-      userRepository.save(user);
-              
-              
-      
+        String name = txtName.getText();
+        String email = txtMail.getText();
+        String phone = txtPhone.getText();
+        String password = txtPass.getText();
+        String securityQuestion = txtQuestion.getText();
+        String answer = txtAnswer.getText();
+        String address = txtAddress.getText();
+        User user = new User(name, email, phone, password, securityQuestion, answer, address);
+        userRepository.save(user);
+        JOptionPane.showConfirmDialog(rootPane, "Kayıt Başarı ile gerçekleşti .\n Login sayfasına yöneldiriliyorsunuz","Bilgilendirme",JOptionPane.INFORMATION_MESSAGE,JOptionPane.OK_OPTION);
+        this.dispose();
+        LoginPage loginPage = new LoginPage();
+        loginPage.setVisible(true);
+
+
     }//GEN-LAST:event_btnSignUpActionPerformed
+
+    private void txtNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyReleased
+        validates();
+    }//GEN-LAST:event_txtNameKeyReleased
+
+    private void txtMailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMailKeyReleased
+        validates();
+    }//GEN-LAST:event_txtMailKeyReleased
+
+    private void txtPhoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyReleased
+        validates();
+    }//GEN-LAST:event_txtPhoneKeyReleased
+
+    private void txtPassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyReleased
+        validates();
+    }//GEN-LAST:event_txtPassKeyReleased
+
+    private void txtQuestionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuestionKeyReleased
+        validates();
+    }//GEN-LAST:event_txtQuestionKeyReleased
+
+    private void txtAnswerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnswerKeyReleased
+        validates();
+    }//GEN-LAST:event_txtAnswerKeyReleased
 
     /**
      * @param args the command line arguments

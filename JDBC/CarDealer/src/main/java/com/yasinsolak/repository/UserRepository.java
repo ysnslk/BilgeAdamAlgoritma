@@ -142,4 +142,79 @@ public class UserRepository implements ICrud<User> {
         return control;
     }
 
+    public boolean validateFields(String name, String email, String password, String phone, String question, String answer) {
+        String emailPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+                + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+
+        if (!name.equals("") && !email.equals("") && email.matches(emailPattern) && !password.equals("") && !phone.equals("") && !question.equals("") && !answer.equals("")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public User login(String email, String password) {
+        User user = null;
+        String sql = "select * from users where email=?  and password=?";
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        try {
+            connection = DbConnection.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                user = new User();
+                user.setEmail(resultSet.getString("email"));
+                user.setIsActive(resultSet.getBoolean("isactive"));
+                return user;
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return user;
+    }
+
+    public User getUserInformation(String email) {
+        User user = null;
+        String sql = "select * from users where email=? ";
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+
+        try {
+            connection = DbConnection.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                user = new User();
+                user.setSecurityQuestion(resultSet.getString("security_question"));
+                user.setAnswer(resultSet.getString("answer"));
+                return user;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+    }
+
+    public void changePassword(String password, Long id) {
+
+        String sql = "update users set password=? where id =?";
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+
+        try {
+            connection = DbConnection.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+             preparedStatement.setString(1, password);
+            preparedStatement.setLong(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }
