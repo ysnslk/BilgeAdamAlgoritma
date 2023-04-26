@@ -1,66 +1,98 @@
 package com.yasinsolak.entity;
 
+/*
+    name
+    surname
+    username--> uniqe olsun null olmasın
+    password--> null olmasın uzunluguda 32 olsun
+    user sınıfın içinde liste içinde interests
+    AddressType--> Enum Home, Bussiness, Other
+    Address--> street,country,city
+    Hashmap yapısında userin içinde kullanalım
+ */
+
 import javax.persistence.*;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * name
- * surname
- * username --> unique olsun null olmasın
- * password --> null olmasın uzunluğu 32 olsun
- */
 @Entity
-@Table(name = "users")
+@Table(name = "tbl_user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-
-    @Column(unique = true , nullable = false)
+    @Column(unique = true, nullable = false)
     private String username;
-    @Column(nullable = false , length = 32)
+    @Column(length = 32, nullable = false)
     private String password;
+
     @Embedded
     private Information information;
-    @Column(name = "cinsiyet")
+
+    @Column(name = "cinsiye")
     @Enumerated(EnumType.STRING)
     private EGender eGender;
+
+    @ElementCollection
+    private List<String> interests;
     @ElementCollection
     @Enumerated(EnumType.STRING)
-    private List<String> interests;
-
-    @ElementCollection
-    private Map<EAddressType,Address> address;
-    public User( String username, String password ,Information information,EGender eGender,List<String> interests,Map<EAddressType,Address> address) {
-
+    private Map<EAddressType, Address> adders;
+    private int postcount;
+    public User(String username, String password, Information information, EGender eGender, List<String> interests, Map<EAddressType, Address> adders, int
+            postcount) {
         this.username = username;
         this.password = password;
         this.information = information;
         this.eGender = eGender;
         this.interests = interests;
-        this.address = address;
+        this.adders = adders;
+        this.postcount = postcount;
     }
-    public User(){
+
+    public User(String username, String password, Information information, EGender eGender, List<String> interests, Map<EAddressType, Address> adders
+    ) {
+        this.username = username;
+        this.password = password;
+        this.information = information;
+        this.eGender = eGender;
+        this.interests = interests;
+        this.adders = adders;
 
     }
 
-    public User(long id) {
-        this.id = id;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public long getId() {
+    public User(String username, String password, EGender eGender) {
+        this.username = username;
+        this.password = password;
+        this.eGender = eGender;
+    }
+
+    public User() {
+
+    }
+
+    public int getPostcount() {
+        return postcount;
+    }
+
+    public void setPostcount(int postcount) {
+        this.postcount = postcount;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-
-
 
     public String getUsername() {
         return username;
@@ -76,5 +108,45 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Information getInformation() {
+        return information;
+    }
+
+    public void setInformation(Information information) {
+        this.information = information;
+    }
+
+    public EGender geteGender() {
+        return eGender;
+    }
+
+    public void seteGender(EGender eGender) {
+        this.eGender = eGender;
+    }
+
+    public List<String> getInterests() {
+        return interests;
+    }
+
+    public void setInterests(List<String> interests) {
+        this.interests = interests;
+    }
+
+    public Map<EAddressType, Address> getAdders() {
+        return adders;
+    }
+
+    public void setAdders(Map<EAddressType, Address> adders) {
+        this.adders = adders;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", eGender=" + eGender +
+                '}';
     }
 }

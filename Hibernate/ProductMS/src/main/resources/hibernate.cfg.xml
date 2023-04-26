@@ -5,7 +5,7 @@
         <!-- Kullanılacak Veritabanı Sürücüsünün Adı       -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <!--  ConnectionString       -->
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/userDB</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/products_DB</property>
         <!--  Kullanıcı Adı , yetkili kullanıcı      -->
         <property name="hibernate.connection.username">postgres</property>
         <!--  Şifre      -->
@@ -27,6 +27,7 @@
                 DİKKAT!! kafanıza göre her sınıfı haritalayamazsınız. çünkü hibernate
                 @Entity ile işaretlenmemiş hiç bir sınıfı kullanamaz.
         -->
+
 
 
     </session-factory>

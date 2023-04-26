@@ -1,5 +1,6 @@
 package com.yasinsolak.utility;
 
+import com.yasinsolak.entity.Post;
 import com.yasinsolak.entity.User;
 import org.hibernate.SessionFactory;
 
@@ -15,6 +16,7 @@ public class HibernateUtils {
         try {
             Configuration configuration = new Configuration();
             configuration.addAnnotatedClass(User.class);
+            configuration.addAnnotatedClass(Post.class);
 
             SessionFactory sessionFactory = configuration.configure("hibernate.cfg.xml").buildSessionFactory();
             return sessionFactory;

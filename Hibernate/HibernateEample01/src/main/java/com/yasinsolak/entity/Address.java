@@ -1,20 +1,20 @@
 package com.yasinsolak.entity;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
 @Embeddable
 public class Address {
-    private String street;
-    private String country;
-
-    public Address(String street, String country, String city) {
-        this.street = street;
-        this.country = country;
-        this.city = city;
-    }
 
     private String city;
+    private String country;
+    private String street;
 
+    public Address(String city, String country, String street) {
+        this.city = city;
+        this.country = country;
+        this.street = street;
+    }
     public Address() {
+
     }
 }
