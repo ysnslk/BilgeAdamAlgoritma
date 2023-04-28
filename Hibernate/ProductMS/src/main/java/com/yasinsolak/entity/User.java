@@ -2,7 +2,7 @@ package com.yasinsolak.entity;
 
 import javax.persistence.*;
 
-
+@MappedSuperclass
 public class User {
 
     private String firstName;

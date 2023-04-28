@@ -15,7 +15,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id",referencedColumnName = "id")
     private Category category;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "products_customers",joinColumns = @JoinColumn(name = "product_id"),inverseJoinColumns = @JoinColumn(name = "customer_id"))
     private List<Customer> customers;
     @OneToMany(mappedBy = "product")
@@ -76,5 +76,31 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public List<ProductDetails> getProductDetails() {
+        return productDetails;
+    }
+
+    public void setProductDetails(List<ProductDetails> productDetails) {
+        this.productDetails = productDetails;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", stock=" + stock +
+                ", category=" + category +
+                '}';
     }
 }

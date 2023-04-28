@@ -15,6 +15,8 @@ public class Customer extends User{
     private String identity;
     @ManyToMany(mappedBy = "customers")
     private List<Product> products;
+    @Enumerated(EnumType.STRING)
+    private EAccountType accountType = EAccountType.NORMAL;
 
     public Customer(String firstName, String lastName, String email, String password, String identity) {
         super(firstName, lastName, email);
@@ -48,5 +50,21 @@ public class Customer extends User{
 
     public void setIdentity(String identity) {
         this.identity = identity;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public EAccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(EAccountType accountType) {
+        this.accountType = accountType;
     }
 }

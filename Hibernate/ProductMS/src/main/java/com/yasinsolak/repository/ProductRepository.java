@@ -7,4 +7,5 @@ public class ProductRepository extends MyFactoryRepository<Product,Long> {
     public ProductRepository(){
         super(new Product());
     }
+
 }

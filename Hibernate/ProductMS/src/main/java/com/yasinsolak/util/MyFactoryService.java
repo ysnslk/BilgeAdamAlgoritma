@@ -6,6 +6,14 @@ import java.util.Optional;
 public class MyFactoryService<R extends MyFactoryRepository, T, ID> implements ICrud<T, ID> {
     R repository;
 
+    public R getRepository() {
+        return repository;
+    }
+
+    public void setRepository(R repository) {
+        this.repository = repository;
+    }
+
     public MyFactoryService(R repository) {
         this.repository = repository;
     }

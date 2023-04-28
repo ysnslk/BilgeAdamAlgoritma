@@ -11,7 +11,7 @@ public class ProductDetails {
     private Long id;
     private String comment;
     private int puan;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id",referencedColumnName = "id")
     private Product product;
 
@@ -51,5 +51,13 @@ public class ProductDetails {
 
     public void setPuan(int puan) {
         this.puan = puan;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

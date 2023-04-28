@@ -27,7 +27,7 @@
                 DİKKAT!! kafanıza göre her sınıfı haritalayamazsınız. çünkü hibernate
                 @Entity ile işaretlenmemiş hiç bir sınıfı kullanamaz.
         -->
-
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
 
 
     </session-factory>

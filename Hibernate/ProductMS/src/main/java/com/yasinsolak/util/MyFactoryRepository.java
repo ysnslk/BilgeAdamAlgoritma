@@ -30,6 +30,42 @@ public class MyFactoryRepository<T, ID> implements ICrud<T, ID> {
         this.t = t;
     }
 
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    public CriteriaBuilder getCriteriaBuilder() {
+        return criteriaBuilder;
+    }
+
+    public void setCriteriaBuilder(CriteriaBuilder criteriaBuilder) {
+        this.criteriaBuilder = criteriaBuilder;
+    }
+
+    public Session getSs() {
+        return ss;
+    }
+
+    public void setSs(Session ss) {
+        this.ss = ss;
+    }
+
+    public Transaction getTt() {
+        return tt;
+    }
+
+    public void setTt(Transaction tt) {
+        this.tt = tt;
+    }
+
+    public T getT() {
+        return t;
+    }
+
+    public void setT(T t) {
+        this.t = t;
+    }
+
     public void openSession() {
 
 
