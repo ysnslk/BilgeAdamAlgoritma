@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+ }
+.header{
+    background-color: orange;
+    display: flex;
+    justify-content: space-between;
+    height: 120px;
+    align-items: center;
+}
+
+.header-img{
+    height: 70px;
+    width: 60px;
+}
+
+.socialmedia li{
+    border: 1px solid black;
+    border-radius: 20px;
+    list-style: none;
+    background-color: bisque;
+    text-align: center;
+    padding: 10px;
+
+}
+.socialmedia{
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+.container{
+    display: flex;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.side-bar{
+    background-color: aqua;
+    flex :1;
+
+}
+
+.main{
+    background-color: bisque;
+    flex: 5;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,155 @@
+*{
+    margin: 0;
+ }
+ 
+ .header-img{
+     width: 50x;
+     height: 80px;
+     position: absolute;
+     left: 30px;
+     top: 25px;
+ }
+ 
+ .header{
+     background-color: orange;
+     height: 120px;
+     position: sticky;
+     top: 0;
+ }
+ 
+ 
+ .header h1{
+     position: absolute;
+     top: 30px;
+     right: 50%;
+ }
+ 
+ .socialmedia{
+     position: absolute;
+     right: 0px;
+     bottom: 10px;
+     list-style: none;
+ }
+ 
+ .socialmedia a{
+     text-decoration: none;
+     color: red;
+     font-size: large;
+     font-weight: 900;
+     
+ }
+ 
+ .socialmedia li{
+     background-color: bisque;
+     border: 1px solid black;
+     border-radius: 15px;
+     text-align: center;
+     padding: 10px;
+     display: inline;
+     /* float: left; */
+ }
+ 
+ .sider-bar{
+     border: 0px;
+     width: 250px;
+     height: 250px;
+     background-color: gray;
+     position: fixed;
+ }
+ 
+ .sider-bar li{
+    padding: 15px;
+ }
+ 
+ .sider-bar a{
+     color: red;
+     font-weight: 900;
+     text-decoration: none;
+     font-size: large;
+  }
+ 
+  .main{
+     border: 0;
+     background-color: bisque;
+     width: 50%;
+     height: 2000px;
+     margin-left: 350px;
+  }
+ 
+  .resimler{
+     background-color: crimson;
+     width: 80%;
+     padding: 25px ;
+     margin: auto;
+  }
+ 
+  .resimler h2{
+     text-align: center;
+     margin-bottom: 20px;
+  }
+ 
+  .resimler img{
+     border-radius: 15px;
+     margin: 4px;
+  }
+  
+ .videolar{
+     background-color: orchid;
+     width: 80%;
+     padding: 25px ;
+     margin: auto;
+     margin-top: 5px;
+ }
+ .videolar h2{
+     text-align: center;
+     margin-bottom: 20px;
+  }
+  .videolar iframe{
+     width: 300px;
+     height: 250px;
+     margin: 4px;
+  }
+ 
+  .hakkimizda{
+     background-color: yellowgreen;
+     width: 80%;
+     padding: 25px ;
+     margin: auto;
+     margin-top: 5px;
+  }
+ 
+  .hakkimizda h2{
+     text-decoration: underline;
+     text-align: center;
+     padding-bottom: 10px;
+  }
+ 
+ 
+  
+  .alt-menu{
+     border: 0px;
+     width: 100%;
+     height: 250px;
+     background-color: gray;
+     margin-top: unset;
+     position: relative;
+ 
+  }
+  .site-haritasi{
+     position: absolute;
+     margin-top: 20px;
+ 
+  }
+  .site-haritasi a{
+     color: red;
+     font-weight: 900;
+     text-decoration: none;
+     font-size: large;
+ 
+  }
+ 
+  .iletisim{
+     position: absolute;
+     right: 300px;
+     margin-top: 20px;
+  }

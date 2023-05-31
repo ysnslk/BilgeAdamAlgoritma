@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div class="mt-4 d-flex flex-column align-items-center">
+        <form class="row loginform">
+
+            <div class="alert alert-danger d-none">Tablo Temizlendi</div>
+
+            <label class="mt-2">Name</label>
+            <input id="name" class="mt-2" type="text" placeholder="İsminizi Girin: ">
+
+            <label class="mt-2">Surname</label>
+            <input id="surname" class="mt-2" type="text" placeholder="Soyadinizi Girin: ">
+
+            <label class="mt-2">Age</label>
+            <input id="age" class="mt-2" type="number" placeholder="Soyadinizi Girin: ">
+
+        </form>
+        <div class="pt-2">
+            <button class="btn btn-success" onclick=add2()>Tabloya ekle</button>
+            <button class="btn btn-danger" onclick=remove()>Tabloyu Temizle</button>
+        </div>
+
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody id="mylist">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+
+        // const name = document.getElementById("name");
+        // const surname = document.getElementById("surname");
+        // const age = document.getElementById("age");
+
+        // function add() {
+        //     let tname = document.createElement("td")
+        //     let tsurname = document.createElement("td")
+        //     let tage = document.createElement("td")
+
+        //     tname.textContent = name.value
+        //     tsurname.textContent = surname.value
+        //     tage.textContent = age.value
+
+        // }
+
+        let tableList = []
+
+        function add() {
+            let mylist = document.getElementById("mylist")
+            let name = document.getElementById("name").value;
+            let surname = document.getElementById("surname").value;
+            let age = document.getElementById("age").value;
+
+            const kisi = {
+                name: name,
+                surname: surname,
+                age: age
+            }
+            tableList.push(kisi)
+            mylist.innerHTML = "";
+
+            tableList.map((m) => {
+                mylist.innerHTML += `
+                    <tr>
+                        <td>${m.name}</td>
+                        <td>${m.surname}</td>
+                        <td>${m.age}</td>
+                    </tr>
+                `
+            })
+        }
+        function add2() {
+            let mylist = document.getElementById("mylist")
+            let name = document.getElementById("name").value;
+            let surname = document.getElementById("surname").value;
+            let age = document.getElementById("age").value;
+            mylist.innerHTML += `
+                    <tr>
+                        <td>${name}</td>
+                        <td>${surname}</td>
+                        <td>${age}</td>
+                    </tr>
+                `
+        }
+
+
+
+        const name = document.getElementById("name");
+        const surname = document.getElementById("surname");
+        const age = document.getElementById("age");
+        const list = document.getElementById("mylist");
+
+        function add3() {
+
+            let tName = document.createElement("td");
+            let tSurname = document.createElement("td");
+            let tAge = document.createElement("td");
+
+            tName.textContent = name.value;
+            tSurname.textContent = surname.value;
+            tAge.textContent = age.value;
+            let tr = document.createElement("tr");
+
+            tr.appendChild(tName);
+            tr.appendChild(tSurname);
+            tr.appendChild(tAge);
+            list.appendChild(tr);
+
+            name.value = "";
+            surname.value = "";
+            age.value = "";
+        }
+
+
+        function remove() {
+            let mylist = document.getElementById("mylist")
+            mylist.innerHTML = ""
+
+            let alert = document.querySelector(".alert")
+            alert.classList.remove("d-none")
+
+            setTimeout(() => {
+                alert.classList.add("d-none")
+            }, 2000)
+        }
+
+
+// 
+
+    </script>
+
+</body>
+
+</html>

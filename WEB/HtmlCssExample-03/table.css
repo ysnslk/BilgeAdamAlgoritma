@@ -1,0 +1,45 @@
+th , td{
+    border: 1px solid black;
+    padding: 20px;
+    text-align: center;
+}
+td:hover{
+    background-color: bisque;
+}
+th{
+    transition: transform .2s; /* Animation */
+    margin: 0 auto;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  th:hover {
+    transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  color: blue;
+}
+  td{
+    color: brown;
+    height: 50px;
+  }
+  button{
+    background-color: deepskyblue;
+    padding: 10px;
+    border-radius: 20px;
+    color: azure;
+    height: 50px;
+    width: 100px;
+    cursor: pointer;
+  }
+  button:hover{
+    font-style: italic;
+    background-color: cadetblue;
+  }
+  button:active{
+    color: brown !important;
+    background-color: bisque;
+    transform: translateX(4px);
+  }
+  button:focus{
+    background-color: bisque;
+    color: brown;
+  }

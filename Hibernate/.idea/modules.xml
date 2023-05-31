@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AracKiralama/AracKiralama.iml" filepath="$PROJECT_DIR$/AracKiralama/AracKiralama.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BankingHibernate/BankingHibernate.iml" filepath="$PROJECT_DIR$/BankingHibernate/BankingHibernate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Hibernate.iml" filepath="$PROJECT_DIR$/.idea/Hibernate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HibernateEample01/HibernateEample01.iml" filepath="$PROJECT_DIR$/HibernateEample01/HibernateEample01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HibernateMaraton/HibernateMaraton.iml" filepath="$PROJECT_DIR$/HibernateMaraton/HibernateMaraton.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProductMS/ProductMS.iml" filepath="$PROJECT_DIR$/ProductMS/ProductMS.iml" />
+    </modules>
+  </component>
+</project>
