@@ -42,6 +42,17 @@ function answer2() {
 
     puan = checkAnswer(cevaplar)
     textPuan.textContent = puan
+
+    setInterval(() => {
+        textPuan.textContent = puanKontrol;
+        if(puanKontrol === puan){
+            clearInterval(animasyon)
+        }else{
+            puanKontrol++;
+        }
+    },50)
+
+
     textPuan.parentElement.parentElement.classList.remove("d-none")
     scrollTo(0, 0)
 
