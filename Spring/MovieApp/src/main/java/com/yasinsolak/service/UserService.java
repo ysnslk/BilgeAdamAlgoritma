@@ -3,10 +3,13 @@ package com.yasinsolak.service;
 import com.yasinsolak.entity.EUserType;
 import com.yasinsolak.entity.User;
 import com.yasinsolak.repository.IUserRepository;
+import jdk.jshell.spi.ExecutionControl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -43,5 +46,39 @@ public class UserService {
 
     public List<User> findAll() {
        return userRepository.findAll();
+    }
+
+    public void saveAll(List<User> users) {
+        userRepository.saveAll(users);
+    }
+
+    public List<User> findAllOrderByName(){
+        return userRepository.findAllByOrderByName();
+    }
+    public List<User> findAllByNameLike(String name){
+        return userRepository.findAllByNameLike(name);
+    }
+    public List<User> findByEmailContainingIgnoreCase(String email){
+        return userRepository.findByEmailContainingIgnoreCase(email);
+    }
+    public List<User> findAllByEmailEndsWith(String email){
+        return userRepository.findByEmailContainingIgnoreCase(email);
+    }
+    public List<User> findAllByEmailEndingWith(String email){
+        return userRepository.findByEmailContainingIgnoreCase(email);
+    }
+    public Boolean existsByEmailAndPassword(String email,String password){
+        return userRepository.existsByEmailAndPassword(email,password);
+    }
+    public Optional<User> findByEmailIgnoreCaseAndPassword(String email, String password){
+        Optional<User> optionalUser = userRepository.findByEmailIgnoreCaseAndPassword(email,password);
+        if (optionalUser.isPresent()){
+            return optionalUser;
+        }else {
+            throw new RuntimeException("Böyle bir kullanıcı yok");
+        }
+    }
+    public List<User> passwordLongerThen(int length){
+        return userRepository.passwordLongerThen(length);
     }
 }
