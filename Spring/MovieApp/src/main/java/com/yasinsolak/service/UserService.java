@@ -81,4 +81,13 @@ public class UserService {
     public List<User> passwordLongerThen(int length){
         return userRepository.passwordLongerThen(length);
     }
+
+    public Optional<User> findById(Long id){
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()){
+            return optionalUser;
+        }else{
+            throw  new RuntimeException("Kullanıcı Bulunamadı.");
+        }
+    }
 }
