@@ -48,5 +48,9 @@ public class MovieController {
     public ResponseEntity<List<Movie>> findAllByNameIn(String[] names){
         return ResponseEntity.ok(movieService.findAllByNameIn(names));
     }
+    @GetMapping("/findallbycountrycount")
+    public ResponseEntity<List<Movie>> findAllByCountryCount(){
+        return ResponseEntity.ok(movieService.findAllByCountryCount());
+    }
 
 }

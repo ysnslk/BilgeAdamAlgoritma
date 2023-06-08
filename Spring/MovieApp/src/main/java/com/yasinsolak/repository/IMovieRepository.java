@@ -19,4 +19,7 @@ public interface IMovieRepository extends JpaRepository<Movie,Long> {
     List<Object> findAllByRatingCountGreaterThan(Double rate);
     List<Movie> findAllByRatingIn(List<Double> ratings);
     List<Movie> findAllByNameIn(String[] names);
+    @Query("Select count(m.country),m.country from Movie m  group by m.country")
+    List<Movie> findAllByCountryCount();
+
 }

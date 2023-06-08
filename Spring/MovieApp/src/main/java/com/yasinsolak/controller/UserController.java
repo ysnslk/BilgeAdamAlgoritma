@@ -1,13 +1,13 @@
 package com.yasinsolak.controller;
 
-import com.yasinsolak.entity.EUserType;
+import com.yasinsolak.dto.request.UserRegisterRequestDto;
+import com.yasinsolak.dto.response.UserFindAllReponseDto;
+import com.yasinsolak.dto.response.UserRegisterResponseDto;
 import com.yasinsolak.entity.User;
 import com.yasinsolak.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,9 +18,26 @@ import java.util.Optional;
 public class UserController {
     private final UserService userService;
 
+    //register metodu yazalım . Parametre UserRegisterDto
+    //kullanıcıKayıt olurken mail pass versin
+    //UserRegisterDto
+    //User dönsün
+    //PostMapping
+    @PostMapping("/register")
+    public UserRegisterResponseDto createUser(UserRegisterRequestDto dto){
+        return userService.register(dto);
+    }
+    @PostMapping("/register2")
+    public UserRegisterResponseDto createUser2(@RequestBody UserRegisterRequestDto dto){
+        return userService.register2(dto);
+    }
     @GetMapping("/create")
     public User createUser(String name, String surname, String email, String phone, String password, String userType){
         return userService.createUser(name,surname,email,phone,password,userType);
+    }
+    @GetMapping("/findalldto")
+    public List<UserFindAllReponseDto> findAlldto(){
+        return userService.findAlldto();
     }
     @GetMapping("/findall")
     public List<User> findAll(){

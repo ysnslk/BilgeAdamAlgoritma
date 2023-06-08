@@ -74,6 +74,9 @@ public class MovieService {
     public List<Movie> findAll(){
         return movieRepository.findAll();
     }
+    public List<Movie> findAllByCountryCount(){
+        return movieRepository.findAllByCountryCount();
+    }
 
 
 }

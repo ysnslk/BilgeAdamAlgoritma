@@ -1,7 +1,11 @@
 package com.yasinsolak.service;
 
+import com.yasinsolak.dto.request.UserRegisterRequestDto;
+import com.yasinsolak.dto.response.UserFindAllReponseDto;
+import com.yasinsolak.dto.response.UserRegisterResponseDto;
 import com.yasinsolak.entity.EUserType;
 import com.yasinsolak.entity.User;
+import com.yasinsolak.mapper.IUserMapper;
 import com.yasinsolak.repository.IUserRepository;
 import jdk.jshell.spi.ExecutionControl;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -89,5 +94,45 @@ public class UserService {
         }else{
             throw  new RuntimeException("Kullanıcı Bulunamadı.");
         }
+    }
+
+    public UserRegisterResponseDto register(UserRegisterRequestDto dto){
+        User user = User.builder()
+                .name(dto.getName())
+                .surname(dto.getSurname())
+                .email(dto.getEmail())
+                .password(dto.getPassword())
+                .build();
+        userRepository.save(user);
+
+        return UserRegisterResponseDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .surname(user.getSurname())
+                .email(user.getEmail())
+                .userType(user.getUserType())
+                .genres(user.getFavGenres())
+                .build();
+    }
+
+    public List<UserFindAllReponseDto> findAlldto() {
+        return userRepository.findAll().stream().map(x->{
+            return UserFindAllReponseDto.builder()
+                    .id(x.getId())
+                    .name(x.getName())
+                    .surname(x.getSurname())
+                    .favGenres(x.getFavGenres())
+                    .favMovie(x.getFavMovies())
+                    .phone(x.getPhone())
+                    .userType(x.getUserType())
+                    .build();
+        }).collect(Collectors.toList());
+    }
+
+    public UserRegisterResponseDto register2(UserRegisterRequestDto dto){
+        User user = IUserMapper.INSTANCE.toUser(dto);
+        userRepository.save(user);
+        return IUserMapper.INSTANCE.toUserRegisterResponseDto(user);
+
     }
 }

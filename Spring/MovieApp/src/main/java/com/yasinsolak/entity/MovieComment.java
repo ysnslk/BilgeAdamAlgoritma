@@ -1,5 +1,6 @@
 package com.yasinsolak.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +24,7 @@ public class MovieComment {
     @Builder.Default
     private LocalDate date = LocalDate.now();
     @ManyToOne
+    @JsonIgnore
     private User user;
     @ManyToOne
     private Movie movie;
