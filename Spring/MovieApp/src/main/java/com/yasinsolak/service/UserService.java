@@ -1,10 +1,14 @@
 package com.yasinsolak.service;
 
+import com.yasinsolak.dto.request.UserLoginRequestDto;
 import com.yasinsolak.dto.request.UserRegisterRequestDto;
 import com.yasinsolak.dto.response.UserFindAllReponseDto;
+import com.yasinsolak.dto.response.UserLoginResponseDto;
 import com.yasinsolak.dto.response.UserRegisterResponseDto;
 import com.yasinsolak.entity.EUserType;
 import com.yasinsolak.entity.User;
+import com.yasinsolak.exception.ErrorType;
+import com.yasinsolak.exception.MovieAppException;
 import com.yasinsolak.mapper.IUserMapper;
 import com.yasinsolak.repository.IUserRepository;
 import jdk.jshell.spi.ExecutionControl;
@@ -115,6 +119,10 @@ public class UserService {
                 .build();
     }
 
+    /**
+     *
+     * @return
+
     public List<UserFindAllReponseDto> findAlldto() {
         return userRepository.findAll().stream().map(x->{
             return UserFindAllReponseDto.builder()
@@ -128,11 +136,53 @@ public class UserService {
                     .build();
         }).collect(Collectors.toList());
     }
-
+     */
     public UserRegisterResponseDto register2(UserRegisterRequestDto dto){
         User user = IUserMapper.INSTANCE.toUser(dto);
         userRepository.save(user);
         return IUserMapper.INSTANCE.toUserRegisterResponseDto(user);
 
+    }
+
+    public List<UserFindAllReponseDto> findAlldto() {
+        return userRepository.findAll().stream().map(x -> {
+            return UserFindAllReponseDto.builder()
+                    .id(x.getId())
+                    .name(x.getName())
+                    .surname(x.getSurname())
+                    .favGenres(x.getFavGenres())
+                    .phone(x.getPhone())
+                    .movieCommentsContent(x.getComments().stream().map(y -> y.getContent()).collect(Collectors.toList()))
+                    .movieContent(x.getComments().stream().collect(Collectors.toMap(z -> z.getMovie().getName(), t -> t.getContent())))
+                    .userType(x.getUserType())
+                    .build();
+        }).collect(Collectors.toList());
+    }
+
+    public UserLoginResponseDto loginDto(UserLoginRequestDto dto){
+        Optional<User> userOptional = userRepository.findByEmailIgnoreCaseAndPassword(dto.getEmail(),dto.getPassword());
+        if(userOptional.isPresent()){
+            return IUserMapper.INSTANCE.toUserLoginResponseDto(userOptional.get());
+                    /**
+                     * return UserLoginResponseDto.builder()
+                     *           .id(userOptional.get().getId())
+                     *           .name(userOptional.get().getName())
+                     *           .email(userOptional.get().getEmail())
+                     *           .userType(userOptional.get().getUserType())
+                     *           .build();
+                     */
+
+        }else {
+            throw new MovieAppException(ErrorType.USER_NOT_FOUND);
+        }
+    }
+
+    public User loginNormal( String email,String password){
+        Optional<User> userOptional = userRepository.findByEmailIgnoreCaseAndPassword(email,password);
+        if(userOptional.isPresent()){
+            return userOptional.get();
+        }else {
+            throw new RuntimeException("Kullanıcı bulunamadı.");
+        }
     }
 }

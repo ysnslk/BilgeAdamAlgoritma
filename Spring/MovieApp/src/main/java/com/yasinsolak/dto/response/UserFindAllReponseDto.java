@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,5 +23,6 @@ public class UserFindAllReponseDto {
     private String email;
     private EUserType userType;
     private List<Genre> favGenres;
-    private List<Movie> favMovie;
+    private List<String> movieCommentsContent;
+    private Map<String ,String> movieContent;
 }

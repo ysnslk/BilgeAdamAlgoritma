@@ -1,6 +1,7 @@
 package com.yasinsolak.mapper;
 
 import com.yasinsolak.dto.request.UserRegisterRequestDto;
+import com.yasinsolak.dto.response.UserLoginResponseDto;
 import com.yasinsolak.dto.response.UserRegisterResponseDto;
 import com.yasinsolak.entity.User;
 import org.mapstruct.Mapper;
@@ -14,4 +15,7 @@ public interface IUserMapper {
 
     User toUser(final UserRegisterRequestDto dto);
     UserRegisterResponseDto toUserRegisterResponseDto(final User user);
+
+    UserLoginResponseDto toUserLoginResponseDto(final User user);
+
 }
