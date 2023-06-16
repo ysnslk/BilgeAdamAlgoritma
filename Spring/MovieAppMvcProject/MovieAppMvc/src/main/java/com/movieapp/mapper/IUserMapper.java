@@ -5,7 +5,6 @@ import com.movieapp.dto.response.UserLoginResponseDto;
 import com.movieapp.dto.response.UserRegisterResponseDto;
 import com.movieapp.entity.User;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
@@ -18,4 +17,6 @@ public interface IUserMapper {
     UserRegisterResponseDto toRegisterResponseDto(User user);
 
     UserLoginResponseDto toLoginResponseDto(User user);
+
+
 }

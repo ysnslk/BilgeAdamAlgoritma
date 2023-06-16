@@ -36,7 +36,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li th:if="${userBilgileri.id != null}" class="nav-item dropdown">
                         <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
                             role="button">
                             <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle"
@@ -51,8 +51,10 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li> <a th:href="${'/user/loginPage'}" class="btn btn-danger">Logout</a> </li>
                         </ul>
                     </li>
+                    <a th:if="${userBilgileri.id == null}" th:href="${'/user/loginPage'}" class="btn btn-success">Login</a>
 
                 </ul>
             </div>
@@ -72,7 +74,7 @@
                 <div aria-labelledby="headingOne" class="accordion-collapse collapse show"
                     data-bs-parent="#accordionExample" id="collapseOne">
                     <div class="accordion-body ">
-                        <form class="gnr">
+                        <form class="gnr" action="/movie">
                             <div th:each="genre:${genreListesi}" class="d-flex justify-content-between">
                                 <label th:text="${genre.name}"></label>
                                 <input th:value="${genre.name}" name="genre" type="checkbox">
@@ -133,7 +135,14 @@
         <div class="col-9  allfilm  d-flex  flex-wrap justify-content-center ">
 
             <div th:each="movie:${movieListesi}" class="card my-2 mx-2" style="width: 20rem; ">
-                <a class="cm">
+                <a th:if="${userBilgileri.id!=null}" th:href="${'/movie/findbyid?id='+movie.id+'&userId='+userBilgileri.id}" class="cm">
+                    <img th:src="${movie.image}" class="card-img-top" alt="...">
+                    <div class="card-body sum d-flex flex-column">
+                        <h5 th:text="${movie.name}" class="card-title"></h5>
+                        <p th:utext="${movie.summary}"></p>
+                    </div>
+                </a>
+                <a th:if="${userBilgileri.id==null}" th:href="${'/movie/findbyid?id='+movie.id}" class="cm">
                     <img th:src="${movie.image}" class="card-img-top" alt="...">
                     <div class="card-body sum d-flex flex-column">
                         <h5 th:text="${movie.name}" class="card-title"></h5>

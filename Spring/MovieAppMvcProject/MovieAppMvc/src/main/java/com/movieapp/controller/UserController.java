@@ -1,11 +1,16 @@
 package com.movieapp.controller;
 
+import com.movieapp.dto.request.FavMovieRequestDto;
 import com.movieapp.dto.request.UserLoginRequestDto;
 import com.movieapp.dto.request.UserRegisterRequestDto;
+import com.movieapp.dto.response.MovieAdminPageResponseDto;
 import com.movieapp.dto.response.UserLoginResponseDto;
 import com.movieapp.dto.response.UserRegisterResponseDto;
+import com.movieapp.entity.EUserType;
 import com.movieapp.entity.Genre;
 import com.movieapp.entity.Movie;
+import com.movieapp.entity.User;
+import com.movieapp.mapper.IMovieMapper;
 import com.movieapp.service.GenreService;
 import com.movieapp.service.MovieService;
 import com.movieapp.service.UserService;
@@ -30,8 +35,9 @@ public class UserController {
     //dto, repository, service katmanını, mapper0
 
     private final UserService userService;
+    private final MovieController movieController;
     private final MovieService movieService;
-    private final GenreService genreService;
+
 
     @GetMapping("/registerPage")
     public ModelAndView getRegisterPage(){
@@ -64,6 +70,8 @@ public class UserController {
         return modelAndView;
     }
 
+
+/*
     @PostMapping("/login")
     public ModelAndView login(UserLoginRequestDto dto){
         String error ="";
@@ -81,6 +89,56 @@ public class UserController {
             modelAndView.addObject("result", ex.getMessage());
             modelAndView.setViewName("login");
              }
+        return modelAndView;
+    }
+     */
+
+    @PostMapping("/login")
+    public ModelAndView login(UserLoginRequestDto dto){
+        String error ="";
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            UserLoginResponseDto responseDto =  userService.login(dto);
+            if(responseDto.getUserType().equals(EUserType.ADMIN)){
+                return adminPage();
+            }
+            return movieController.getMoviePage(responseDto,null);
+        }catch (Exception ex){
+            error = ex.getMessage();
+            modelAndView.addObject("result", ex.getMessage());
+            modelAndView.setViewName("login");
+        }
+        return modelAndView;
+    }
+    @GetMapping("/admin")
+    private ModelAndView adminPage() {
+        ModelAndView modelAndView = new ModelAndView();
+        List<User> users = userService.findAllUser();
+        modelAndView.addObject("users",users);
+
+        List<MovieAdminPageResponseDto> movies = IMovieMapper.INSTANCE.toMovieAdminPageResponseDto(movieService.findAll());
+        modelAndView.addObject("movies",movies);
+        modelAndView.setViewName("admin");
+        return modelAndView;
+    }
+
+    @GetMapping("/addfavmovies")
+    public ModelAndView addFavMovies(FavMovieRequestDto dto){
+        ModelAndView modelAndView = new ModelAndView();
+        userService.addFavmovies(dto);
+        modelAndView.addObject("id",dto.getMovieId());
+        modelAndView.addObject("userId",dto.getUserId());
+        modelAndView.setViewName("redirect:/movie/findbyid");
+        return modelAndView;
+    }
+
+    @GetMapping("/removefavmovies")
+    public ModelAndView removeFavMovies(FavMovieRequestDto dto){
+        ModelAndView modelAndView = new ModelAndView();
+        userService.removeFavmovies(dto);
+        modelAndView.addObject("id",dto.getMovieId());
+        modelAndView.addObject("userId",dto.getUserId());
+        modelAndView.setViewName("redirect:/movie/findbyid");
         return modelAndView;
     }
 }

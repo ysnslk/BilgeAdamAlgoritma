@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface IMovieRepository extends JpaRepository<Movie,Long> {
 
-
+    List<Movie> findAllByGenre_NameIn(String[] genre);
 
 }
