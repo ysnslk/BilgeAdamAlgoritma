@@ -6,6 +6,7 @@ import com.socialmedia.dto.request.AuthRegisterRequestDto;
 import com.socialmedia.dto.response.AuthRegisterResponseDto;
 import com.socialmedia.exception.AuthManagerException;
 import com.socialmedia.exception.ErrorType;
+import com.socialmedia.manager.IUserProfileManager;
 import com.socialmedia.mapper.IAuthMapper;
 import com.socialmedia.repository.IAuthRepository;
 import com.socialmedia.repository.entity.Auth;
@@ -34,22 +35,24 @@ import java.util.Optional;
 public class AuthService extends ServiceManager<Auth, Long> {
 
     private final IAuthRepository repository;
+    private final IUserProfileManager userProfileManager;
 
-    public AuthService(IAuthRepository repository) {
+    public AuthService(IAuthRepository repository, IUserProfileManager userProfileManager) {
         super(repository);
         this.repository = repository;
+        this.userProfileManager = userProfileManager;
     }
 
 
     public AuthRegisterResponseDto register(AuthRegisterRequestDto dto) {
         Auth auth = IAuthMapper.INSTANCE.fromAuthRegisterRequestDtotoAuth(dto);
-        auth.setActivateCode(CodeGenerator.generatecode());
-        try {
+        if(auth.getPassword().equals(dto.getRePassword())){
+            auth.setActivateCode(CodeGenerator.generatecode());
             save(auth);
-        }catch (Exception e){
-            throw new AuthManagerException(ErrorType.INTERVAL_ERROR);
+            userProfileManager.createUser(IAuthMapper.INSTANCE.fromRegisterDtoToUserCreateDto(dto));
+        } else {
+            throw new AuthManagerException(ErrorType.PASSWORD_ERROR);
         }
-
         AuthRegisterResponseDto responseDto = IAuthMapper.INSTANCE.fromAuthtoAuthRegisterResponseDto(auth);
         return responseDto;
     }
@@ -59,7 +62,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
         if (optionalAuth.isEmpty()) {
             throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
         }
-        if(!optionalAuth.get().getStatus().equals(EStatus.ACTIVE)){
+        if (!optionalAuth.get().getStatus().equals(EStatus.ACTIVE)) {
             throw new AuthManagerException(ErrorType.ACCOUNT_NOT_ACTIVE);
         }
         return true;
@@ -67,17 +70,17 @@ public class AuthService extends ServiceManager<Auth, Long> {
 
     public Boolean activeStatus(ActiveRequestDto dto) {
         Optional<Auth> auth = findById(dto.getId());
-        if (auth.isEmpty()){
+        if (auth.isEmpty()) {
             throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
         }
-        if (auth.get().getStatus().equals(EStatus.ACTIVE)){
+        if (auth.get().getStatus().equals(EStatus.ACTIVE)) {
             throw new AuthManagerException(ErrorType.ALREADY_ACTIVE);
         }
-        if (dto.getActivationCode().equals(auth.get().getActivateCode())){
+        if (dto.getActivationCode().equals(auth.get().getActivateCode())) {
             auth.get().setStatus(EStatus.ACTIVE);
             update(auth.get());
             return true;
-        }else{
+        } else {
             throw new AuthManagerException(ErrorType.INVALID_CODE);
         }
     }
