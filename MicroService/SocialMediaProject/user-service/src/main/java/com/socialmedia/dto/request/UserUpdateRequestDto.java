@@ -1,21 +1,15 @@
-package com.socialmedia.repository.entity;
+package com.socialmedia.dto.request;
 
-import com.socialmedia.repository.enums.EStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
-@Document
-public class UserProfile extends BaseEntity {
-    @Id
+@Builder
+public class UserUpdateRequestDto {
     private String id;
     private String username;
     private String name;
@@ -26,7 +20,4 @@ public class UserProfile extends BaseEntity {
     private String avatar;
     private String info;
     private String address;
-    private Long authId;
-    @Builder.Default
-    private EStatus status = EStatus.PENDING;
 }

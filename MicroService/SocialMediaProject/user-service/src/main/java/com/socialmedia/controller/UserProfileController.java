@@ -2,14 +2,13 @@ package com.socialmedia.controller;
 
 import com.socialmedia.dto.request.UserCreateRequestDto;
 import com.socialmedia.dto.request.UserProfileSaveRequestDto;
+import com.socialmedia.dto.request.UserUpdateRequestDto;
 import com.socialmedia.repository.entity.UserProfile;
 import com.socialmedia.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 @RequestMapping("/user-profile")
 @RestController
 @RequiredArgsConstructor
@@ -23,5 +22,20 @@ public class UserProfileController {
     @PostMapping("/create-user")
     public ResponseEntity<Boolean> createUser(@RequestBody UserCreateRequestDto dto){
         return ResponseEntity.ok(userProfileService.createUser(dto));
+    }
+
+    /**
+     * @RequestParam -->
+     * @PathVariable -->
+     * Delete Put Post Mapping farkları nelerdir?
+     * Neden Delete, Post, Put mapping vardır diye sorduğumuzda tek fark controller metotlarını işaretlerken
+     * okunabilirliği arttırmaktadır.
+     * Genellikle PostMapping   -> Veri Kaydetme , veri tabanındaki değişiklik yapma işlemlerinde kullanılır.
+     *            PutMapping    -> Veri tabanındaki varolan veriyi update için kullanılır.
+     *            DeleteMapping -> Veri Silme işleminde kullanılır.
+     */
+     @PutMapping("/update")
+    public ResponseEntity<Boolean> updateUser(@RequestBody UserUpdateRequestDto dto){
+        return ResponseEntity.ok(userProfileService.updateUser(dto));
     }
 }

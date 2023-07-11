@@ -5,6 +5,7 @@ import com.socialmedia.dto.request.UserCreateRequestDto;
 import com.socialmedia.dto.response.AuthRegisterResponseDto;
 import com.socialmedia.repository.entity.Auth;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
