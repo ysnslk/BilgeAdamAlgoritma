@@ -1,9 +1,6 @@
 package com.socialmedia.service;
 
-import com.socialmedia.dto.request.ActiveRequestDto;
-import com.socialmedia.dto.request.AuthLoginRequestDto;
-import com.socialmedia.dto.request.AuthRegisterRequestDto;
-import com.socialmedia.dto.request.UserCreateRequestDto;
+import com.socialmedia.dto.request.*;
 import com.socialmedia.dto.response.AuthRegisterResponseDto;
 import com.socialmedia.exception.AuthManagerException;
 import com.socialmedia.exception.ErrorType;
@@ -91,5 +88,16 @@ public class AuthService extends ServiceManager<Auth, Long> {
         } else {
             throw new AuthManagerException(ErrorType.INVALID_CODE);
         }
+    }
+
+    public Boolean updateAuth(AuthUpdateRequestDto dto){
+        Optional<Auth> optionalAuth = repository.findById(dto.getAuthId());
+        if (optionalAuth.isEmpty()) {
+            throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
+        }
+       Auth auth = IAuthMapper.INSTANCE.fromAuthUpdateDtoToAuth(dto,optionalAuth.get());
+
+        update(auth);
+        return true;
     }
 }

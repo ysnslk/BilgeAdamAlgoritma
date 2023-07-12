@@ -16,6 +16,6 @@ public interface IUserProfileMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     UserProfile fromDtoToUserUpdate(UserUpdateRequestDto dto,@MappingTarget UserProfile userProfile);
 
-    AuthUpdateRequestDto fromUserUpdateToAuthUpdate(UserUpdateRequestDto dto);
+    AuthUpdateRequestDto fromUserProfileToAuthUpdateDto(UserProfile userProfile);
 
 }

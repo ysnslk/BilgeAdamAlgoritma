@@ -1,9 +1,11 @@
 package com.socialmedia.manager;
 
+import com.socialmedia.dto.request.AuthUpdateRequestDto;
 import com.socialmedia.dto.request.UserCreateRequestDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(url = "http://localhost:7070/auth" , name = "userprofile-auth")
@@ -17,6 +19,6 @@ public interface IAuthManager {
      *  Dto içindeki propertylerde aynı olmalıdır.
      */
 
-    @PostMapping("/create-user")
-    public ResponseEntity<Boolean> createUser(@RequestBody UserCreateRequestDto dto);
+    @PutMapping("/update")
+    public ResponseEntity<Boolean> updateAuth(AuthUpdateRequestDto dto);
 }

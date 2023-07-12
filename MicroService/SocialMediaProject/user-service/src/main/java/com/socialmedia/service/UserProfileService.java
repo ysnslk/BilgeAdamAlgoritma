@@ -44,7 +44,7 @@ public class UserProfileService extends ServiceManager<UserProfile,String> {
         }
 
         userProfileRepository.save( IUserProfileMapper.INSTANCE.fromDtoToUserUpdate(dto,optionalUserProfile.get()));
-        // authManager.createUser(IUserProfileMapper.INSTANCE.fromUserUpdateToAuthUpdate(dto));
+        authManager.updateAuth(IUserProfileMapper.INSTANCE.fromUserProfileToAuthUpdateDto(optionalUserProfile.get()));
         return true;
     }
 }

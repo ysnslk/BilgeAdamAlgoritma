@@ -3,14 +3,12 @@ package com.socialmedia.controller;
 import com.socialmedia.dto.request.ActiveRequestDto;
 import com.socialmedia.dto.request.AuthLoginRequestDto;
 import com.socialmedia.dto.request.AuthRegisterRequestDto;
+import com.socialmedia.dto.request.AuthUpdateRequestDto;
 import com.socialmedia.dto.response.AuthRegisterResponseDto;
 import com.socialmedia.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -34,5 +32,10 @@ public class AuthController {
     @PostMapping("/activestatus")
     public ResponseEntity<Boolean> activeStatus (@RequestBody ActiveRequestDto dto){
         return ResponseEntity.ok(authService.activeStatus(dto));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Boolean> updateAuth(@RequestBody AuthUpdateRequestDto dto){
+        return ResponseEntity.ok(authService.updateAuth(dto));
     }
 }

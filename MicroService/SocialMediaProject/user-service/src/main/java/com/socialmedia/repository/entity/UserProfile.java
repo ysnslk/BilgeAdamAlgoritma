@@ -17,6 +17,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class UserProfile extends BaseEntity {
     @Id
     private String id;
+    private Long authId;
     private String username;
     private String name;
     private String surname;
@@ -26,7 +27,6 @@ public class UserProfile extends BaseEntity {
     private String avatar;
     private String info;
     private String address;
-    private Long authId;
     @Builder.Default
     private EStatus status = EStatus.PENDING;
 }
