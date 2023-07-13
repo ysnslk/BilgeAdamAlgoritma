@@ -86,7 +86,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
             update(auth.get());
             return true;
         } else {
-            throw new AuthManagerException(ErrorType.INVALID_CODE);
+            throw new AuthManagerException(ErrorType.ACTIVATE_CODE_ERROR);
         }
     }
 
