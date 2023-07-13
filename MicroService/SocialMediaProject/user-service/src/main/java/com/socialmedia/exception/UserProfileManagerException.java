@@ -3,14 +3,14 @@ package com.socialmedia.exception;
 import lombok.Getter;
 
 @Getter
-public class UserProfileException extends RuntimeException{
+public class UserProfileManagerException extends RuntimeException{
 
     private final ErrorType errorType;
 
-    public UserProfileException(ErrorType errorType) {
+    public UserProfileManagerException(ErrorType errorType) {
         this.errorType = errorType;
     }
-    public UserProfileException(ErrorType errorType, String customMessage) {
+    public UserProfileManagerException(ErrorType errorType, String customMessage) {
         super(customMessage);
         this.errorType = errorType;
     }

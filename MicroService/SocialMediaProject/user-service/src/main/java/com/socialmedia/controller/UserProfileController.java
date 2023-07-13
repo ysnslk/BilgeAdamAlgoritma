@@ -8,18 +8,19 @@ import com.socialmedia.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import static com.socialmedia.constant.ApiUrls.*;
 
-@RequestMapping("/user-profile")
+@RequestMapping(USER_PROFILE)
 @RestController
 @RequiredArgsConstructor
 public class UserProfileController {
     private final UserProfileService userProfileService;
 
-    @PostMapping("/save")
+    @PostMapping(REGISTER)
     public UserProfile save(@RequestBody UserProfileSaveRequestDto dto){
         return userProfileService.save(dto);
     }
-    @PostMapping("/create-user")
+    @PostMapping(CREATE_USER)
     public ResponseEntity<Boolean> createUser(@RequestBody UserCreateRequestDto dto){
         return ResponseEntity.ok(userProfileService.createUser(dto));
     }
@@ -34,7 +35,7 @@ public class UserProfileController {
      *            PutMapping    -> Veri tabanındaki varolan veriyi update için kullanılır.
      *            DeleteMapping -> Veri Silme işleminde kullanılır.
      */
-     @PutMapping("/update")
+     @PutMapping(UPDATE)
     public ResponseEntity<Boolean> updateUser(@RequestBody UserUpdateRequestDto dto){
         return ResponseEntity.ok(userProfileService.updateUser(dto));
     }

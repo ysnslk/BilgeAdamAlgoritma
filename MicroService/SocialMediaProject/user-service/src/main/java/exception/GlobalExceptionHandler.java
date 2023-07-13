@@ -1,6 +1,8 @@
-package com.socialmedia.exception;
+package exception;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.socialmedia.exception.ErrorMessage;
+import com.socialmedia.exception.ErrorType;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +19,14 @@ import java.util.List;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(UserProfileManagerException.class)
-    public ResponseEntity<ErrorMessage> handleManagerException(UserProfileManagerException exception) {
-        ErrorType errorType = exception.getErrorType();
+    @ExceptionHandler(AuthManagerException.class)
+    public ResponseEntity<ErrorMessage> handleManagerException(AuthManagerException exception) {
+        com.socialmedia.exception.ErrorType errorType = exception.getErrorType();
         HttpStatus httpStatus = errorType.getHttpStatus();
         return new ResponseEntity<>(createError(errorType, exception), httpStatus);
     }
 
-    private ErrorMessage createError(ErrorType errorType, Exception exception) {
+    private ErrorMessage createError(com.socialmedia.exception.ErrorType errorType, Exception exception) {
         return ErrorMessage.builder()
                 .code(errorType.getCode())
                 .message(errorType.getMessage())
@@ -33,7 +35,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ErrorMessage> handleAllExceptions(Exception exception) {
-        ErrorType errorType = ErrorType.INTERNAL_ERROR;
+        com.socialmedia.exception.ErrorType errorType = com.socialmedia.exception.ErrorType.INTERNAL_ERROR;
         List<String> fields = new ArrayList<>();
         fields.add(exception.getMessage());
         ErrorMessage errorMessage = createError(errorType, exception);
@@ -52,7 +54,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public final ResponseEntity<ErrorMessage> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
-        ErrorType errorType = ErrorType.BAD_REQUEST;
+        com.socialmedia.exception.ErrorType errorType = com.socialmedia.exception.ErrorType.BAD_REQUEST;
         List<String> fields = new ArrayList<>();
         exception.getBindingResult().getFieldErrors().forEach(e -> fields.add(e.getField() + ": " + e.getDefaultMessage()));
         ErrorMessage errorMessage = createError(errorType, exception);
@@ -68,7 +70,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public final ResponseEntity<ErrorMessage> handleMessageNotReadableException(
             HttpMessageNotReadableException exception) {
-        ErrorType errorType = ErrorType.BAD_REQUEST;
+        com.socialmedia.exception.ErrorType errorType = com.socialmedia.exception.ErrorType.BAD_REQUEST;
         return new ResponseEntity<>(createError(errorType, exception), errorType.getHttpStatus());
     }
 
@@ -79,7 +81,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(InvalidFormatException.class)
     public final ResponseEntity<ErrorMessage> handleInvalidFormatException(InvalidFormatException exception) {
-        ErrorType errorType = ErrorType.BAD_REQUEST;
+        com.socialmedia.exception.ErrorType errorType = com.socialmedia.exception.ErrorType.BAD_REQUEST;
         return new ResponseEntity<>(createError(errorType, exception), errorType.getHttpStatus());
     }
 
@@ -89,7 +91,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public final ResponseEntity<ErrorMessage> handleMethodArgumentMisMatchException(MethodArgumentTypeMismatchException exception) {
-        ErrorType errorType = ErrorType.BAD_REQUEST;
+        com.socialmedia.exception.ErrorType errorType = com.socialmedia.exception.ErrorType.BAD_REQUEST;
         return new ResponseEntity<>(createError(errorType, exception), errorType.getHttpStatus());
     }
 
@@ -100,7 +102,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MissingPathVariableException.class)
     public final ResponseEntity<ErrorMessage> handleMethodArgumentMisMatchException(MissingPathVariableException exception) {
-        ErrorType errorType = ErrorType.BAD_REQUEST;
+        com.socialmedia.exception.ErrorType errorType = com.socialmedia.exception.ErrorType.BAD_REQUEST;
         return new ResponseEntity<>(createError(errorType, exception), errorType.getHttpStatus());
     }
 
@@ -112,7 +114,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(DataIntegrityViolationException.class)
     public final ResponseEntity<ErrorMessage> handlePsqlException(DataIntegrityViolationException exception) {
-        ErrorType errorType = ErrorType.USERNAME_DUPLICATE;
+        com.socialmedia.exception.ErrorType errorType = ErrorType.USERNAME_DUPLICATE;
         return new ResponseEntity<>(createError(errorType, exception), errorType.getHttpStatus());
     }
 }

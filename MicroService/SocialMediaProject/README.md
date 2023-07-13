@@ -14,6 +14,8 @@
 #### Autowired nedir? Neden cons inj. neden autowired?
 #### SpringFramework vs SpringBoot?
 #### SOLID prensipleri nelerdir?
+#### RestAPI nedir? RESTful arach nedir?
+### SOAP --> Acces Protocol --> xml tabanlı verileri 
 
 
 ## Http Request - JavaServlet Container
