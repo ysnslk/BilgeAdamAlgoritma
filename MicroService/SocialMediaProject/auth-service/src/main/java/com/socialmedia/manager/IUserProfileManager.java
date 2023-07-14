@@ -1,12 +1,13 @@
 package com.socialmedia.manager;
 
 import com.socialmedia.dto.request.UserCreateRequestDto;
+import com.socialmedia.dto.request.UserDeleteRequestDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(url = "http://localhost:8080/user-profile" , name = "auth-userprofile")
+@FeignClient(url = "http://localhost:8080/api/v1/user-profile" , name = "auth-userprofile")
 public interface IUserProfileManager {
 
     /**
@@ -19,4 +20,6 @@ public interface IUserProfileManager {
 
     @PostMapping("/create-user")
     public ResponseEntity<Boolean> createUser(@RequestBody UserCreateRequestDto dto);
+    @PostMapping("/delete-user")
+    public ResponseEntity<Boolean> deleteUser(@RequestBody UserDeleteRequestDto dto);
 }

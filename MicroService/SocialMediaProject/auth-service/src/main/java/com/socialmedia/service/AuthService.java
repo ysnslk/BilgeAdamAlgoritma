@@ -14,6 +14,7 @@ import com.socialmedia.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -99,5 +100,21 @@ public class AuthService extends ServiceManager<Auth, Long> {
 
         update(auth);
         return true;
+    }
+
+    public Boolean DeleteAuth(Long id){
+        Optional<Auth> optionalAuth = repository.findById(id);
+        if (optionalAuth.isEmpty()) {
+            throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
+        }
+        if (optionalAuth.get().getStatus().equals(EStatus.ACTIVE) || optionalAuth.get().getStatus().equals(EStatus.PENDING)){
+            optionalAuth.get().setStatus(EStatus.DELETED);
+            update(optionalAuth.get());
+            // userProfileManager.deleteUser();
+            return true;
+        }else{
+            throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
+        }
+
     }
 }

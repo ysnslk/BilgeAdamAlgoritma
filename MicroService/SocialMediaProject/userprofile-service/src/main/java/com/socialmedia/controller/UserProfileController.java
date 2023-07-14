@@ -1,6 +1,7 @@
 package com.socialmedia.controller;
 
 import com.socialmedia.dto.request.UserCreateRequestDto;
+import com.socialmedia.dto.request.UserDeleteRequestDto;
 import com.socialmedia.dto.request.UserProfileSaveRequestDto;
 import com.socialmedia.dto.request.UserUpdateRequestDto;
 import com.socialmedia.repository.entity.UserProfile;
@@ -38,5 +39,9 @@ public class UserProfileController {
      @PutMapping(UPDATE)
     public ResponseEntity<Boolean> updateUser(@RequestBody UserUpdateRequestDto dto){
         return ResponseEntity.ok(userProfileService.updateUser(dto));
+    }
+    @PostMapping(DELETE)
+    public ResponseEntity<Boolean> deleteUser(@RequestBody Long authId){
+         return ResponseEntity.ok(userProfileService.deleteUser(authId));
     }
 }

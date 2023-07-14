@@ -8,6 +8,8 @@ import com.socialmedia.repository.entity.Auth;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
+import java.util.Optional;
+
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IAuthMapper {
     IAuthMapper INSTANCE = Mappers.getMapper(IAuthMapper.class);
@@ -18,6 +20,7 @@ public interface IAuthMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(source = "authId",target = "id")
     Auth fromAuthUpdateDtoToAuth(AuthUpdateRequestDto dto ,@MappingTarget Auth auth);
+
 
 }
 

@@ -10,16 +10,21 @@ ext {
     ]
     //Ctrl + Alt + L
     libs = [
-            springBootWeb       : "org.springframework.boot:spring-boot-starter-web:$versions.springBoot",
-            springBootJpa       : "org.springframework.boot:spring-boot-starter-data-jpa:$versions.springBoot",
-            springBootValidation: "org.springframework.boot:spring-boot-starter-validation:$versions.springBoot",
-            postgresql          : "org.postgresql:postgresql:$versions.postgresql",
-            lombok              : "org.projectlombok:lombok:$versions.lombok",
-            mapstruct           : "org.mapstruct:mapstruct:$versions.mapstruct",
-            mapstructProcessor  : "org.mapstruct:mapstruct-processor:$versions.mapstruct",
-            openapi             : "org.springdoc:springdoc-openapi-ui:$versions.openapi",
-            mongoDB             : "org.springframework.boot:spring-boot-starter-data-mongodb:${versions.springBoot}",
-            springOpenFeign     : "org.springframework.cloud:spring-cloud-starter-openfeign:${versions.springCloud}"
+            springBootWeb          : "org.springframework.boot:spring-boot-starter-web:$versions.springBoot",
+            springBootJpa          : "org.springframework.boot:spring-boot-starter-data-jpa:$versions.springBoot",
+            springBootValidation   : "org.springframework.boot:spring-boot-starter-validation:$versions.springBoot",
+            postgresql             : "org.postgresql:postgresql:$versions.postgresql",
+            lombok                 : "org.projectlombok:lombok:$versions.lombok",
+            mapstruct              : "org.mapstruct:mapstruct:$versions.mapstruct",
+            mapstructProcessor     : "org.mapstruct:mapstruct-processor:$versions.mapstruct",
+            openapi                : "org.springdoc:springdoc-openapi-ui:$versions.openapi",
+            mongoDB                : "org.springframework.boot:spring-boot-starter-data-mongodb:${versions.springBoot}",
+            springOpenFeign        : "org.springframework.cloud:spring-cloud-starter-openfeign:${versions.springCloud}",
+            springCloudConfigServer: "org.springframework.cloud:spring-cloud-config-server:${versions.springCloud}",
+            springCloudConfigClient: "org.springframework.cloud:spring-cloud-config-client:${versions.springCloud}",
+            springCloudConfig      : "org.springframework.cloud:spring-cloud-starter-config:${versions.springCloud}",
+            springCloudSleuthZipkin: "org.springframework.cloud:spring-cloud-sleuth-zipkin:$versions.springCloud",
+            springCloudSleuth      : "org.springframework.cloud:spring-cloud-starter-sleuth:$versions.springCloud",
 
     ]
 }

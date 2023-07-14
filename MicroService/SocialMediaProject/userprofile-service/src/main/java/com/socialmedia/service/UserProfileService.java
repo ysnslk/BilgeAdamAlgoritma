@@ -4,11 +4,12 @@ import com.socialmedia.dto.request.UserCreateRequestDto;
 import com.socialmedia.dto.request.UserProfileSaveRequestDto;
 import com.socialmedia.dto.request.UserUpdateRequestDto;
 import com.socialmedia.exception.ErrorType;
-import com.socialmedia.exception.UserProfileException;
+import com.socialmedia.exception.UserProfileManagerException;
 import com.socialmedia.manager.IAuthManager;
 import com.socialmedia.mapper.IUserProfileMapper;
 import com.socialmedia.repository.IUserProfileRepository;
 import com.socialmedia.repository.entity.UserProfile;
+import com.socialmedia.repository.enums.EStatus;
 import com.socialmedia.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 
@@ -40,11 +41,21 @@ public class UserProfileService extends ServiceManager<UserProfile,String> {
     public Boolean updateUser(UserUpdateRequestDto dto){
         Optional<UserProfile> optionalUserProfile = userProfileRepository.findById(dto.getId());
         if(optionalUserProfile.isEmpty()){
-            throw new UserProfileException(ErrorType.USER_NOT_FOUND);
+            throw new UserProfileManagerException(ErrorType.USER_NOT_FOUND);
         }
 
         userProfileRepository.save( IUserProfileMapper.INSTANCE.fromDtoToUserUpdate(dto,optionalUserProfile.get()));
         authManager.updateAuth(IUserProfileMapper.INSTANCE.fromUserProfileToAuthUpdateDto(optionalUserProfile.get()));
+        return true;
+    }
+
+    public Boolean deleteUser(Long authId) {
+        Optional<UserProfile> optionalUserProfile = userProfileRepository.findByAuthId(authId);
+        if (optionalUserProfile.isEmpty()){
+            throw new UserProfileManagerException(ErrorType.USER_NOT_FOUND);
+        }
+        optionalUserProfile.get().setStatus(EStatus.DELETED);
+        update(optionalUserProfile.get());
         return true;
     }
 }
