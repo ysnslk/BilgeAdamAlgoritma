@@ -11,5 +11,6 @@ public class ApiUrls {
     public static final String FIND_BY_ID = "/find-by-id";
     public static final String FIND_ALL = "/find-all";
     public static final String ACTIVATE_STATUS = "/activate-status";
+    public static final String FORGOT_PASSWORD = "/forgot-password";
 
 }

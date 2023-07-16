@@ -1,6 +1,5 @@
 package com.socialmedia.dto.request;
 
-import com.socialmedia.repository.enums.EStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserDeleteRequestDto {
-    private Long authId;
-    private EStatus eStatus;
+public class AuthForgotPasswordRequestDto {
+    private Long id;
+    private String password;
+    private String rePassword;
 }

@@ -1,8 +1,6 @@
 package com.socialmedia.mapper;
 
-import com.socialmedia.dto.request.AuthRegisterRequestDto;
-import com.socialmedia.dto.request.AuthUpdateRequestDto;
-import com.socialmedia.dto.request.UserCreateRequestDto;
+import com.socialmedia.dto.request.*;
 import com.socialmedia.dto.response.AuthRegisterResponseDto;
 import com.socialmedia.repository.entity.Auth;
 import org.mapstruct.*;
@@ -20,6 +18,7 @@ public interface IAuthMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(source = "authId",target = "id")
     Auth fromAuthUpdateDtoToAuth(AuthUpdateRequestDto dto ,@MappingTarget Auth auth);
+    UserForgotPasswordRequestDto fromAuthForgotPassToUserForgorPassDto(AuthForgotPasswordRequestDto dto);
 
 
 }

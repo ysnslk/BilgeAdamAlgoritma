@@ -1,7 +1,7 @@
 package com.socialmedia.controller;
 
 import com.socialmedia.dto.request.UserCreateRequestDto;
-import com.socialmedia.dto.request.UserDeleteRequestDto;
+import com.socialmedia.dto.request.UserForgotPasswordRequestDto;
 import com.socialmedia.dto.request.UserProfileSaveRequestDto;
 import com.socialmedia.dto.request.UserUpdateRequestDto;
 import com.socialmedia.repository.entity.UserProfile;
@@ -40,8 +40,18 @@ public class UserProfileController {
     public ResponseEntity<Boolean> updateUser(@RequestBody UserUpdateRequestDto dto){
         return ResponseEntity.ok(userProfileService.updateUser(dto));
     }
-    @PostMapping(DELETE)
-    public ResponseEntity<Boolean> deleteUser(@RequestBody Long authId){
-         return ResponseEntity.ok(userProfileService.deleteUser(authId));
+    @DeleteMapping(DELETE)
+    public ResponseEntity<Boolean> deleteUser(@RequestBody Long id){
+         return ResponseEntity.ok(userProfileService.deleteUser(id));
+    }
+
+    @PutMapping(ACTIVATE_STATUS)
+    public ResponseEntity<Boolean> activeStatus(@RequestBody Long id){
+         return ResponseEntity.ok(userProfileService.activeStatus(id));
+    }
+
+    @PutMapping("/forgot-password")
+    public ResponseEntity<Boolean> forgotPassword(@RequestBody UserForgotPasswordRequestDto dto){
+         return ResponseEntity.ok(userProfileService.forgotPassword(dto));
     }
 }

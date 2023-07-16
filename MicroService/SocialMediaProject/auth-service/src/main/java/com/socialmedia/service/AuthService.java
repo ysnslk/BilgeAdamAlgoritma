@@ -46,14 +46,13 @@ public class AuthService extends ServiceManager<Auth, Long> {
     @Transactional //Rolback  ->
     public AuthRegisterResponseDto register(AuthRegisterRequestDto dto) {
         Auth auth = IAuthMapper.INSTANCE.fromAuthRegisterRequestDtotoAuth(dto);
-        if(auth.getPassword().equals(dto.getRePassword())){
+        if (auth.getPassword().equals(dto.getRePassword())) {
             auth.setActivateCode(CodeGenerator.generatecode());
             save(auth);
             //1. alternatif
             UserCreateRequestDto userDto = IAuthMapper.INSTANCE.fromRegisterDtoToUserCreateDto(dto);
             userDto.setAuthId(auth.getId());
             userProfileManager.createUser(userDto);
-
 
 
         } else {
@@ -82,39 +81,55 @@ public class AuthService extends ServiceManager<Auth, Long> {
         if (auth.get().getStatus().equals(EStatus.ACTIVE)) {
             throw new AuthManagerException(ErrorType.ALREADY_ACTIVE);
         }
-        if (dto.getActivationCode().equals(auth.get().getActivateCode())) {
+        if (dto.getActivationCode().equals(auth.get().getActivateCode()) && auth.get().getStatus().equals(EStatus.PENDING)) {
             auth.get().setStatus(EStatus.ACTIVE);
             update(auth.get());
+            userProfileManager.activeStatus(dto.getId());
             return true;
         } else {
             throw new AuthManagerException(ErrorType.ACTIVATE_CODE_ERROR);
         }
     }
 
-    public Boolean updateAuth(AuthUpdateRequestDto dto){
+    public Boolean updateAuth(AuthUpdateRequestDto dto) {
         Optional<Auth> optionalAuth = repository.findById(dto.getAuthId());
         if (optionalAuth.isEmpty()) {
             throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
         }
-       Auth auth = IAuthMapper.INSTANCE.fromAuthUpdateDtoToAuth(dto,optionalAuth.get());
+        Auth auth = IAuthMapper.INSTANCE.fromAuthUpdateDtoToAuth(dto, optionalAuth.get());
 
         update(auth);
         return true;
     }
-
-    public Boolean DeleteAuth(Long id){
+    @Transactional
+    public Boolean DeleteAuth(Long id) {
         Optional<Auth> optionalAuth = repository.findById(id);
         if (optionalAuth.isEmpty()) {
             throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
         }
-        if (optionalAuth.get().getStatus().equals(EStatus.ACTIVE) || optionalAuth.get().getStatus().equals(EStatus.PENDING)){
+        if (optionalAuth.get().getStatus().equals(EStatus.ACTIVE) || optionalAuth.get().getStatus().equals(EStatus.PENDING)) {
             optionalAuth.get().setStatus(EStatus.DELETED);
             update(optionalAuth.get());
-            // userProfileManager.deleteUser();
+            userProfileManager.deleteUser(id);
             return true;
-        }else{
+        } else {
             throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
         }
 
+    }
+
+    public Boolean forgotPassword(AuthForgotPasswordRequestDto dto){
+        Optional<Auth> optionalAuth = repository.findById(dto.getId());
+        if (optionalAuth.isEmpty()) {
+            throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
+        }
+        if(dto.getPassword().equals(dto.getRePassword())){
+            optionalAuth.get().setPassword(dto.getPassword());
+            update(optionalAuth.get());
+            userProfileManager.forgotPassword(IAuthMapper.INSTANCE.fromAuthForgotPassToUserForgorPassDto(dto));
+        }else {
+            throw new AuthManagerException(ErrorType.PASSWORD_ERROR);
+        }
+        return true;
     }
 }

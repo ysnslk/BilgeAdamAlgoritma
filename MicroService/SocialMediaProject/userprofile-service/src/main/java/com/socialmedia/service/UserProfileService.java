@@ -1,6 +1,7 @@
 package com.socialmedia.service;
 
 import com.socialmedia.dto.request.UserCreateRequestDto;
+import com.socialmedia.dto.request.UserForgotPasswordRequestDto;
 import com.socialmedia.dto.request.UserProfileSaveRequestDto;
 import com.socialmedia.dto.request.UserUpdateRequestDto;
 import com.socialmedia.exception.ErrorType;
@@ -57,5 +58,29 @@ public class UserProfileService extends ServiceManager<UserProfile,String> {
         optionalUserProfile.get().setStatus(EStatus.DELETED);
         update(optionalUserProfile.get());
         return true;
+    }
+
+    public Boolean activeStatus(Long id) {
+        Optional<UserProfile> optionalUserProfile = userProfileRepository.findByAuthId(id);
+        if (optionalUserProfile.isEmpty()){
+            throw new UserProfileManagerException(ErrorType.USER_NOT_FOUND);
+        }
+        optionalUserProfile.get().setStatus(EStatus.ACTIVE);
+        update(optionalUserProfile.get());
+        return true;
+    }
+
+    public Boolean forgotPassword(UserForgotPasswordRequestDto dto) {
+        Optional<UserProfile> optionalUserProfile = userProfileRepository.findByAuthId(dto.getId());
+        if (optionalUserProfile.isEmpty()){
+            throw new UserProfileManagerException(ErrorType.USER_NOT_FOUND);
+        }
+        if (dto.getPassword().equals(dto.getRePassword())){
+            optionalUserProfile.get().setPassword(dto.getPassword());
+            update(optionalUserProfile.get());
+            return true;
+        }else {
+            throw new UserProfileManagerException(ErrorType.PASSWORD_ERROR);
+        }
     }
 }

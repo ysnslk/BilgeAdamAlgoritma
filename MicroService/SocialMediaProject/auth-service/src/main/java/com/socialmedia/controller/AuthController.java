@@ -1,9 +1,6 @@
 package com.socialmedia.controller;
 
-import com.socialmedia.dto.request.ActiveRequestDto;
-import com.socialmedia.dto.request.AuthLoginRequestDto;
-import com.socialmedia.dto.request.AuthRegisterRequestDto;
-import com.socialmedia.dto.request.AuthUpdateRequestDto;
+import com.socialmedia.dto.request.*;
 import com.socialmedia.dto.response.AuthRegisterResponseDto;
 import com.socialmedia.repository.entity.Auth;
 import com.socialmedia.service.AuthService;
@@ -66,7 +63,12 @@ public class AuthController {
         return ResponseEntity.ok(authService.findAll());
     }
     @DeleteMapping(DELETE)
-    public ResponseEntity<Boolean> deleteAuth(Long id){
+    public ResponseEntity<Boolean> deleteAuth(@RequestBody Long id){
         return ResponseEntity.ok(authService.DeleteAuth(id));
+    }
+
+    @PutMapping(FORGOT_PASSWORD)
+    public ResponseEntity<Boolean> forgotPassword(@RequestBody AuthForgotPasswordRequestDto dto){
+        return ResponseEntity.ok(authService.forgotPassword(dto));
     }
 }
