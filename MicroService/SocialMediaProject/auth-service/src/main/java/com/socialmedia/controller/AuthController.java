@@ -24,6 +24,10 @@ public class AuthController {
     public ResponseEntity<AuthRegisterResponseDto> register(@RequestBody @Valid AuthRegisterRequestDto dto) {
         return ResponseEntity.ok(authService.register(dto));
     }
+    @PostMapping(REGISTER+"-with-rabbitmq")
+    public ResponseEntity<AuthRegisterResponseDto> registerWithRabbitMQ(@RequestBody @Valid AuthRegisterRequestDto dto) {
+        return ResponseEntity.ok(authService.registerWithRabbitMQ(dto));
+    }
 
     @PostMapping(LOGIN)
     public ResponseEntity<Boolean> login(@RequestBody AuthLoginRequestDto dto) {
@@ -68,7 +72,7 @@ public class AuthController {
     }
 
     @PutMapping(FORGOT_PASSWORD)
-    public ResponseEntity<Boolean> forgotPassword(@RequestBody AuthForgotPasswordRequestDto dto){
+    public ResponseEntity<String> forgotPassword(@RequestBody AuthForgotPasswordRequestDto dto){
         return ResponseEntity.ok(authService.forgotPassword(dto));
     }
 }

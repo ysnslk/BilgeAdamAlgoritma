@@ -2,4 +2,5 @@ rootProject.name = 'SocialMediaProject'
 include 'auth-service'
 include 'userprofile-service'
 include 'config-server'
+include 'mail-server'
 

@@ -6,6 +6,7 @@ import com.socialmedia.exception.AuthManagerException;
 import com.socialmedia.exception.ErrorType;
 import com.socialmedia.manager.IUserProfileManager;
 import com.socialmedia.mapper.IAuthMapper;
+import com.socialmedia.rabbitmq.producer.UserRegisterProducer;
 import com.socialmedia.repository.IAuthRepository;
 import com.socialmedia.repository.entity.Auth;
 import com.socialmedia.repository.enums.EStatus;
@@ -14,7 +15,6 @@ import com.socialmedia.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -37,11 +37,13 @@ public class AuthService extends ServiceManager<Auth, Long> {
 
     private final IAuthRepository repository;
     private final IUserProfileManager userProfileManager;
+    private final UserRegisterProducer userRegisterProducer;
 
-    public AuthService(IAuthRepository repository, IUserProfileManager userProfileManager) {
+    public AuthService(IAuthRepository repository, IUserProfileManager userProfileManager, UserRegisterProducer userRegisterProducer) {
         super(repository);
         this.repository = repository;
         this.userProfileManager = userProfileManager;
+        this.userRegisterProducer = userRegisterProducer;
     }
 
     @Transactional //Rolback  ->
@@ -57,6 +59,20 @@ public class AuthService extends ServiceManager<Auth, Long> {
 
 
         } else {
+            throw new AuthManagerException(ErrorType.PASSWORD_ERROR);
+        }
+        AuthRegisterResponseDto responseDto = IAuthMapper.INSTANCE.fromAuthtoAuthRegisterResponseDto(auth);
+        return responseDto;
+    }
+
+    public AuthRegisterResponseDto registerWithRabbitMQ(AuthRegisterRequestDto dto){
+        Auth auth = IAuthMapper.INSTANCE.fromAuthRegisterRequestDtotoAuth(dto);
+        if (auth.getPassword().equals(dto.getRePassword())) {
+            auth.setActivateCode(CodeGenerator.generatecode());
+            save(auth);
+            userRegisterProducer.sendNewUser(IAuthMapper.INSTANCE.fromAuthToUserRegisterModel(auth));
+            }
+        else {
             throw new AuthManagerException(ErrorType.PASSWORD_ERROR);
         }
         AuthRegisterResponseDto responseDto = IAuthMapper.INSTANCE.fromAuthtoAuthRegisterResponseDto(auth);

@@ -8,6 +8,7 @@ import com.socialmedia.exception.ErrorType;
 import com.socialmedia.exception.UserProfileManagerException;
 import com.socialmedia.manager.IAuthManager;
 import com.socialmedia.mapper.IUserProfileMapper;
+import com.socialmedia.rabbitmq.model.AuthRegisterModel;
 import com.socialmedia.repository.IUserProfileRepository;
 import com.socialmedia.repository.entity.UserProfile;
 import com.socialmedia.repository.enums.EStatus;
@@ -38,6 +39,9 @@ public class UserProfileService extends ServiceManager<UserProfile, String> {
 
         userProfileRepository.save(userProfile);
         return true;
+    }
+    public void createUserWithRabbitMq(AuthRegisterModel model) {
+        userProfileRepository.save(IUserProfileMapper.INSTANCE.fromRegisterModelToUserProfile(model));
     }
 
     public Boolean updateUser(UserUpdateRequestDto dto) {
@@ -80,5 +84,6 @@ public class UserProfileService extends ServiceManager<UserProfile, String> {
         update(userProfile.get());
         return true;
     }
+
 
 }
