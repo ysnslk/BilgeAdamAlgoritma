@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class UserProfileService extends ServiceManager<UserProfile,String> {
+public class UserProfileService extends ServiceManager<UserProfile, String> {
 
     private final IUserProfileRepository userProfileRepository;
     private final IAuthManager authManager;
@@ -28,31 +28,32 @@ public class UserProfileService extends ServiceManager<UserProfile,String> {
         this.authManager = authManager;
     }
 
-    public UserProfile save (UserProfileSaveRequestDto dto){
+    public UserProfile save(UserProfileSaveRequestDto dto) {
         UserProfile userProfile = IUserProfileMapper.INSTANCE.userProfileFromDto(dto);
         return userProfileRepository.save(userProfile);
     }
-    public Boolean createUser(UserCreateRequestDto dto){
-       UserProfile userProfile = IUserProfileMapper.INSTANCE.fromDtoToUserProfile(dto);
+
+    public Boolean createUser(UserCreateRequestDto dto) {
+        UserProfile userProfile = IUserProfileMapper.INSTANCE.fromDtoToUserProfile(dto);
 
         userProfileRepository.save(userProfile);
         return true;
     }
 
-    public Boolean updateUser(UserUpdateRequestDto dto){
+    public Boolean updateUser(UserUpdateRequestDto dto) {
         Optional<UserProfile> optionalUserProfile = userProfileRepository.findById(dto.getId());
-        if(optionalUserProfile.isEmpty()){
+        if (optionalUserProfile.isEmpty()) {
             throw new UserProfileManagerException(ErrorType.USER_NOT_FOUND);
         }
 
-        userProfileRepository.save( IUserProfileMapper.INSTANCE.fromDtoToUserUpdate(dto,optionalUserProfile.get()));
+        userProfileRepository.save(IUserProfileMapper.INSTANCE.fromDtoToUserUpdate(dto, optionalUserProfile.get()));
         authManager.updateAuth(IUserProfileMapper.INSTANCE.fromUserProfileToAuthUpdateDto(optionalUserProfile.get()));
         return true;
     }
 
     public Boolean deleteUser(Long authId) {
         Optional<UserProfile> optionalUserProfile = userProfileRepository.findByAuthId(authId);
-        if (optionalUserProfile.isEmpty()){
+        if (optionalUserProfile.isEmpty()) {
             throw new UserProfileManagerException(ErrorType.USER_NOT_FOUND);
         }
         optionalUserProfile.get().setStatus(EStatus.DELETED);
@@ -62,7 +63,7 @@ public class UserProfileService extends ServiceManager<UserProfile,String> {
 
     public Boolean activeStatus(Long id) {
         Optional<UserProfile> optionalUserProfile = userProfileRepository.findByAuthId(id);
-        if (optionalUserProfile.isEmpty()){
+        if (optionalUserProfile.isEmpty()) {
             throw new UserProfileManagerException(ErrorType.USER_NOT_FOUND);
         }
         optionalUserProfile.get().setStatus(EStatus.ACTIVE);
@@ -71,16 +72,13 @@ public class UserProfileService extends ServiceManager<UserProfile,String> {
     }
 
     public Boolean forgotPassword(UserForgotPasswordRequestDto dto) {
-        Optional<UserProfile> optionalUserProfile = userProfileRepository.findByAuthId(dto.getId());
-        if (optionalUserProfile.isEmpty()){
+        Optional<UserProfile> userProfile = userProfileRepository.findByAuthId(dto.getAuthId());
+        if (userProfile.isEmpty()) {
             throw new UserProfileManagerException(ErrorType.USER_NOT_FOUND);
         }
-        if (dto.getPassword().equals(dto.getRePassword())){
-            optionalUserProfile.get().setPassword(dto.getPassword());
-            update(optionalUserProfile.get());
-            return true;
-        }else {
-            throw new UserProfileManagerException(ErrorType.PASSWORD_ERROR);
-        }
+        userProfile.get().setPassword(dto.getPassword());
+        update(userProfile.get());
+        return true;
     }
+
 }

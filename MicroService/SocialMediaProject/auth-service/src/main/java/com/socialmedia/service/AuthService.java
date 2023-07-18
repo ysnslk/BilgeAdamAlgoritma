@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Locale;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Register işlemi yapalım
@@ -118,18 +119,21 @@ public class AuthService extends ServiceManager<Auth, Long> {
 
     }
 
-    public Boolean forgotPassword(AuthForgotPasswordRequestDto dto){
-        Optional<Auth> optionalAuth = repository.findById(dto.getId());
-        if (optionalAuth.isEmpty()) {
-            throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
+    public String forgotPassword(AuthForgotPasswordRequestDto dto){
+        Optional<Auth> auth = repository.findOptionalByEmail(dto.getEmail());
+        if (auth.isPresent() && auth.get().getStatus().equals(EStatus.ACTIVE)){
+            //random password
+            String randomPassword = UUID.randomUUID().toString();
+            auth.get().setPassword(randomPassword);
+            save(auth.get());
+            //userprofilemanager
+            UserForgotPasswordRequestDto userProfileDto = UserForgotPasswordRequestDto.builder()
+                    .authId(auth.get().getId())
+                    .password(auth.get().getPassword())
+                    .build();
+            userProfileManager.forgotPassword(userProfileDto);
+            return "Yeni şifreniz: " + auth.get().getPassword();
         }
-        if(dto.getPassword().equals(dto.getRePassword())){
-            optionalAuth.get().setPassword(dto.getPassword());
-            update(optionalAuth.get());
-            userProfileManager.forgotPassword(IAuthMapper.INSTANCE.fromAuthForgotPassToUserForgorPassDto(dto));
-        }else {
-            throw new AuthManagerException(ErrorType.PASSWORD_ERROR);
-        }
-        return true;
+        throw new AuthManagerException(ErrorType.ACCOUNT_NOT_ACTIVE);
     }
 }

@@ -10,7 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class AuthForgotPasswordRequestDto {
-    private Long id;
-    private String password;
-    private String rePassword;
+    String email;
 }
