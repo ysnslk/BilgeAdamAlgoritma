@@ -75,4 +75,8 @@ public class AuthController {
     public ResponseEntity<String> forgotPassword(@RequestBody AuthForgotPasswordRequestDto dto){
         return ResponseEntity.ok(authService.forgotPassword(dto));
     }
+    @PutMapping(FORGOT_PASSWORD+"-with-rabbitmq")
+    public ResponseEntity<String> forgotPasswordWithRabbitMq(@RequestBody AuthForgotPasswordRequestDto dto){
+        return ResponseEntity.ok(authService.forgotPasswordWithRabbitMQ(dto));
+    }
 }

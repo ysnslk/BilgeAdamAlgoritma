@@ -6,6 +6,8 @@ import com.socialmedia.exception.AuthManagerException;
 import com.socialmedia.exception.ErrorType;
 import com.socialmedia.manager.IUserProfileManager;
 import com.socialmedia.mapper.IAuthMapper;
+import com.socialmedia.rabbitmq.model.UserForgotPassModel;
+import com.socialmedia.rabbitmq.producer.UserForgotPassProducer;
 import com.socialmedia.rabbitmq.producer.UserRegisterProducer;
 import com.socialmedia.repository.IAuthRepository;
 import com.socialmedia.repository.entity.Auth;
@@ -38,12 +40,14 @@ public class AuthService extends ServiceManager<Auth, Long> {
     private final IAuthRepository repository;
     private final IUserProfileManager userProfileManager;
     private final UserRegisterProducer userRegisterProducer;
+    private final UserForgotPassProducer userForgotPassProducer;
 
-    public AuthService(IAuthRepository repository, IUserProfileManager userProfileManager, UserRegisterProducer userRegisterProducer) {
+    public AuthService(IAuthRepository repository, IUserProfileManager userProfileManager, UserRegisterProducer userRegisterProducer, UserForgotPassProducer userForgotPassProducer) {
         super(repository);
         this.repository = repository;
         this.userProfileManager = userProfileManager;
         this.userRegisterProducer = userRegisterProducer;
+        this.userForgotPassProducer = userForgotPassProducer;
     }
 
     @Transactional //Rolback  ->
@@ -65,14 +69,13 @@ public class AuthService extends ServiceManager<Auth, Long> {
         return responseDto;
     }
 
-    public AuthRegisterResponseDto registerWithRabbitMQ(AuthRegisterRequestDto dto){
+    public AuthRegisterResponseDto registerWithRabbitMQ(AuthRegisterRequestDto dto) {
         Auth auth = IAuthMapper.INSTANCE.fromAuthRegisterRequestDtotoAuth(dto);
         if (auth.getPassword().equals(dto.getRePassword())) {
             auth.setActivateCode(CodeGenerator.generatecode());
             save(auth);
             userRegisterProducer.sendNewUser(IAuthMapper.INSTANCE.fromAuthToUserRegisterModel(auth));
-            }
-        else {
+        } else {
             throw new AuthManagerException(ErrorType.PASSWORD_ERROR);
         }
         AuthRegisterResponseDto responseDto = IAuthMapper.INSTANCE.fromAuthtoAuthRegisterResponseDto(auth);
@@ -118,6 +121,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
         update(auth);
         return true;
     }
+
     @Transactional
     public Boolean DeleteAuth(Long id) {
         Optional<Auth> optionalAuth = repository.findById(id);
@@ -135,9 +139,9 @@ public class AuthService extends ServiceManager<Auth, Long> {
 
     }
 
-    public String forgotPassword(AuthForgotPasswordRequestDto dto){
+    public String forgotPassword(AuthForgotPasswordRequestDto dto) {
         Optional<Auth> auth = repository.findOptionalByEmail(dto.getEmail());
-        if (auth.isPresent() && auth.get().getStatus().equals(EStatus.ACTIVE)){
+        if (auth.isPresent() && auth.get().getStatus().equals(EStatus.ACTIVE)) {
             //random password
             String randomPassword = UUID.randomUUID().toString();
             auth.get().setPassword(randomPassword);
@@ -148,6 +152,23 @@ public class AuthService extends ServiceManager<Auth, Long> {
                     .password(auth.get().getPassword())
                     .build();
             userProfileManager.forgotPassword(userProfileDto);
+            return "Yeni şifreniz: " + auth.get().getPassword();
+        }
+        throw new AuthManagerException(ErrorType.ACCOUNT_NOT_ACTIVE);
+    }
+
+    public String forgotPasswordWithRabbitMQ(AuthForgotPasswordRequestDto dto) {
+        Optional<Auth> auth = repository.findOptionalByEmail(dto.getEmail());
+        if (auth.isPresent() && auth.get().getStatus().equals(EStatus.ACTIVE)) {
+            //random password
+            String randomPassword = UUID.randomUUID().toString();
+            auth.get().setPassword(randomPassword);
+            save(auth.get());
+            userForgotPassProducer.sendForgotPass(UserForgotPassModel.builder()
+                    .authId(auth.get().getId())
+                    .password(auth.get().getPassword())
+                    .build());
+
             return "Yeni şifreniz: " + auth.get().getPassword();
         }
         throw new AuthManagerException(ErrorType.ACCOUNT_NOT_ACTIVE);

@@ -15,8 +15,8 @@ public class RabbitConfig {
      * gibi değişkenlere ihtiyaç duyulur.
      * Ancak Consumer işlemi yapılacağı zaman yalnızca tüketilecek olan 'queue' oluşturularak kuyruktan gelen veri deserialize edilir.
      */
-    //User register producer
     private final String exchange = "exchange-auth";
+    //User register producer
     private final String userRegisterQueue = "user-register-queue";  //her producer işlemi için yeniden bir değişken oluşturulmalıdır.
     private final String userRegisterBinding = "user-register-binding";  //her producer işlemi için yeniden bir değişken oluşturulmalıdır.
 
@@ -36,4 +36,19 @@ public class RabbitConfig {
                 .to(authExchange)
                 .with(userRegisterBinding);
     }
+    //User Forgot Pass producer
+    private final String userForotPassQueue = "user-forgot-pass-queue";  //her producer işlemi için yeniden bir değişken oluşturulmalıdır.
+    private final String userForotPassBinding = "user-forgot-pass-binding";  //her producer işlemi için yeniden bir değişken oluşturulmalıdır.
+    @Bean
+    Queue userForotPassQueue() {
+        return new Queue(userForotPassQueue);
+    }
+
+    @Bean
+    public Binding bindingForgotPassUserProfileMethod(final DirectExchange authExchange, final Queue userForotPassQueue) {
+        return BindingBuilder.bind(userForotPassQueue)
+                .to(authExchange)
+                .with(userForotPassBinding);
+    }
+
 }

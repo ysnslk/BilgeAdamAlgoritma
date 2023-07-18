@@ -8,6 +8,7 @@ import com.socialmedia.exception.ErrorType;
 import com.socialmedia.exception.UserProfileManagerException;
 import com.socialmedia.manager.IAuthManager;
 import com.socialmedia.mapper.IUserProfileMapper;
+import com.socialmedia.rabbitmq.model.AuthForgotPassModel;
 import com.socialmedia.rabbitmq.model.AuthRegisterModel;
 import com.socialmedia.repository.IUserProfileRepository;
 import com.socialmedia.repository.entity.UserProfile;
@@ -81,6 +82,14 @@ public class UserProfileService extends ServiceManager<UserProfile, String> {
             throw new UserProfileManagerException(ErrorType.USER_NOT_FOUND);
         }
         userProfile.get().setPassword(dto.getPassword());
+        update(userProfile.get());
+        return true;
+    }public Boolean forgotPasswordWithRabbitMq(AuthForgotPassModel model) {
+        Optional<UserProfile> userProfile = userProfileRepository.findByAuthId(model.getAuthId());
+        if (userProfile.isEmpty()) {
+            throw new UserProfileManagerException(ErrorType.USER_NOT_FOUND);
+        }
+        userProfile.get().setPassword(model.getPassword());
         update(userProfile.get());
         return true;
     }
