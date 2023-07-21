@@ -1,4 +1,4 @@
-package com.socialmedia.config.rabbit;
+package com.socialmedia.config.rabbitmq;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -51,4 +51,34 @@ public class RabbitConfig {
                 .with(userForotPassBinding);
     }
 
+
+    //Send Mail Register
+    private String mailRegisterQueue = "mail-register-queue";  //her producer işlemi için yeniden bir değişken oluşturulmalıdır.
+    private String  mailRegisterBinding = "mail-register-binding";  //her producer işlemi için yeniden bir değişken oluşturulmalıdır.
+    @Bean
+    Queue mailRegisterQueue() {
+        return new Queue(mailRegisterQueue);
+    }
+
+    @Bean
+    public Binding mailRegisterBinding(final DirectExchange authExchange, final Queue mailRegisterQueue) {
+        return BindingBuilder.bind(mailRegisterQueue)
+                .to(authExchange)
+                .with(mailRegisterBinding);
+    }
+
+    //Send Mail Forgot Pass
+    private final String mailForgotPassQueue = "mail-forgot-pass-queue";  //her producer işlemi için yeniden bir değişken oluşturulmalıdır.
+    private final String mailForgotPassBinding = "mail-forgot-pass-binding";  //her producer işlemi için yeniden bir değişken oluşturulmalıdır.
+    @Bean
+    Queue mailForgotPassQueue() {
+        return new Queue(mailForgotPassQueue);
+    }
+
+    @Bean
+    public Binding bindingMailForgotPassUserProfileMethod(final DirectExchange authExchange, final Queue mailForgotPassQueue) {
+        return BindingBuilder.bind(mailForgotPassQueue)
+                .to(authExchange)
+                .with(mailForgotPassBinding);
+    }
 }

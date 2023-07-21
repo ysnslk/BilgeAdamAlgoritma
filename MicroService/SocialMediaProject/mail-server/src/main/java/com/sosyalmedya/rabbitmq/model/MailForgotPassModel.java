@@ -1,4 +1,4 @@
-package com.socialmedia.rabbitmq.model;
+package com.sosyalmedya.rabbitmq.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AuthForgotPassModel implements Serializable {
-    Long authId;
-    String password;
+public class MailForgotPassModel implements Serializable {
+    String username;
+    String email;
+    String randomPassword;
 }

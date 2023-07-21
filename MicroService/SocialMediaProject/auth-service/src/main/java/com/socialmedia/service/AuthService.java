@@ -6,7 +6,10 @@ import com.socialmedia.exception.AuthManagerException;
 import com.socialmedia.exception.ErrorType;
 import com.socialmedia.manager.IUserProfileManager;
 import com.socialmedia.mapper.IAuthMapper;
+import com.socialmedia.rabbitmq.model.MailForgotPassModel;
 import com.socialmedia.rabbitmq.model.UserForgotPassModel;
+import com.socialmedia.rabbitmq.producer.MailForgotPassProducer;
+import com.socialmedia.rabbitmq.producer.MailRegisterProducer;
 import com.socialmedia.rabbitmq.producer.UserForgotPassProducer;
 import com.socialmedia.rabbitmq.producer.UserRegisterProducer;
 import com.socialmedia.repository.IAuthRepository;
@@ -14,6 +17,7 @@ import com.socialmedia.repository.entity.Auth;
 import com.socialmedia.repository.enums.EStatus;
 import com.socialmedia.utility.CodeGenerator;
 import com.socialmedia.utility.ServiceManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,13 +45,19 @@ public class AuthService extends ServiceManager<Auth, Long> {
     private final IUserProfileManager userProfileManager;
     private final UserRegisterProducer userRegisterProducer;
     private final UserForgotPassProducer userForgotPassProducer;
+    private final MailRegisterProducer mailRegisterProducer;
+    private final MailForgotPassProducer mailForgotPassProducer;
+    private final PasswordEncoder passwordEncoder;
 
-    public AuthService(IAuthRepository repository, IUserProfileManager userProfileManager, UserRegisterProducer userRegisterProducer, UserForgotPassProducer userForgotPassProducer) {
+    public AuthService(IAuthRepository repository, IUserProfileManager userProfileManager, UserRegisterProducer userRegisterProducer, UserForgotPassProducer userForgotPassProducer, MailRegisterProducer mailRegisterProducer, MailForgotPassProducer mailForgotPassProducer, PasswordEncoder passwordEncoder) {
         super(repository);
         this.repository = repository;
         this.userProfileManager = userProfileManager;
         this.userRegisterProducer = userRegisterProducer;
         this.userForgotPassProducer = userForgotPassProducer;
+        this.mailRegisterProducer = mailRegisterProducer;
+        this.mailForgotPassProducer = mailForgotPassProducer;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional //Rolback  ->
@@ -55,6 +65,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
         Auth auth = IAuthMapper.INSTANCE.fromAuthRegisterRequestDtotoAuth(dto);
         if (auth.getPassword().equals(dto.getRePassword())) {
             auth.setActivateCode(CodeGenerator.generatecode());
+            auth.setPassword(passwordEncoder.encode(dto.getPassword()));
             save(auth);
             //1. alternatif
             UserCreateRequestDto userDto = IAuthMapper.INSTANCE.fromRegisterDtoToUserCreateDto(dto);
@@ -73,8 +84,11 @@ public class AuthService extends ServiceManager<Auth, Long> {
         Auth auth = IAuthMapper.INSTANCE.fromAuthRegisterRequestDtotoAuth(dto);
         if (auth.getPassword().equals(dto.getRePassword())) {
             auth.setActivateCode(CodeGenerator.generatecode());
+            auth.setPassword(passwordEncoder.encode(dto.getPassword()));
             save(auth);
             userRegisterProducer.sendNewUser(IAuthMapper.INSTANCE.fromAuthToUserRegisterModel(auth));
+            //Mail Sender
+            mailRegisterProducer.sendRegisterMail(IAuthMapper.INSTANCE.fromAuthtoMailSenderModel(auth));
         } else {
             throw new AuthManagerException(ErrorType.PASSWORD_ERROR);
         }
@@ -83,8 +97,8 @@ public class AuthService extends ServiceManager<Auth, Long> {
     }
 
     public Boolean login(AuthLoginRequestDto dto) {
-        Optional<Auth> optionalAuth = repository.findOptionalByUsernameAndPassword(dto.getUsername(), dto.getPassword());
-        if (optionalAuth.isEmpty()) {
+        Optional<Auth> optionalAuth = repository.findOptionalByEmail(dto.getEmail());
+        if (optionalAuth.isEmpty() || !passwordEncoder.matches(dto.getPassword(), optionalAuth.get().getPassword())) {
             throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
         }
         if (!optionalAuth.get().getStatus().equals(EStatus.ACTIVE)) {
@@ -144,7 +158,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
         if (auth.isPresent() && auth.get().getStatus().equals(EStatus.ACTIVE)) {
             //random password
             String randomPassword = UUID.randomUUID().toString();
-            auth.get().setPassword(randomPassword);
+            auth.get().setPassword(passwordEncoder.encode(randomPassword));
             save(auth.get());
             //userprofilemanager
             UserForgotPasswordRequestDto userProfileDto = UserForgotPasswordRequestDto.builder()
@@ -152,7 +166,10 @@ public class AuthService extends ServiceManager<Auth, Long> {
                     .password(auth.get().getPassword())
                     .build();
             userProfileManager.forgotPassword(userProfileDto);
-            return "Yeni şifreniz: " + auth.get().getPassword();
+            mailForgotPassProducer.sendMailForgotPass(MailForgotPassModel.builder()
+                    .randomPassword(auth.get().getPassword())
+                    .build());
+            return "Yeni şifreniz: " + randomPassword;
         }
         throw new AuthManagerException(ErrorType.ACCOUNT_NOT_ACTIVE);
     }
@@ -162,15 +179,40 @@ public class AuthService extends ServiceManager<Auth, Long> {
         if (auth.isPresent() && auth.get().getStatus().equals(EStatus.ACTIVE)) {
             //random password
             String randomPassword = UUID.randomUUID().toString();
-            auth.get().setPassword(randomPassword);
+            auth.get().setPassword(passwordEncoder.encode(randomPassword));
             save(auth.get());
+            /*
             userForgotPassProducer.sendForgotPass(UserForgotPassModel.builder()
+
                     .authId(auth.get().getId())
                     .password(auth.get().getPassword())
                     .build());
+                    */
+            MailForgotPassModel model = IAuthMapper.INSTANCE.fromAuthToMailForgotPassModel(auth.get());
+            model.setRandomPassword(randomPassword);
+            mailForgotPassProducer.sendMailForgotPass(model);
+/*
 
-            return "Yeni şifreniz: " + auth.get().getPassword();
+            mailForgotPassProducer.sendMailForgotPass(MailForgotPassModel.builder()
+                    .username(auth.get().getUsername())
+                    .password(randomPassword)
+                    .email(auth.get().getEmail())
+                    .build());
+
+ */
+
+            return "Yeni şifreniz: " + randomPassword;
         }
         throw new AuthManagerException(ErrorType.ACCOUNT_NOT_ACTIVE);
+    }
+
+    public Boolean passwordChange(ToAuthPasswordChangeRequestDto dto) {
+        Optional<Auth> auth = repository.findById(dto.getAuthId());
+        if (auth.isEmpty()) {
+            throw new AuthManagerException(ErrorType.USER_NOT_FOUND);
+        }
+        auth.get().setPassword(dto.getPassword());
+        update(auth.get());
+        return true;
     }
 }

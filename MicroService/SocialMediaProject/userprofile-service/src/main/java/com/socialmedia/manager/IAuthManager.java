@@ -1,6 +1,7 @@
 package com.socialmedia.manager;
 
 import com.socialmedia.dto.request.AuthUpdateRequestDto;
+import com.socialmedia.dto.request.ToAuthPasswordChangeRequestDto;
 import com.socialmedia.dto.request.UserCreateRequestDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(url = "http://localhost:7070/auth" , name = "userprofile-auth")
+@FeignClient(url = "http://localhost:7070/api/v1/auth" , name = "userprofile-auth")
 public interface IAuthManager {
 
     /**
@@ -21,4 +22,6 @@ public interface IAuthManager {
 
     @PutMapping("/update")
     public ResponseEntity<Boolean> updateAuth(AuthUpdateRequestDto dto);
+    @PutMapping("/password-change")
+    public ResponseEntity<Boolean> passwordChange(@RequestBody ToAuthPasswordChangeRequestDto dto);
 }

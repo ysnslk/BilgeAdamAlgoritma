@@ -4,6 +4,7 @@ import com.socialmedia.dto.request.*;
 import com.socialmedia.dto.response.AuthRegisterResponseDto;
 import com.socialmedia.repository.entity.Auth;
 import com.socialmedia.service.AuthService;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -75,8 +76,14 @@ public class AuthController {
     public ResponseEntity<String> forgotPassword(@RequestBody AuthForgotPasswordRequestDto dto){
         return ResponseEntity.ok(authService.forgotPassword(dto));
     }
+    @Hidden
     @PutMapping(FORGOT_PASSWORD+"-with-rabbitmq")
     public ResponseEntity<String> forgotPasswordWithRabbitMq(@RequestBody AuthForgotPasswordRequestDto dto){
         return ResponseEntity.ok(authService.forgotPasswordWithRabbitMQ(dto));
+    }
+
+    @PutMapping("/password-change")
+    public ResponseEntity<Boolean> passwordChange(@RequestBody ToAuthPasswordChangeRequestDto dto){
+        return ResponseEntity.ok(authService.passwordChange(dto));
     }
 }

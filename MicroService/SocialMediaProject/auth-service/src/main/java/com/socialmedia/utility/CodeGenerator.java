@@ -1,5 +1,9 @@
 package com.socialmedia.utility;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.UUID;
 
 public class CodeGenerator {
@@ -13,4 +17,5 @@ public class CodeGenerator {
         }
         return newCode;
     }
+
 }

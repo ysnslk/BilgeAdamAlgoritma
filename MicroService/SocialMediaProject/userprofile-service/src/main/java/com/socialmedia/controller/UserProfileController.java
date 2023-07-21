@@ -1,11 +1,10 @@
 package com.socialmedia.controller;
 
-import com.socialmedia.dto.request.UserCreateRequestDto;
-import com.socialmedia.dto.request.UserForgotPasswordRequestDto;
-import com.socialmedia.dto.request.UserProfileSaveRequestDto;
-import com.socialmedia.dto.request.UserUpdateRequestDto;
+import com.socialmedia.dto.request.*;
 import com.socialmedia.repository.entity.UserProfile;
 import com.socialmedia.service.UserProfileService;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +20,7 @@ public class UserProfileController {
     public UserProfile save(@RequestBody UserProfileSaveRequestDto dto){
         return userProfileService.save(dto);
     }
+    @Hidden
     @PostMapping(CREATE_USER)
     public ResponseEntity<Boolean> createUser(@RequestBody UserCreateRequestDto dto){
         return ResponseEntity.ok(userProfileService.createUser(dto));
@@ -36,10 +36,12 @@ public class UserProfileController {
      *            PutMapping    -> Veri tabanındaki varolan veriyi update için kullanılır.
      *            DeleteMapping -> Veri Silme işleminde kullanılır.
      */
+    @Operation(summary = "Burasıda başlık",description = "Kullanıcının giriş yaptıktan sonra eksik bilgilerini doldurduğu metot")
      @PutMapping(UPDATE)
     public ResponseEntity<Boolean> updateUser(@RequestBody UserUpdateRequestDto dto){
         return ResponseEntity.ok(userProfileService.updateUser(dto));
     }
+    @Hidden
     @DeleteMapping(DELETE)
     public ResponseEntity<Boolean> deleteUser(@RequestBody Long id){
          return ResponseEntity.ok(userProfileService.deleteUser(id));
@@ -49,9 +51,13 @@ public class UserProfileController {
     public ResponseEntity<Boolean> activeStatus(@RequestBody Long id){
          return ResponseEntity.ok(userProfileService.activeStatus(id));
     }
-
-    @PutMapping("/forgot-password")
+    @Hidden
+    @PutMapping(FORGOT_PASSWORD)
     public ResponseEntity<Boolean> forgotPassword(@RequestBody UserForgotPasswordRequestDto dto){
          return ResponseEntity.ok(userProfileService.forgotPassword(dto));
+    }
+    @PutMapping(PASSWORD_CHANGE)
+    public ResponseEntity<Boolean> passwordChange(PasswordChangeDto dto){
+         return ResponseEntity.ok(userProfileService.passwordChange(dto));
     }
 }
