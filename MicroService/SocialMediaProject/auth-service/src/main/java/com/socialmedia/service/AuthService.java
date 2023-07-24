@@ -166,7 +166,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
                     .password(auth.get().getPassword())
                     .build();
             userProfileManager.forgotPassword(userProfileDto);
-            mailForgotPassProducer.sendMailForgotPass(MailForgotPassModel.builder()
+            mailForgotPassProducer.forgotPassSendMail(MailForgotPassModel.builder()
                     .randomPassword(auth.get().getPassword())
                     .build());
             return "Yeni şifreniz: " + randomPassword;
@@ -181,16 +181,16 @@ public class AuthService extends ServiceManager<Auth, Long> {
             String randomPassword = UUID.randomUUID().toString();
             auth.get().setPassword(passwordEncoder.encode(randomPassword));
             save(auth.get());
-            /*
+
             userForgotPassProducer.sendForgotPass(UserForgotPassModel.builder()
 
                     .authId(auth.get().getId())
                     .password(auth.get().getPassword())
                     .build());
-                    */
+
             MailForgotPassModel model = IAuthMapper.INSTANCE.fromAuthToMailForgotPassModel(auth.get());
             model.setRandomPassword(randomPassword);
-            mailForgotPassProducer.sendMailForgotPass(model);
+            mailForgotPassProducer.forgotPassSendMail(model);
 /*
 
             mailForgotPassProducer.sendMailForgotPass(MailForgotPassModel.builder()

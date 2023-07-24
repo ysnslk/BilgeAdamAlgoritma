@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class MailForgotPassModel implements Serializable {
-    String username;
-    String email;
-    String randomPassword;
+    private String username;
+    private String email;
+    private String randomPassword;
 }

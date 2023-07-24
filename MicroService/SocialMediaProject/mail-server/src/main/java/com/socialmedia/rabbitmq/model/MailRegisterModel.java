@@ -1,4 +1,4 @@
-package com.sosyalmedya.rabbitmq.model;
+package com.socialmedia.rabbitmq.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

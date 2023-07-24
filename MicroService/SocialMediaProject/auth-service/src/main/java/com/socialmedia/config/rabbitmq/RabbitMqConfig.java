@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitConfig {
+public class RabbitMqConfig {
     /**
      * Bu rabbitmq configuration sınıfı producer veya consumer işlemleri için gerekli alt yapıyı oluşturmayı sağlar.
      * Producer işlemi(bu serviste bir kuyruk üret ve verileri bu kuyruk üzerinden gönder) yapılacağında exchange, queue ve bindingKey
@@ -52,33 +52,30 @@ public class RabbitConfig {
     }
 
 
-    //Send Mail Register
-    private String mailRegisterQueue = "mail-register-queue";  //her producer işlemi için yeniden bir değişken oluşturulmalıdır.
-    private String  mailRegisterBinding = "mail-register-binding";  //her producer işlemi için yeniden bir değişken oluşturulmalıdır.
+    //Mail sender register producer
+    private String mailRegisterQueue = "mail-register-queue";
+    private String mailRegisterBinding = "mail-register-binding";
+
     @Bean
-    Queue mailRegisterQueue() {
+    Queue mailRegisterQueue(){
         return new Queue(mailRegisterQueue);
     }
-
     @Bean
-    public Binding mailRegisterBinding(final DirectExchange authExchange, final Queue mailRegisterQueue) {
-        return BindingBuilder.bind(mailRegisterQueue)
-                .to(authExchange)
-                .with(mailRegisterBinding);
+    public Binding mailRegisterBinding(final Queue mailRegisterQueue, final DirectExchange authExchange){
+        return BindingBuilder.bind(mailRegisterQueue).to(authExchange).with(mailRegisterBinding);
     }
 
-    //Send Mail Forgot Pass
-    private final String mailForgotPassQueue = "mail-forgot-pass-queue";  //her producer işlemi için yeniden bir değişken oluşturulmalıdır.
-    private final String mailForgotPassBinding = "mail-forgot-pass-binding";  //her producer işlemi için yeniden bir değişken oluşturulmalıdır.
+    //Mail forgot password
+    private String forgotPassMailQueue = "forgot-pass-mail-queue";
     @Bean
-    Queue mailForgotPassQueue() {
-        return new Queue(mailForgotPassQueue);
+    Queue forgotPassMailQueue(){
+        return new Queue(forgotPassMailQueue);
     }
 
+    private String forgotPassMailBinding = "forgot-pass-mail-binding";
+
     @Bean
-    public Binding bindingMailForgotPassUserProfileMethod(final DirectExchange authExchange, final Queue mailForgotPassQueue) {
-        return BindingBuilder.bind(mailForgotPassQueue)
-                .to(authExchange)
-                .with(mailForgotPassBinding);
+    public Binding forgotPassMailBinding(final Queue forgotPassMailQueue, final DirectExchange authExchange){
+        return BindingBuilder.bind(forgotPassMailQueue).to(authExchange).with(forgotPassMailBinding);
     }
 }

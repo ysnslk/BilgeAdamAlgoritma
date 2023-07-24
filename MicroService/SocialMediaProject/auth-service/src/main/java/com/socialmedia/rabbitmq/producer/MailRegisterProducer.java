@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 public class MailRegisterProducer {
 
     private final String exchange = "exchange-auth";
-    private final String  mailRegisterBinding = "mail-register-binding";
-    private final RabbitTemplate rabbitTemplate;
+    private String mailRegisterBinding = "mail-register-binding";
 
-    public void sendRegisterMail(MailRegisterModel mailRegisterModel) {
-        rabbitTemplate.convertAndSend(exchange,mailRegisterBinding,mailRegisterModel);
+    private final RabbitTemplate rabbitTemplate;
+    public void sendRegisterMail(MailRegisterModel mailRegisterModel){
+        rabbitTemplate.convertAndSend(exchange, mailRegisterBinding, mailRegisterModel);
     }
 }
