@@ -1,5 +1,6 @@
 package com.bilgeadam.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +20,7 @@ public class Instructor {
     private Long id;
     private String name;
     private String surname;
+    @JsonIgnore
     @ManyToOne
     private Course courses;
 }

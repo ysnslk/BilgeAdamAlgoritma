@@ -13,7 +13,7 @@ public class MailForgotPassConsumer {
     private final MailSenderService mailSenderService;
     @RabbitListener(queues = "forgot-pass-mail-queue")
     public void sendForgotPassword(MailForgotPassModel mailForgotPassModel){
-        System.out.println(mailForgotPassModel);
+        System.out.println("Consumer"+ mailForgotPassModel.toString());
         mailSenderService.sendForgotPassword(mailForgotPassModel);
     }
 }

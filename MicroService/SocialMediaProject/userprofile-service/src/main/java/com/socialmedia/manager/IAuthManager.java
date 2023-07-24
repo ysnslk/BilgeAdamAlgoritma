@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(url = "http://localhost:7070/api/v1/auth" , name = "userprofile-auth")
+@FeignClient(url = "${localhost.auth-manager-url}" , name = "userprofile-auth")
 public interface IAuthManager {
 
     /**

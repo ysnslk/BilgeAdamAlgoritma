@@ -14,6 +14,6 @@ import java.io.Serializable;
 public class MailRegisterModel implements Serializable {
     private String username;
     private String email;
-    private String password;
+    private String decodedPassword;
     private String activateCode;
 }

@@ -8,6 +8,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 import static com.socialmedia.constant.ApiUrls.*;
 
 @RequestMapping(USER_PROFILE)
@@ -15,6 +18,11 @@ import static com.socialmedia.constant.ApiUrls.*;
 @RequiredArgsConstructor
 public class UserProfileController {
     private final UserProfileService userProfileService;
+
+    @GetMapping("/find-all")
+    public ResponseEntity<List<UserProfile>> findAll(){
+        return ResponseEntity.ok(userProfileService.findAll());
+    }
 
     @PostMapping(REGISTER)
     public UserProfile save(@RequestBody UserProfileSaveRequestDto dto){

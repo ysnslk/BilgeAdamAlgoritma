@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-@FeignClient(url = "http://localhost:8080/api/v1/user-profile" , name = "auth-userprofile")
+@FeignClient(url = "${localhost.user-manager-url}" , name = "auth-userprofile")
 public interface IUserProfileManager {
 
     /**

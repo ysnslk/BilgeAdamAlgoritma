@@ -19,3 +19,5 @@ spring:
     port: 5672
     username: admin
     password: root
+localhost:
+  auth-manager-url: http://localhost:7070/api/v1/auth

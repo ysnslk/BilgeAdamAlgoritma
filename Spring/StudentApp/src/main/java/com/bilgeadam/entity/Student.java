@@ -1,5 +1,6 @@
 package com.bilgeadam.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +21,7 @@ public class Student {
     private String name;
     private String surname;
     private String classNo;
-
+    @JsonIgnore
     @OneToMany
     private List<Course> courses;
 
