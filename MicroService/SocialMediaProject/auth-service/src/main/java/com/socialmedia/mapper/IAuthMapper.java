@@ -27,7 +27,7 @@ public interface IAuthMapper {
     @Mapping(source = "authId", target = "id")
     Auth fromAuthUpdateDtoToAuth(AuthUpdateRequestDto dto, @MappingTarget Auth auth);
 
-    UserForgotPasswordRequestDto fromAuthForgotPassToUserForgorPassDto(AuthForgotPasswordRequestDto dto);
+    UserForgotPasswordRequestDto fromAuthForgotPassToUserForgotPassDto(AuthForgotPasswordRequestDto dto);
 
 
     MailForgotPassModel fromAuthToMailForgotPassModel(final Auth auth);

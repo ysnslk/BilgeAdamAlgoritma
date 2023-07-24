@@ -14,6 +14,7 @@ public class MailRegisterConsumer {
     @RabbitListener(queues = "mail-register-queue")
     public void sendRegisterUsersInfo(MailRegisterModel mailRegisterModel){
         mailSenderService.sendRegisterUsersInfo(mailRegisterModel);
+        System.out.println(mailRegisterModel.toString());
     }
 
 }
